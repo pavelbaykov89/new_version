@@ -1,0 +1,15 @@
+﻿@using SLK.Web.Data
+@using SLK.Web.Infrastructure
+@model string
+@{ 
+    var dbContext = Context.GetContainer().GetInstance<ApplicationDbContext>();
+
+    var availableCategories = dbContext.Categories.Select(c => new SelectListItem
+    {
+        Text = c.Name,
+        Value = c.ID.ToString(),
+        Selected = c.ID.ToString() == Model
+    }).ToArray();
+}
+
+@Html.DropDownList("", availableCategories, new { @class = "form-control" })
