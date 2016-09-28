@@ -12,6 +12,7 @@ using Microsoft.Owin;
 using Microsoft.Owin.Security;
 using SLK.Web.Models;
 using SLK.DataLayer;
+using SLK.Domain.Core;
 
 namespace SLK.Web
 {

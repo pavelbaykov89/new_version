@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
+using SLK.Domain.Core;
 using SLK.Web.Filters;
 using SLK.Web.Infrastructure;
 using SLK.Web.Models;

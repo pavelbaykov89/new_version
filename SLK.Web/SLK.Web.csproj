@@ -318,7 +318,7 @@
       <Project>{ad5a549b-5adf-47e7-91a8-723681e5c20d}</Project>
       <Name>SLK.DataLayer</Name>
     </ProjectReference>
-    <ProjectReference Include="..\SLK.Domain.Core\SLK.Domain.csproj">
+    <ProjectReference Include="..\SLK.Domain\SLK.Domain.csproj">
       <Project>{7b159bec-2356-417e-b1aa-21ab06ccf271}</Project>
       <Name>SLK.Domain</Name>
     </ProjectReference>

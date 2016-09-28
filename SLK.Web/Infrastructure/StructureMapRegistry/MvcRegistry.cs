@@ -2,6 +2,7 @@
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Owin.Security;
 using SLK.DataLayer;
+using SLK.Domain.Core;
 using SLK.Web.Models;
 using StructureMap;
 using System.Data.Entity;

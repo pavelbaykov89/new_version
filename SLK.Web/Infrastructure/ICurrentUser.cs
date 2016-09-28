@@ -1,4 +1,5 @@
-﻿using SLK.Web.Models;
+﻿using SLK.Domain.Core;
+using SLK.Web.Models;
 
 namespace SLK.Web.Infrastructure
 {

@@ -1,5 +1,4 @@
-﻿using SLK.Web.Models;
-using System;
+﻿using System;
 
 namespace SLK.Domain.Core
 {

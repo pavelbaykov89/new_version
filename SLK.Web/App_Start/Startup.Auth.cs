@@ -7,6 +7,7 @@ using Microsoft.Owin.Security.Google;
 using Owin;
 using SLK.Web.Models;
 using SLK.DataLayer;
+using SLK.Domain.Core;
 
 namespace SLK.Web
 {
