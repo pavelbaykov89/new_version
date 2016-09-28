@@ -1,6 +1,8 @@
 ﻿using SLK.Web.Infrastructure;
 using SLK.Web.Infrastructure.StructureMapRegistry;
 using SLK.Web.Infrastructure.Tasks;
+using SLK.DataLayer;
+using SLK.DataLayer.Migrations;
 using StructureMap;
 using System.Data.Entity.Migrations;
 using System.Web;
@@ -31,7 +33,7 @@ namespace SLK.Web
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
-            var migrator = new DbMigrator(new Migrations.Configuration());
+            var migrator = new DbMigrator(new Configuration());
             migrator.Update();
 
             DependencyResolver.SetResolver(

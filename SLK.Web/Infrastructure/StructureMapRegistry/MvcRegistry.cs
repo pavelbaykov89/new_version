@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Owin.Security;
-using SLK.Web.Data;
+using SLK.DataLayer;
 using SLK.Web.Models;
 using StructureMap;
 using System.Data.Entity;

@@ -1,5 +1,5 @@
-﻿using Slk.Domain.Core;
-using SLK.Web.Data;
+﻿using SLK.Domain.Core;
+using SLK.DataLayer;
 using SLK.Web.Infrastructure.Tasks;
 using SLK.Web.Models;
 using System.Linq;

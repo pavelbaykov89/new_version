@@ -6,7 +6,7 @@ using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.Google;
 using Owin;
 using SLK.Web.Models;
-using SLK.Web.Data;
+using SLK.DataLayer;
 
 namespace SLK.Web
 {

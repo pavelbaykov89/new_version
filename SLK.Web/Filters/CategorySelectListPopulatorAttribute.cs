@@ -1,4 +1,4 @@
-﻿using SLK.Web.Data;
+﻿using SLK.DataLayer;
 using System;
 using System.Collections.Generic;
 using System.Linq;

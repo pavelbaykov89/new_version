@@ -11,7 +11,7 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Security;
 using SLK.Web.Models;
-using SLK.Web.Data;
+using SLK.DataLayer;
 
 namespace SLK.Web
 {

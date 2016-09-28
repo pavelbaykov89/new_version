@@ -1,4 +1,4 @@
-﻿using Slk.Domain.Core;
+﻿using SLK.Domain.Core;
 using SLK.Web.Infrastructure.Mapping;
 using System.ComponentModel.DataAnnotations;
 using System.Web.Mvc;

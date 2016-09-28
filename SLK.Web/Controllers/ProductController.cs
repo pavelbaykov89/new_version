@@ -1,7 +1,7 @@
 ﻿using AutoMapper.QueryableExtensions;
 using Microsoft.Web.Mvc;
-using Slk.Domain.Core;
-using SLK.Web.Data;
+using SLK.Domain.Core;
+using SLK.DataLayer;
 using SLK.Web.Filters;
 using SLK.Web.Infrastructure;
 using SLK.Web.Infrastructure.Alerts;

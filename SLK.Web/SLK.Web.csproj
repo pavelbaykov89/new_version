@@ -186,30 +186,6 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
-    <Compile Include="Data\ApplicationDbContext.cs" />
-    <Compile Include="Domain\ApplicationUser.cs" />
-    <Compile Include="Domain\Category.cs" />
-    <Compile Include="Domain\ContentUnitMeasure.cs" />
-    <Compile Include="Domain\ContentUnitMeasureMap.cs" />
-    <Compile Include="Domain\LogAction.cs" />
-    <Compile Include="Domain\Manufacturer.cs" />
-    <Compile Include="Domain\MessageTemplate.cs" />
-    <Compile Include="Domain\Order.cs" />
-    <Compile Include="Domain\OrderItem.cs" />
-    <Compile Include="Domain\Product.cs" />
-    <Compile Include="Domain\ProductComment.cs" />
-    <Compile Include="Domain\ProductInShop.cs" />
-    <Compile Include="Domain\ProductNote.cs" />
-    <Compile Include="Domain\ProductRate.cs" />
-    <Compile Include="Domain\ProductSKUMap.cs" />
-    <Compile Include="Domain\Role.cs" />
-    <Compile Include="Domain\Shop.cs" />
-    <Compile Include="Domain\ShopRate.cs" />
-    <Compile Include="Domain\ShopShipTime.cs" />
-    <Compile Include="Domain\ShopType.cs" />
-    <Compile Include="Domain\ShopWorkTime.cs" />
-    <Compile Include="Domain\User.cs" />
-    <Compile Include="Domain\UserAddressSearch.cs" />
     <Compile Include="Filters\CategorySelectListPopulatorAttribute.cs" />
     <Compile Include="Filters\LogAttribute.cs" />
     <Compile Include="Filters\ManufacturerSelectListPopulatorAttribute.cs" />
@@ -250,7 +226,6 @@
     <Compile Include="Infrastructure\Tasks\IRunOnEachRequest.cs" />
     <Compile Include="Infrastructure\Tasks\IRunOnError.cs" />
     <Compile Include="Infrastructure\TransactionPerRequest.cs" />
-    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\EditProductForm.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
@@ -329,7 +304,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Services\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -338,6 +312,16 @@
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SLK.DataLayer\SLK.DataLayer.csproj">
+      <Project>{ad5a549b-5adf-47e7-91a8-723681e5c20d}</Project>
+      <Name>SLK.DataLayer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SLK.Domain.Core\SLK.Domain.csproj">
+      <Project>{7b159bec-2356-417e-b1aa-21ab06ccf271}</Project>
+      <Name>SLK.Domain</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

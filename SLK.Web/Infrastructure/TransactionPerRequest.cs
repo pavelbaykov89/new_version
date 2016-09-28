@@ -1,4 +1,4 @@
-﻿using SLK.Web.Data;
+﻿using SLK.DataLayer;
 using SLK.Web.Infrastructure.Tasks;
 using System.Data;
 using System.Data.Entity;

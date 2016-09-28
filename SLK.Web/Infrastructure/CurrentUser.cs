@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNet.Identity;
-using SLK.Web.Data;
+using SLK.DataLayer;
 using SLK.Web.Models;
 using System.Security.Principal;
 

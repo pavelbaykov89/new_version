@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using Slk.Domain.Core;
+using SLK.Domain.Core;
 using SLK.Web.Infrastructure.Mapping;
 using SLK.Web.Infrastructure.Tasks;
 using SLK.Web.Models;
