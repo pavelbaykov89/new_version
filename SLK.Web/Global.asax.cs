@@ -1,14 +1,16 @@
-﻿using SLK.Web.Infrastructure;
+﻿using Knoema.Localization;
+using Knoema.Localization.Mvc;
+using SLK.DataLayer.Migrations;
+using SLK.Web.Infrastructure;
 using SLK.Web.Infrastructure.StructureMapRegistry;
 using SLK.Web.Infrastructure.Tasks;
-using SLK.DataLayer;
-using SLK.DataLayer.Migrations;
 using StructureMap;
 using System.Data.Entity.Migrations;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using SLK.Web.Localization;
 
 namespace SLK.Web
 {
@@ -33,9 +35,17 @@ namespace SLK.Web
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
+            // initialize localization provider
+            LocalizationManager.Provider = new LocalizationProvider(new LocalizationContext());
+            
+            // configure localization of models
+            //ModelValidatorProviders.Providers.Clear();
+            //ModelValidatorProviders.Providers.Add(new ValidationLocalizer());
+            //ModelMetadataProviders.Current = new MetadataLocalizer();
+
             var migrator = new DbMigrator(new Configuration());
             migrator.Update();
-
+            
             DependencyResolver.SetResolver(
                 new StructureMapDependencyResolver(() => Container ?? IoC.Container));
 

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace SLK.Domain.Core
 {
@@ -10,17 +11,20 @@ namespace SLK.Domain.Core
         {
             Name = name;
             Category = category;
-            Manufacturer = manufacturer;
+            ProductManufacturer = manufacturer;
             ShortDescription = shortDesc;
             FullDescription = fullDesc;
             SKU = sku;
-            ImagePath = imagePath;
+            Image = imagePath;
 
             HasImage = imagePath?.Length > 0;
             Deleted = false;
+
+            MeasureUnitStep = 0;
+            UnitsPerPackage = 0;
         }
 
-        public long ID { get; protected set; }
+        public int ID { get; protected set; }
 
         public string SKU { get; protected set; }
 
@@ -28,45 +32,81 @@ namespace SLK.Domain.Core
 
         public string ShortDescription { get; set; }
 
-        public string FullDescription { get; set; }
+        public string FullDescription { get; set; }       
 
-        public bool HasImage { get; protected set; }
+        public string Image { get; protected set; }
 
-        public string ImagePath { get; protected set; }
+        public decimal Rate { get; set; }
+        
+        public int RateCount { get; set; }
 
-        public int DisplayOrder { get; set; }
-
-        public long CategoryID { get; protected set; }
+        public int CategoryID { get; protected set; }
 
         public virtual Category Category { get; protected set; }
 
-        public long ManufacturerID { get; protected set; }
-        
-        public virtual Manufacturer Manufacturer { get; protected set; }
+        public bool NoTax { get; set; }
 
-        public bool IsVegan { get; set; }
+        public bool IsFeaturedTop { get; set; }
+
+        public bool IsFeaturedLeft { get; set; }
 
         public bool IsKosher { get; set; }
 
         public string KosherType { get; set; }
 
-        public string Components { get; set; }
+        public string Capacity { get; set; }
 
-        //public long ProductMeasureID { get; protected set; }
+        public string MeasureUnit { get; set; }
 
         public decimal MeasureUnitStep { get; set; }
 
+        public bool SoldByWeight { get; set; }
+
         public decimal UnitsPerPackage { get; set; }
 
-        public long? ContentUnitMeasureID { get; }
+        public string ProductShopOptions { get; set; }
 
-        public virtual ContentUnitMeasure ContentUnitMeasure { get; set; }
+        public string Components { get; set; }
+
+        public bool IgnoreOnImport { get; set; }
+
+        public bool HasImage { get; protected set; }
+
+        public int ProductManufacturerID { get; protected set; }
+
+        public virtual Manufacturer ProductManufacturer { get; protected set; }
+        
+        public int DisplayOrder { get; set; }
 
         public bool Deleted { get; protected set; }
+        
+        public int? ProductMeasureID { get; set; }
 
+        public virtual ContentUnitMeasure ProductMeasure { get; set; }
+
+        public string MadeCountry { get; set; }
+
+        [MaxLength(4000)]
+        public string SeoDescription { get; set; }
+        
+        [MaxLength(4000)]
+        public string SeoKeywords { get; set; }
+
+        //public int? ContentUnitMeasureID { get; set; }
+
+        //public ContentUnitMeasureMap ContentUnitMeasure { get; set; }
+
+        public decimal ContentUnitPriceMultiplicator { get; set; }
+
+        // New property
+        //public bool IsVegan { get; set; }       
+
+        // Links
         public virtual ICollection<ProductSKUMap> ProductSKUMaps { get; set; } = new List<ProductSKUMap>();
         
         public virtual ICollection<ProductInShop> ProductInShops { get; set; } = new List<ProductInShop>();
+
+        public List<ProductInShop> ProductShops { get; set; }
 
         public void Delete()
         {

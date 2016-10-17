@@ -4,7 +4,7 @@
     {
         protected MessageTemplate() { }
 
-        public long ID { get; protected set; }
+        public int ID { get; protected set; }
 
         public string LanguageCode { get; protected set; }
 

@@ -16,12 +16,12 @@ namespace SLK.Web.App_Start
         {
             var types = Assembly.GetExecutingAssembly().GetExportedTypes();
 
-            LoadStandartMappings(types);
+            LoadStandardMappings(types);
 
             LoadCustomMappings(types);
         }
 
-        private static void LoadStandartMappings(IEnumerable<Type> types)
+        private static void LoadStandardMappings(IEnumerable<Type> types)
         {
             var maps = (from t in types
                         from i in t.GetInterfaces()

@@ -4,9 +4,9 @@
     {
         protected ContentUnitMeasureMap() { }
 
-        public long ID { get; protected set; }
+        public int ID { get; protected set; }
 
-        public long ContentUnitMeasureID { get; protected set; }
+        public int ContentUnitMeasureID { get; protected set; }
 
         public virtual ContentUnitMeasure ContentUnitMeasure { get; protected set; }
 

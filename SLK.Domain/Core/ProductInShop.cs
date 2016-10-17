@@ -7,13 +7,13 @@ namespace SLK.Domain.Core
     {
         protected ProductInShop() { }
 
-        public long ID { get; protected set; }
+        public int ID { get; protected set; }
 
-        public long ProductID { get; protected set; }
+        public int ProductID { get; protected set; }
 
         public virtual Product Product { get; protected set; }
 
-        public long ShopID { get; protected set; }
+        public int ShopID { get; protected set; }
 
         public virtual Shop Shop { get; protected set; }
 

@@ -8,7 +8,7 @@ namespace SLK.Domain.Core
     {
         protected Shop() { }
 
-        public long ID { get; protected set; }
+        public int ID { get; protected set; }
 
         public string Name { get; protected set; }
 
@@ -16,11 +16,11 @@ namespace SLK.Domain.Core
 
         public string FullDescription { get; set; }
 
-        public long OwnerID { get; protected set; }
+        public int OwnerID { get; protected set; }
                 
         public virtual User Owner { get; protected set; }
 
-        public long ShopTypeID { get; protected set; }
+        public int ShopTypeID { get; protected set; }
 
         public virtual ShopType ShopType { get; protected set; }
 

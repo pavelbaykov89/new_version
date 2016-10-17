@@ -6,13 +6,13 @@ namespace SLK.Domain.Core
     {
         protected ShopRate() { }
 
-        public long ID { get; protected set; }
+        public int ID { get; protected set; }
 
-        public long UserID {get; protected set; }
+        public int UserID {get; protected set; }
 
         public virtual User User { get; protected set; }
 
-        public long ShopID { get; protected set; }
+        public int ShopID { get; protected set; }
         
         public virtual Shop Shop { get; protected set; }
 

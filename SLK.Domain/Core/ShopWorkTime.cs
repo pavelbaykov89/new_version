@@ -6,9 +6,9 @@ namespace SLK.Domain.Core
     {
         protected ShopWorkTime() { }
 
-        public long ID { get; protected set; }
+        public int ID { get; protected set; }
 
-        public long ShopID { get; protected set; }
+        public int ShopID { get; protected set; }
 
         public virtual Shop Shop { get; protected set; }
 

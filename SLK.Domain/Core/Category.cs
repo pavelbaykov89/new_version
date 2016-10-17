@@ -11,11 +11,11 @@ namespace SLK.Domain.Core
             Name = name;
         }
 
-        public long ID { get; protected set; }
+        public int ID { get; protected set; }
 
         public string Name { get; protected set; }
 
-        public long? ParentCategoryID { get; protected set; }
+        public int? ParentCategoryID { get; protected set; }
 
         public virtual Category ParentCategory { get; protected set; }
 

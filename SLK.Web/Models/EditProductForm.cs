@@ -8,7 +8,7 @@ namespace SLK.Web.Models
     public class EditProductForm : IMapFrom<Product>
     {
         [HiddenInput]
-        public long ID { get; set; }
+        public int ID { get; set; }
 
         [Required]
         public string Name { get; set; }
@@ -29,9 +29,7 @@ namespace SLK.Web.Models
         public string CategoryID { get; set; }
 
         [Required, Display(Name = "Manufacturer")]
-        public string ManufacturerID { get; set; }        
-
-        public bool IsVegan { get; set; }
+        public string ProductManufacturerID { get; set; }        
 
         public bool IsKosher { get; set; }
 

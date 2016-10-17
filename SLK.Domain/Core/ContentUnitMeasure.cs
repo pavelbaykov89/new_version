@@ -6,7 +6,7 @@ namespace SLK.Domain.Core
     {
         protected ContentUnitMeasure() { }
 
-        public long ID { get; protected set; }
+        public int ID { get; protected set; }
 
         public string Name { get; protected set; }
 

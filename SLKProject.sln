@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SLK.DataLayer", "SLK.DataLa
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SLK.Domain", "SLK.Domain\SLK.Domain.csproj", "{7B159BEC-2356-417E-B1AA-21AB06CCF271}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SLK.Services", "SLK.Services\SLK.Services.csproj", "{7FB39AB5-0198-488E-BDC7-9BFE2E3B50DD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{7B159BEC-2356-417E-B1AA-21AB06CCF271}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7B159BEC-2356-417E-B1AA-21AB06CCF271}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7B159BEC-2356-417E-B1AA-21AB06CCF271}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7FB39AB5-0198-488E-BDC7-9BFE2E3B50DD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7FB39AB5-0198-488E-BDC7-9BFE2E3B50DD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7FB39AB5-0198-488E-BDC7-9BFE2E3B50DD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7FB39AB5-0198-488E-BDC7-9BFE2E3B50DD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

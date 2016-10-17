@@ -4,15 +4,15 @@
     {
         protected ProductSKUMap() { }
 
-        public long ID { get; protected set; }
+        public int ID { get; protected set; }
 
         public string ShortSKU { get; protected set; }
 
-        public long ProductID { get; protected set; }
+        public int ProductID { get; protected set; }
 
         public virtual Product Product { get; protected set; }
 
-        public long ShopID { get; protected set; }
+        public int ShopID { get; protected set; }
 
         public virtual Shop Shop { get; protected set; }
 

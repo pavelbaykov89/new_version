@@ -19,7 +19,7 @@
         
         #region Properties
 
-        public long ID { get; protected set; }
+        public int ID { get; protected set; }
 
         public string Title { get; protected set; }
 

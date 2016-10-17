@@ -11,7 +11,7 @@ namespace SLK.Domain.Core
             Name = name;
         }
 
-        public long ID { get; protected set; }
+        public int ID { get; protected set; }
 
         public string Name { get; protected set; }
 

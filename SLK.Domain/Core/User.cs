@@ -24,7 +24,7 @@ namespace SLK.Domain.Core
 
         #region Properties
 
-        public long ID { get; protected set; }
+        public int ID { get; protected set; }
 
         public string IdentityID { get; protected set; }
 

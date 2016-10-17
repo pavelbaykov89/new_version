@@ -23,11 +23,13 @@ namespace SLK.DataLayer
                 .HasMany(c => c.Childs)
                 .WithOptional(c => c.ParentCategory)
                 .HasForeignKey(c => c.ParentCategoryID);
-            
+                    
             base.OnModelCreating(modelBuilder);
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
+            modelBuilder.Conventions.Remove<ManyToManyCascadeDeleteConvention>();
+            modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
         }
-
+        
         public DbSet<LogAction> Logs { get; set; }
 
         public DbSet<Category> Categories { get; set; }

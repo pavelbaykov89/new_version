@@ -23,10 +23,12 @@ textarea {
     max-width: 280px;
 }
 
-.alert-container {
-    position: fixed;
-    left: 0;
-    right: 0;
-    padding-left: 3em;
-    padding-right: 3em;
+tfoot input {
+        width: 100%;
+        padding: 3px;
+        box-sizing: border-box;
+}
+
+div.dataTables_filter {
+    display: none;
 }

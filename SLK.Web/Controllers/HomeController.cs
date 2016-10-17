@@ -1,4 +1,6 @@
-﻿using SLK.Web.Infrastructure;
+﻿using Knoema.Localization;
+using SLK.Web.Infrastructure;
+using System.Globalization;
 using System.Web.Mvc;
 
 namespace SLK.Web.Controllers
@@ -22,6 +24,12 @@ namespace SLK.Web.Controllers
             ViewBag.Message = "Your contact page.";
 
             return View();
+        }
+
+        public ActionResult Lang(string culture)
+        {
+            LocalizationManager.Instance.SetCulture(new CultureInfo(culture));
+            return new RedirectResult(Request.UrlReferrer.ToString());
         }
     }
 }
