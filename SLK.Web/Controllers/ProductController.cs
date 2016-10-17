@@ -253,7 +253,7 @@ namespace SLK.Web.Controllers
 
             attachment.SaveAs(fullname);
 
-            var task = new TaskDescription { Caption = $"Products importing from {attachment.FileName}", Progress = 0 };
+            var task = new TaskDescription("Products importing from", attachment.FileName);
 
             TaskManager.AddTask(task);
 
