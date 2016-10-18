@@ -246,6 +246,7 @@
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\EditProductForm.cs" />
     <Compile Include="Models\jQueryDataTableParamModel.cs" />
+    <Compile Include="Models\ListModel.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\NewProductForm.cs" />
     <Compile Include="Models\PageInfo.cs" />
@@ -338,7 +339,7 @@
     <Content Include="Views\Shared\EditorTemplates\ReadOnly.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\Object.cshtml" />
     <Content Include="Views\Product\Upload.cshtml" />
-    <Content Include="Views\Shared\EditorTemplates\List.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\ListModel.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Product\Table.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />

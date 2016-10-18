@@ -1,17 +1,17 @@
 ﻿@using SLK.Web.Helpers
-@model SLK.Web.Models.ProductsListViewModel
+@model SLK.Web.Models.ListModel
 @{
     ViewBag.Title = "Table";
 }
 
-<div class="portlet light portlet-fit portlet-datatable bordered">  
-    
+<div class="portlet light portlet-fit portlet-datatable bordered">
+
     <div class="portlet-title">
         <div class="caption">
             <i class="icon-settings font-dark"></i>
             <span class="caption-subject font-dark sbold uppercase">Products</span>
-        </div> 
-        <div class="actions">            
+        </div>
+        <div class="actions">
             <div class="btn-group">
                 <a class="btn red btn-outline btn-circle" href="javascript:;" data-toggle="dropdown">
                     <i class="fa fa-share"></i>
@@ -20,17 +20,17 @@
                 </a>
                 <ul class="dropdown-menu pull-right">
                     <li>
-                        <a href="#Upload" data-toggle="modal"> Import from Excel </a>                        
+                        <a href="#Upload" data-toggle="modal"> Import from Excel </a>
                     </li>
                     <li>
                         <a href="javascript:;"> Import from CSV </a>
                     </li>
                     <li>
                         <a href="javascript:;"> Import from XML </a>
-                    </li>                   
+                    </li>
                 </ul>
             </div>
-        </div>      
+        </div>
     </div>
     <div class="modal fade" id="Upload" tabindex="-1" role="Upload" aria-hidden="true">
         <div class="modal-dialog" on>
@@ -51,13 +51,13 @@
                                     </span>
                                     <span class="fileinput-filename"></span> &nbsp;
                                     <a href="javascript:;" class="close fileinput-exists" data-dismiss="fileinput"> </a>
-                                </div>                                
+                                </div>
                             </div>
                         </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn dark btn-outline" data-dismiss="modal">Close</button>
-                        <input type="submit" value="Upload" class="btn green"/>                        
+                        <input type="submit" value="Upload" class="btn green" />
                     </div>
                 </form>
             </div>
@@ -65,60 +65,5 @@
         </div>
         <!-- /.modal-dialog -->
     </div>
-    <div class="portlet-body">
-        <div class="table-container">                        
-            <table class="table table-striped table-bordered table-hover dataTable" id="datatable_ajax">
-                <thead>
-                    <tr role="row">                        
-                        <th width="14%" class="sorting">
-                            @Html.DisplayNameFor(model => model.Name)
-                        </th>
-                        <th width="14%">
-                            @Html.DisplayNameFor(model => model.CategoryName)
-                        </th>
-                        <th width="14%">
-                            @Html.DisplayNameFor(model => model.ShortDescription)
-                        </th>
-                        <th width="15%">
-                            @Html.DisplayNameFor(model => model.FullDescription)
-                        </th>
-                        <th width="14%">
-                            @Html.DisplayNameFor(model => model.SKU)
-                        </th>
-                        <th width="14%">
-                            @Html.DisplayNameFor(model => model.ProductManufacturerName)
-                        </th>
-                        <th width="5%">
-                            @Html.DisplayNameFor(model => model.HasImage)
-                        </th>
-                        <th width="10%" class="sorting_disabled"></th>
-                    </tr>
-                    <tr role="row" class="filter">
-                        <td>
-                            <input type="text" class="form-control form-filter input-sm" name="Name"> 
-                        </td>
-                        <td>
-                            <input type="text" class="form-control form-filter input-sm" name="Category">
-                        </td>
-                        <td>
-                            <input type="text" class="form-control form-filter input-sm" name="ShortDescription">
-                        </td>
-                        <td>
-                            <input type="text" class="form-control form-filter input-sm" name="FullDescription">
-                        </td>
-                        <td>
-                            <input type="text" class="form-control form-filter input-sm" name="SKU">
-                        </td>
-                        <td>
-                            <input type="text" class="form-control form-filter input-sm" name="Manufacturer">
-                        </td>                        
-                        <td></td>
-                        <td></td>
-                    </tr>
-                </thead>
-                <tbody> </tbody>
-            </table>
-        </div>
-    </div>
+    @Html.EditorForModel()
 </div>
-
