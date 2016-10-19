@@ -61,6 +61,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ProductsExportService.cs" />
     <Compile Include="ProductsImportService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Task\TaskDescription.cs" />

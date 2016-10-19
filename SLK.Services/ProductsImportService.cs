@@ -52,8 +52,10 @@ namespace SLK.Services
             products.Capacity = 1000;
 
             var categories = context.Categories.ToList();
-
+            
             var manufacturers = context.Manufacturers.ToList();
+
+            task.Start();
 
             using (var package = new ExcelPackage(new FileInfo(filename)))
             {
@@ -95,7 +97,7 @@ namespace SLK.Services
                         products.Add(product);
 
                         ++row;
-                        if (row%1000 == 0)
+                        if (row % 100 == 0)
                         {
                             context.Products.AddRange(products);
                             context.SaveChanges();

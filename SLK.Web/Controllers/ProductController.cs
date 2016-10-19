@@ -1,21 +1,20 @@
 ﻿using AutoMapper.QueryableExtensions;
-using Microsoft.Web.Mvc;
-using SLK.Domain.Core;
 using SLK.DataLayer;
+using SLK.Domain.Core;
+using SLK.Services;
+using SLK.Services.Task;
 using SLK.Web.Filters;
 using SLK.Web.Infrastructure;
 using SLK.Web.Infrastructure.Alerts;
 using SLK.Web.Models;
+using SLK.Web.Models.ProductModels;
+using SLK.Web.ProductModels;
 using System;
 using System.Linq;
 using System.Linq.Dynamic;
-using System.Web.Mvc;
-using System.Collections.Generic;
-using System.Web;
-using SLK.Services;
 using System.Threading.Tasks;
-using System.Threading;
-using SLK.Services.Task;
+using System.Web;
+using System.Web.Mvc;
 
 namespace SLK.Web.Controllers
 {
@@ -46,13 +45,18 @@ namespace SLK.Web.Controllers
             var products = _context.Products
                     .Where(p => !p.Deleted)
                     .ProjectTo<ProductsListViewModel>();
-            
+
+            int displayOrderFilterInteger;
+
             var nameFilter = Convert.ToString(Request["Name"]);
             var categoryFilter = Convert.ToString(Request["Category"]);
             var shortDescFilter = Convert.ToString(Request["ShortDescription"]);
             var fullDescFilter = Convert.ToString(Request["FullDescription"]);
             var skuFilter = Convert.ToString(Request["SKU"]);
-            var manufacturerFilter = Convert.ToString(Request["Manufacturer"]);            
+            var manufacturerFilter = Convert.ToString(Request["Manufacturer"]);
+            var hasImageFilter = Convert.ToString(Request["HasImage"]);
+            var displayOrderFilter = (Int32.TryParse(Request["DisplayOrder"], out displayOrderFilterInteger)) ? "y" : "";
+
 
             if (!string.IsNullOrEmpty(nameFilter))
             {
@@ -84,6 +88,16 @@ namespace SLK.Web.Controllers
                 products = products.Where(p => p.ProductManufacturerName.Contains(manufacturerFilter));
             }
 
+            if (!string.IsNullOrEmpty(hasImageFilter) && hasImageFilter != "any")
+            {
+                bool flag = hasImageFilter == "true" ? true : false;
+                products = products.Where(p => p.HasImage == flag);
+            }
+
+            if (!string.IsNullOrEmpty(displayOrderFilter))
+            {                
+                products = products.Where(p => p.DisplayOrder == displayOrderFilterInteger);
+            }
 
             string ordering = "";
             int ind = 0;
@@ -99,7 +113,8 @@ namespace SLK.Web.Controllers
                             sortColumnIndex == 3 ? "FullDescription" :
                             sortColumnIndex == 4 ? "SKU" :
                             sortColumnIndex == 5 ? "ProductManufacturerName" :
-                            sortColumnIndex == 6 ? "HasImage" : "";
+                            sortColumnIndex == 7 ? "DisplayOrder" : "";
+                            
 
                 // asc or desc
                 ordering += " "  + sortDirection.ToUpper() + ", ";
@@ -227,15 +242,7 @@ namespace SLK.Web.Controllers
 
             return RedirectToAction<ProductController>(c => c.Table()).WithSuccess("Product updated!");
         }
-         
-        [HttpGet]       
-        public ActionResult Upload()
-        {
-            ViewBag.ProductMenuActive = "active open";
-            ViewBag.ProductActive = "active open";
-            return View();
-        }
-
+   
         [HttpPost]
         public ActionResult Upload(HttpPostedFileBase attachment)
         {
@@ -263,6 +270,31 @@ namespace SLK.Web.Controllers
             });
 
             return RedirectToAction<ProductController>(c => c.Table()).WithSuccess("Products file uploaded!");
+        }
+               
+        public ActionResult Download()
+        {
+            var fileName = "Products_" + DateTime.Now.ToString("dd-mm-yyyy_HH-mm") + ".xlsx";
+
+            var fullname = Server.MapPath("~/FilesToDownload/") + fileName;
+
+            var task = new TaskDescription("Products exporting to", fileName);
+
+            TaskManager.AddTask(task);
+
+            Task.Factory.StartNew(() =>
+            {
+                var context = new ApplicationDbContext();
+                
+                ProductsExportService.ExportProductsToExcelFile(
+                            typeof(ProductExportModel).GetProperties(),
+                            context.Products.ProjectTo<ProductExportModel>(),
+                            task,
+                            context.Products.Count(),
+                            fullname);                        
+            });
+
+            return RedirectToAction<ProductController>(c => c.Table()).WithSuccess("Products are exporting to file!");
         }
 
         [Log("Deleted product {id}")]

@@ -1,7 +1,7 @@
 ﻿@using SLK.Web.Helpers
 @model SLK.Web.Models.ListModel
 @{
-    ViewBag.Title = "Table";
+    ViewBag.Title = "ProductTable";
 }
 
 <div class="portlet light portlet-fit portlet-datatable bordered">
@@ -15,19 +15,17 @@
             <div class="btn-group">
                 <a class="btn red btn-outline btn-circle" href="javascript:;" data-toggle="dropdown">
                     <i class="fa fa-share"></i>
-                    <span class="hidden-xs"> Tools </span>
+                    <span class="hidden-xs"> Import/Export </span>
                     <i class="fa fa-angle-down"></i>
                 </a>
                 <ul class="dropdown-menu pull-right">
                     <li>
                         <a href="#Upload" data-toggle="modal"> Import from Excel </a>
                     </li>
+                    <li class="divider"> </li>
                     <li>
-                        <a href="javascript:;"> Import from CSV </a>
-                    </li>
-                    <li>
-                        <a href="javascript:;"> Import from XML </a>
-                    </li>
+                        <a href="/Product/Download"> Export to Excel </a>
+                    </li>                    
                 </ul>
             </div>
         </div>
@@ -67,3 +65,90 @@
     </div>
     @Html.EditorForModel()
 </div>
+
+@section scripts
+{
+    <script src="~/Scripts/app/data-tables.js" type="text/javascript"></script>
+    <script>
+
+        $(setTasksCount());
+
+        $(TableDatatablesAjax.init("/Product/List", @Html.CreateColumnsInfo(ViewData.ModelMetadata.Properties, true)));
+
+        function setTasksCount() {
+            $.get('/Product/TasksCount', {}, function callback(data) {
+                $('.dropdown-tasks span.badge')[0].innerText = data.count;
+                if (data.count == 1)
+                    $('.tasks h3')[0].innerText = '1 task is active';
+                else
+                    $('.tasks h3')[0].innerText = data.count + ' tasks are active';
+            });
+        }
+
+        function drawTasks(anyway) {
+
+            var taskdata;
+
+            if (anyway || $.inArray('open', $('.dropdown-tasks')[0].classList) !== -1) {
+
+                $.ajax({
+                    async: false,
+                    type: 'GET',
+                    url: '/Product/ActiveTasks',
+                    success: function (data) {
+                        taskdata = data;
+                    }
+                });
+
+                var list = $('.dropdown-tasks .dropdown-menu-list')[0];
+                list.innerHTML = "";
+
+                for (var i = 0; i < taskdata.count; ++i) {
+                    list.innerHTML +=
+                        "<li>\
+                    <a href='javascript:;'>\
+                        <span class='task'>\
+                            <span class='desc'>" + taskdata.tasks[i].Caption + "</span><br>\
+                            <span class='desc font-blue-soft'>" + taskdata.tasks[i].FileName + "</span><br>\
+                            <span class='desc'>" + taskdata.tasks[i].Elapsed + " / " + taskdata.tasks[i].Estimated + "</span>\
+                            <span class='percent'>" + taskdata.tasks[i].Progress + "%</span>\
+                        </span>\
+                        <span class='progress'>\
+                            <span style='width: " + taskdata.tasks[i].Progress + "%;' class='progress-bar progress-bar-success' aria-valuenow='98' aria-valuemin='0' aria-valuemax='100'>\
+                                <span class='sr-only'>" + taskdata.tasks[i].Progress + "% Complete</span>\
+                            </span>\
+                        </span>\
+                    </a>\
+                </li>";
+                }
+            }
+
+            if (!taskdata) {
+                $.ajax({
+                    async: false,
+                    type: 'GET',
+                    url: '/Product/TasksCount',
+                    success: function (data) {
+                        $('.dropdown-tasks span.badge')[0].innerText = data.count;
+                        if (data.count == 1)
+                            $('.tasks h3')[0].innerText = '1 task is active';
+                        else
+                            $('.tasks h3')[0].innerText = data.count + ' tasks are active';
+
+                        if (data.count) setTimeout(drawTasks, 1000);
+                    }
+                });
+            }
+            else {
+                $('.dropdown-tasks span.badge')[0].innerText = taskdata.count;
+                if (taskdata.count == 1)
+                    $('.tasks h3')[0].innerText = '1 task is active';
+                else
+                    $('.tasks h3')[0].innerText = taskdata.count + ' tasks are active';
+
+                if (taskdata.count) setTimeout(drawTasks, 1000);
+            }
+        }
+           
+    </script>
+}

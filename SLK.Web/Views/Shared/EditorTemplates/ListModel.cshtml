@@ -11,66 +11,45 @@
                     {
                         if (prop.TemplateHint != "HiddenInput")
                         {
-                            <th class="sorting">
-                                @prop.DisplayName
-                            </th>
+                            if (prop.ModelType == typeof(bool))
+                            {
+                                <th class="sorting_disabled" width="6%">
+                                    @prop.DisplayName
+                                </th>
+                            }
+                            else
+                            {
+                                <th class="sorting">
+                                    @prop.DisplayName
+                                </th>
+                            }
                         }
                     }
-
-                    @*<th width="14%" class="sorting">
-                        @Html.DisplayNameFor(model => model.Name)
-                    </th>
-                    <th width="14%">
-                        @Html.DisplayNameFor(model => model.CategoryName)
-                    </th>
-                    <th width="14%">
-                        @Html.DisplayNameFor(model => model.ShortDescription)
-                    </th>
-                    <th width="15%">
-                        @Html.DisplayNameFor(model => model.FullDescription)
-                    </th>
-                    <th width="14%">
-                        @Html.DisplayNameFor(model => model.SKU)
-                    </th>
-                    <th width="14%">
-                        @Html.DisplayNameFor(model => model.ProductManufacturerName)
-                    </th>
-                    <th width="5%">
-                        @Html.DisplayNameFor(model => model.HasImage)
-                    </th>*@
                     <th width="10%" class="sorting_disabled"></th>
                 </tr>
                 <tr role="row" class="filter">
-                    @foreach (var prop in ViewData.ModelMetadata.Properties
-                        .Where(p => p.ShowForEdit))
+                    @foreach (var prop in ViewData.ModelMetadata.Properties.Where(p => p.ShowForEdit))
                     {
                         if (prop.TemplateHint != "HiddenInput")
                         {
-                            <td>
-                                <input type="text" class="form-control form-filter input-sm" name="@prop.PropertyName">
-                            </td>
+                            if (prop.ModelType == typeof(bool))
+                            {                                
+                                <td>                                    
+                                    <select name="@prop.PropertyName" class="form-control form-filter input-sm">                                        
+                                        <option value="any">Any</option>
+                                        <option value="true">True</option>
+                                        <option value="false">False</option>                                        
+                                    </select>
+                                </td>
+                            }
+                            else
+                            {
+                                <td>
+                                    <input type="text" class="form-control form-filter input-sm" name="@prop.PropertyName">                                    
+                                </td>
+                            }
                         }
                     }
-
-                    @*<td>
-                        <input type="text" class="form-control form-filter input-sm" name="Name">
-                    </td>
-                    <td>
-                        <input type="text" class="form-control form-filter input-sm" name="Category">
-                    </td>
-                    <td>
-                        <input type="text" class="form-control form-filter input-sm" name="ShortDescription">
-                    </td>
-                    <td>
-                        <input type="text" class="form-control form-filter input-sm" name="FullDescription">
-                    </td>
-                    <td>
-                        <input type="text" class="form-control form-filter input-sm" name="SKU">
-                    </td>
-                    <td>
-                        <input type="text" class="form-control form-filter input-sm" name="Manufacturer">
-                    </td>
-                    <td></td>*@
                     <td></td>
                 </tr>
             </thead>
