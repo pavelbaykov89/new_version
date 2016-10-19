@@ -1,0 +1,23 @@
+﻿.login input {
+    max-width: 100%;
+}
+
+.login .content {
+    width: 430px;
+}
+
+.login .content .create-account {
+    margin: 0px -45px -45px;
+}
+
+.login {
+    background-color: transparent !important;
+    line-height: normal;
+}
+.login .login-close {
+    margin-top: 2px;
+    margin-right: -14px;
+}
+.login .content .register-form{
+    display: block;
+}

@@ -1,0 +1,58 @@
+﻿@model SLK.Web.Models.RegisterViewModel
+
+
+@*@using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "register-form", role = "form" }))*@
+@using (Ajax.BeginForm("Register", "Account", null,
+                new AjaxOptions { HttpMethod = "post", InsertionMode = InsertionMode.Replace, UpdateTargetId = "register-form",
+                    OnSuccess = "slk.login.reloadIfSuccess(data, status, xhr, 'register-form')", OnComplete = "slk.login.initMetronicLogin()"
+                },
+                new { @class = "register-form", id = "register-form" }))
+{
+    <button type="button" class="close login-close" data-dismiss="modal" aria-hidden="true"></button>
+    <div class="modal-body">
+
+        @Html.AntiForgeryToken()
+        <h3 class="font-green">Sign Up</h3>
+        <p class="hint"> Enter your personal details below: </p>
+        <div class="form-group">
+            <!--ie8, ie9 does not support html5 placeholder, so we just show field title for that-->
+            <label class="control-label visible-ie8 visible-ie9">Email</label>
+            @*<input class="form-control placeholder-no-fix" type="text" placeholder="Email" name="email" />*@
+            @Html.TextBoxFor(m => m.Email, new { @class = "form-control placeholder-no-fix", placeholder = "Email" })
+            @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+        </div>
+        <div class="form-group">
+            <label class="control-label visible-ie8 visible-ie9">Password</label>
+            @*<input class="form-control placeholder-no-fix" type="password" autocomplete="off" id="register_password" placeholder="Password" name="password" />*@
+            @Html.PasswordFor(m => m.Password, new { @class = "form-control placeholder-no-fix", autocomplete = "off", id = "register_password", placeholder = "Password" })
+            @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+        </div>
+        <div class="form-group">
+            <label class="control-label visible-ie8 visible-ie9">Re-type Your Password</label>
+            @*<input class="form-control placeholder-no-fix" type="password" autocomplete="off" placeholder="Re-type Your Password" name="rpassword" />*@
+            @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control placeholder-no-fix", autocomplete = "off", placeholder = "Re-type Your Password" })
+            @Html.ValidationMessageFor(m => m.ConfirmPassword, "", new { @class = "text-danger" })
+        </div>
+        <div class="form-group margin-top-20 margin-bottom-20">
+            <label class="mt-checkbox mt-checkbox-outline">
+                <input type="checkbox" name="tnc" /> I agree to the
+                <a href="javascript:;">Terms of Service </a> &
+                <a href="javascript:;">Privacy Policy </a>
+                <span></span>
+            </label>
+            <div id="register_tnc_error"> </div>
+        </div>
+        <div class="form-actions">
+            @*<a onclick="slk.login.reloadPopup(event || window.event, this)" data-target="#login" href="@Url.Action("Register", "Account")" class="uppercase">Create an account</a>*@
+            <button type="button" class="btn green btn-outline" href="@Url.Action("Login", "Account")" 
+                    onclick="slk.login.reloadPopup(event || window.event, this)" data-target="#login">
+                Sign In
+            </button>
+            <button type="submit" id="register-submit-btn" class="btn btn-success uppercase pull-right">Submit</button>
+        </div>
+
+    </div>
+}
+
+
+

@@ -41,8 +41,14 @@ License: You must have a valid license purchased only from themeforest(the above
     <link href="~/Content/assets/layouts/layout/css/themes/darkblue.min.css" rel="stylesheet" type="text/css" id="style_color" />
     <link href="~/Content/assets/layouts/layout/css/custom.min.css" rel="stylesheet" type="text/css" />
     <!-- END THEME LAYOUT STYLES -->
+
     <link href="~/Content/assets/global/plugins/bootstrap-fileinput/bootstrap-fileinput.css" rel="stylesheet" type="text/css">
     <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
+
+    <!-- BEGIN LOGIN POPUPS STYLE -->
+    <link href="../assets/pages/css/login.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/login.popup.css" rel="stylesheet" type="text/css" />
+    <!-- BEGIN LOGIN POPUPS STYLE -->
     <link rel="shortcut icon" href="favicon.ico" />
 </head>
 <!-- END HEAD -->
@@ -152,9 +158,16 @@ License: You must have a valid license purchased only from themeforest(the above
                         else
                         {
                             <li class="dropdown">
-                                <button type="button" class="btn btn-circle btn-success btn-sm" 
+                                @*<button type="button" class="btn btn-circle btn-success btn-sm" 
                                         style="margin-top: 11px; margin-bottom: 11px;"
                                         onclick="location.href='@Url.Action("Login", "Account")';">
+                                    Sign In
+                                </button>*@
+                                <button type="button" class="btn btn-circle btn-success btn-sm"
+                                        data-toggle="modal"
+                                        data-target="#login"
+                                        href="@Url.Action("Login", "Account")"
+                                        style="margin-top: 11px; margin-bottom: 11px;">
                                     Sign In
                                 </button>
                             </li>                              
@@ -868,7 +881,7 @@ License: You must have a valid license purchased only from themeforest(the above
         </div>
         <!-- END FOOTER -->
     </div>
-    
+
     <!--[if lt IE 9]>
     <script src="../assets/global/plugins/respond.min.js"></script>
     <script src="../assets/global/plugins/excanvas.min.js"></script>
@@ -882,6 +895,10 @@ License: You must have a valid license purchased only from themeforest(the above
     <script src="~/Content/assets/global/plugins/jquery.blockui.min.js" type="text/javascript"></script>
     <script src="~/Content/assets/global/plugins/bootstrap-switch/js/bootstrap-switch.min.js" type="text/javascript"></script>
     <!-- END CORE PLUGINS -->
+    <!-- BEGIN ADDITIONAL PLUGINS -->
+    @Scripts.Render("~/bundles/jqueryval")
+    <script src="../assets/global/plugins/jquery-validation/js/additional-methods.min.js" type="text/javascript"></script>
+    <!-- END ADDITIONAL PLUGINS -->
     <!-- BEGIN THEME GLOBAL SCRIPTS -->
     <script src="~/Content/assets/global/scripts/app.min.js" type="text/javascript"></script>
     <script src="~/Content/assets/global/scripts/datatable.min.js" type="text/javascript"></script>
@@ -898,9 +915,46 @@ License: You must have a valid license purchased only from themeforest(the above
     <script src="~/Content/assets/layouts/global/scripts/quick-sidebar.min.js" type="text/javascript"></script>
     <script src="~/Content/assets/layouts/global/scripts/quick-nav.min.js" type="text/javascript"></script>
     <script src="~/Content/assets/global/plugins/bootstrap-fileinput/bootstrap-fileinput.js" type="text/javascript"></script>
-    <script src="~/Content/assets/pages/scripts/ui-modals.min.js" type="text/javascript"></script>
+    <!-- END THEME LAYOUT SCRIPTS --> 
+
+    <!-- BEGIN LOGIN POPUP SCRIPTS -->
+    <script src="../assets/pages/scripts/login.js" type="text/javascript"></script>
+    <script src="~/Scripts/login.js" type="text/javascript"></script>
+    <script>
+        slk.login.setLoader(`@(Html.Partial("ModalLoading"))`);
+    </script>
+    <!-- END LOGIN POPUP SCRIPTS -->
+
+    @* AJAX POPUPS BEGIN *@
+    @helper AjaxPopup(string id, string bodyClass, string contentClass = null, string onShown = null)
+    {
+        <!--DOC: Aplly "modal-cached" class after "modal" class to enable ajax content caching-->
+        <div class="modal fade @bodyClass" id="@id" role="basic" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content @contentClass">
+                    @Html.Partial("ModalLoading")
+                </div>
+            </div>
+        </div>
+        if (onShown != null)
+        {
+            <script>
+                $(function () {
+                    $('#' + '@id').on('shown.bs.modal', function () {
+                        @onShown;
+                    });
+                });
+            </script>
+        }
+    }
+    @if (!User.Identity.IsAuthenticated)
+    {
+        @:@AjaxPopup("login", "login", "content", "slk.login.initMetronicLogin()")
+    }
+    @* AJAX POPUPS END *@
+
     @RenderSection("scripts", required: false)
-    <!-- END THEME LAYOUT SCRIPTS -->    
+   
     @RenderLocalizationIncludes(true/*User.IsInRole("Admin")*/)
 
     <script>
