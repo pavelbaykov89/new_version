@@ -45,9 +45,9 @@ var Login = function() {
                 error.insertAfter(element.closest('.input-icon'));
             },
 
-            submitHandler: function(form) {
-                form.submit(); // form validation success, call ajax form submit
-            }
+            //submitHandler: function(form) {
+                //form.submit(); // form validation success, call ajax form submit
+            //}
         });
 
         $('.login-form input').keypress(function(e) {
@@ -97,9 +97,9 @@ var Login = function() {
                 error.insertAfter(element.closest('.input-icon'));
             },
 
-            submitHandler: function(form) {
-                form.submit();
-            }
+            //submitHandler: function(form) {
+                //form.submit();
+            //}
         });
 
         $('.forget-form input').keypress(function(e) {
@@ -220,9 +220,9 @@ var Login = function() {
                 }
             },
 
-            submitHandler: function(form) {
-                form[0].submit();
-            }
+            //submitHandler: function(form) {
+                //form[0].submit();
+            //}
         });
 
         $('.register-form input').keypress(function(e) {

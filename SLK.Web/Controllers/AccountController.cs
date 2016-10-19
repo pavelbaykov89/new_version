@@ -5,6 +5,7 @@ using SLK.Domain.Core;
 using SLK.Web.Filters;
 using SLK.Web.Infrastructure;
 using SLK.Web.Models;
+using System;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
@@ -55,23 +56,20 @@ namespace SLK.Web.Controllers
         //
         // GET: /Account/Login
         [AllowAnonymous]
-        public ActionResult Login(string returnUrl)
+        public ActionResult Login()
         {
-            ViewBag.ReturnUrl = returnUrl ?? "/";
-            return View();
+            return PartialView("Popup/LoginPopup");
         }
 
-        //
-        // POST: /Account/Login
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
         [Log("User login")]
-        public async Task<ActionResult> Login(LoginViewModel model, string returnUrl)
+        public async Task<ActionResult> Login(LoginViewModel model)
         {
             if (!ModelState.IsValid)
             {
-                return View(model);
+                return PartialView("Popup/LoginPopup", model);
             }
 
             // This doesn't count login failures towards account lockout
@@ -81,18 +79,20 @@ namespace SLK.Web.Controllers
             switch (result)
             {
                 case SignInStatus.Success:
-                    return RedirectToLocal(returnUrl);
+                    return Json(new { success = true });
                 case SignInStatus.LockedOut:
-                    return View("Lockout");
+                    throw new NotImplementedException();
+                    //return View("Lockout");
                 case SignInStatus.RequiresVerification:
-                    return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
+                    throw new NotImplementedException();
+                    //return RedirectToAction("SendCode", new { RememberMe = model.RememberMe });
                 case SignInStatus.Failure:
                 default:
                     ModelState.AddModelError("WrongCredentials", "Email or username is incorrect.");
-                    return View(model);
+                    return PartialView("Popup/LoginPopup", model);
             }
         }
-
+       
         //
         // GET: /Account/VerifyCode
         [AllowAnonymous]
@@ -141,7 +141,7 @@ namespace SLK.Web.Controllers
         [AllowAnonymous]
         public ActionResult Register()
         {
-            return View();
+            return PartialView("Popup/RegisterPopup");
         }
 
         //
@@ -159,20 +159,20 @@ namespace SLK.Web.Controllers
                 if (result.Succeeded)
                 {
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
-                    
+
                     // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link
                     // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
                     // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                     // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
 
-                    return RedirectToAction("Index", "Home");
+                    return Json(new { success = true });
                 }
                 AddErrors(result);
             }
 
             // If we got this far, something failed, redisplay form
-            return View(model);
+            return PartialView("Popup/RegisterPopup", model);
         }
 
         //

@@ -27,22 +27,28 @@ License: You must have a valid license purchased only from themeforest(the above
     <meta content="" name="author" />
     <!-- BEGIN GLOBAL MANDATORY STYLES -->
     <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=all" rel="stylesheet" type="text/css" />
-    <link href="~/Content/assets/global/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
-    <link href="~/Content/assets/global/plugins/simple-line-icons/simple-line-icons.min.css" rel="stylesheet" type="text/css" />
-    <link href="~/Content/assets/global/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
-    <link href="~/Content/assets/global/plugins/bootstrap-switch/css/bootstrap-switch.min.css" rel="stylesheet" type="text/css" />
+    <link href="../assets/global/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+    <link href="../assets/global/plugins/simple-line-icons/simple-line-icons.min.css" rel="stylesheet" type="text/css" />
+    <link href="../assets/global/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="../assets/global/plugins/bootstrap-switch/css/bootstrap-switch.min.css" rel="stylesheet" type="text/css" />
     <!-- END GLOBAL MANDATORY STYLES -->
     <!-- BEGIN THEME GLOBAL STYLES -->
-    <link href="~/Content/assets/global/css/components.min.css" rel="stylesheet" id="style_components" type="text/css" />
-    <link href="~/Content/assets/global/css/plugins.min.css" rel="stylesheet" type="text/css" />
+    <link href="../assets/global/css/components.min.css" rel="stylesheet" id="style_components" type="text/css" />
+    <link href="../assets/global/css/plugins.min.css" rel="stylesheet" type="text/css" />
     <!-- END THEME GLOBAL STYLES -->
     <!-- BEGIN THEME LAYOUT STYLES -->
-    <link href="~/Content/assets/layouts/layout/css/layout.min.css" rel="stylesheet" type="text/css" />
-    <link href="~/Content/assets/layouts/layout/css/themes/darkblue.min.css" rel="stylesheet" type="text/css" id="style_color" />
-    <link href="~/Content/assets/layouts/layout/css/custom.min.css" rel="stylesheet" type="text/css" />
+    <link href="../assets/layouts/layout/css/layout.min.css" rel="stylesheet" type="text/css" />
+    <link href="../assets/layouts/layout/css/themes/darkblue.min.css" rel="stylesheet" type="text/css" id="style_color" />
+    <link href="../assets/layouts/layout/css/custom.min.css" rel="stylesheet" type="text/css" />
     <!-- END THEME LAYOUT STYLES -->
-    <link href="~/Content/assets/global/plugins/bootstrap-fileinput/bootstrap-fileinput.css" rel="stylesheet" type="text/css">
+
+    <link href="../assets/global/plugins/bootstrap-fileinput/bootstrap-fileinput.css" rel="stylesheet" type="text/css">
     <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
+
+    <!-- BEGIN LOGIN POPUPS STYLE -->
+    <link href="../assets/pages/css/login.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/login.popup.css" rel="stylesheet" type="text/css" />
+    <!-- BEGIN LOGIN POPUPS STYLE -->
     <link rel="shortcut icon" href="favicon.ico" />
 </head>
 <!-- END HEAD -->
@@ -55,7 +61,7 @@ License: You must have a valid license purchased only from themeforest(the above
                 <!-- BEGIN LOGO -->
                 <div class="page-logo">
                     <a href="index.html">
-                        <img src="~/Content/assets/layouts/layout/img/logo.png" alt="logo" class="logo-default" />
+                        <img src="../assets/layouts/layout/img/logo.png" alt="logo" class="logo-default" />
                     </a>
                     <div class="menu-toggler sidebar-toggler">
                         <span></span>
@@ -128,7 +134,7 @@ License: You must have a valid license purchased only from themeforest(the above
                         {
                             <li class="dropdown dropdown-user">
                                 <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
-                                    <img alt="" class="img-circle" src="~/Content/assets/layouts/layout/img/avatar3_small.jpg" />
+                                    <img alt="" class="img-circle" src="../assets/layouts/layout/img/avatar3_small.jpg" />
                                     <span class="username username-hide-on-mobile"> @User.Identity.Name </span>
                                     <i class="fa fa-angle-down"></i>
                                 </a>
@@ -152,9 +158,16 @@ License: You must have a valid license purchased only from themeforest(the above
                         else
                         {
                             <li class="dropdown">
-                                <button type="button" class="btn btn-circle btn-success btn-sm" 
+                                @*<button type="button" class="btn btn-circle btn-success btn-sm" 
                                         style="margin-top: 11px; margin-bottom: 11px;"
                                         onclick="location.href='@Url.Action("Login", "Account")';">
+                                    Sign In
+                                </button>*@
+                                <button type="button" class="btn btn-circle btn-success btn-sm"
+                                        data-toggle="modal"
+                                        data-target="#login"
+                                        href="@Url.Action("Login", "Account")"
+                                        style="margin-top: 11px; margin-bottom: 11px;">
                                     Sign In
                                 </button>
                             </li>                              
@@ -348,14 +361,14 @@ License: You must have a valid license purchased only from themeforest(the above
                                         <div class="media-status">
                                             <span class="badge badge-success">8</span>
                                         </div>
-                                        <img class="media-object" src="~/Content/assets/layouts/layout/img/avatar3.jpg" alt="...">
+                                        <img class="media-object" src="../assets/layouts/layout/img/avatar3.jpg" alt="...">
                                         <div class="media-body">
                                             <h4 class="media-heading">Bob Nilson</h4>
                                             <div class="media-heading-sub"> Project Manager</div>
                                         </div>
                                     </li>
                                     <li class="media">
-                                        <img class="media-object" src="~/Content/assets/layouts/layout/img/avatar1.jpg" alt="...">
+                                        <img class="media-object" src="../assets/layouts/layout/img/avatar1.jpg" alt="...">
                                         <div class="media-body">
                                             <h4 class="media-heading">Nick Larson</h4>
                                             <div class="media-heading-sub"> Art Director</div>
@@ -365,14 +378,14 @@ License: You must have a valid license purchased only from themeforest(the above
                                         <div class="media-status">
                                             <span class="badge badge-danger">3</span>
                                         </div>
-                                        <img class="media-object" src="~/Content/assets/layouts/layout/img/avatar4.jpg" alt="...">
+                                        <img class="media-object" src="../assets/layouts/layout/img/avatar4.jpg" alt="...">
                                         <div class="media-body">
                                             <h4 class="media-heading">Deon Hubert</h4>
                                             <div class="media-heading-sub"> CTO</div>
                                         </div>
                                     </li>
                                     <li class="media">
-                                        <img class="media-object" src="~/Content/assets/layouts/layout/img/avatar2.jpg" alt="...">
+                                        <img class="media-object" src="../assets/layouts/layout/img/avatar2.jpg" alt="...">
                                         <div class="media-body">
                                             <h4 class="media-heading">Ella Wong</h4>
                                             <div class="media-heading-sub"> CEO</div>
@@ -385,7 +398,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                         <div class="media-status">
                                             <span class="badge badge-warning">2</span>
                                         </div>
-                                        <img class="media-object" src="~/Content/assets/layouts/layout/img/avatar6.jpg" alt="...">
+                                        <img class="media-object" src="../assets/layouts/layout/img/avatar6.jpg" alt="...">
                                         <div class="media-body">
                                             <h4 class="media-heading">Lara Kunis</h4>
                                             <div class="media-heading-sub"> CEO, Loop Inc</div>
@@ -396,7 +409,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                         <div class="media-status">
                                             <span class="label label-sm label-success">new</span>
                                         </div>
-                                        <img class="media-object" src="~/Content/assets/layouts/layout/img/avatar7.jpg" alt="...">
+                                        <img class="media-object" src="../assets/layouts/layout/img/avatar7.jpg" alt="...">
                                         <div class="media-body">
                                             <h4 class="media-heading">Ernie Kyllonen</h4>
                                             <div class="media-heading-sub">
@@ -406,7 +419,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                         </div>
                                     </li>
                                     <li class="media">
-                                        <img class="media-object" src="~/Content/assets/layouts/layout/img/avatar8.jpg" alt="...">
+                                        <img class="media-object" src="../assets/layouts/layout/img/avatar8.jpg" alt="...">
                                         <div class="media-body">
                                             <h4 class="media-heading">Lisa Stone</h4>
                                             <div class="media-heading-sub"> CTO, Keort Inc</div>
@@ -417,14 +430,14 @@ License: You must have a valid license purchased only from themeforest(the above
                                         <div class="media-status">
                                             <span class="badge badge-success">7</span>
                                         </div>
-                                        <img class="media-object" src="~/Content/assets/layouts/layout/img/avatar9.jpg" alt="...">
+                                        <img class="media-object" src="../assets/layouts/layout/img/avatar9.jpg" alt="...">
                                         <div class="media-body">
                                             <h4 class="media-heading">Deon Portalatin</h4>
                                             <div class="media-heading-sub"> CFO, H&D LTD</div>
                                         </div>
                                     </li>
                                     <li class="media">
-                                        <img class="media-object" src="~/Content/assets/layouts/layout/img/avatar10.jpg" alt="...">
+                                        <img class="media-object" src="../assets/layouts/layout/img/avatar10.jpg" alt="...">
                                         <div class="media-body">
                                             <h4 class="media-heading">Irina Savikova</h4>
                                             <div class="media-heading-sub"> CEO, Tizda Motors Inc</div>
@@ -434,7 +447,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                         <div class="media-status">
                                             <span class="badge badge-danger">4</span>
                                         </div>
-                                        <img class="media-object" src="~/Content/assets/layouts/layout/img/avatar11.jpg" alt="...">
+                                        <img class="media-object" src="../assets/layouts/layout/img/avatar11.jpg" alt="...">
                                         <div class="media-body">
                                             <h4 class="media-heading">Maria Gomez</h4>
                                             <div class="media-heading-sub"> Manager, Infomatic Inc</div>
@@ -452,7 +465,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                     </div>
                                     <div class="page-quick-sidebar-chat-user-messages">
                                         <div class="post out">
-                                            <img class="avatar" alt="" src="~/Content/assets/layouts/layout/img/avatar3.jpg" />
+                                            <img class="avatar" alt="" src="../assets/layouts/layout/img/avatar3.jpg" />
                                             <div class="message">
                                                 <span class="arrow"></span>
                                                 <a href = "javascript:;" class="name">Bob Nilson</a>
@@ -461,7 +474,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                             </div>
                                         </div>
                                         <div class="post in">
-                                            <img class="avatar" alt="" src="~/Content/assets/layouts/layout/img/avatar2.jpg" />
+                                            <img class="avatar" alt="" src="../assets/layouts/layout/img/avatar2.jpg" />
                                             <div class="message">
                                                 <span class="arrow"></span>
                                                 <a href = "javascript:;" class="name">Ella Wong</a>
@@ -470,7 +483,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                             </div>
                                         </div>
                                         <div class="post out">
-                                            <img class="avatar" alt="" src="~/Content/assets/layouts/layout/img/avatar3.jpg" />
+                                            <img class="avatar" alt="" src="../assets/layouts/layout/img/avatar3.jpg" />
                                             <div class="message">
                                                 <span class="arrow"></span>
                                                 <a href = "javascript:;" class="name">Bob Nilson</a>
@@ -479,7 +492,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                             </div>
                                         </div>
                                         <div class="post in">
-                                            <img class="avatar" alt="" src="~/Content/assets/layouts/layout/img/avatar2.jpg" />
+                                            <img class="avatar" alt="" src="../assets/layouts/layout/img/avatar2.jpg" />
                                             <div class="message">
                                                 <span class="arrow"></span>
                                                 <a href="javascript:;" class="name">Ella Wong</a>
@@ -488,7 +501,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                             </div>
                                         </div>
                                         <div class="post out">
-                                            <img class="avatar" alt="" src="~/Content/assets/layouts/layout/img/avatar3.jpg" />
+                                            <img class="avatar" alt="" src="../assets/layouts/layout/img/avatar3.jpg" />
                                             <div class="message">
                                                 <span class="arrow"></span>
                                                 <a href="javascript:;" class="name">Bob Nilson</a>
@@ -497,7 +510,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                             </div>
                                         </div>
                                         <div class="post in">
-                                            <img class="avatar" alt="" src="~/Content/assets/layouts/layout/img/avatar2.jpg" />
+                                            <img class="avatar" alt="" src="../assets/layouts/layout/img/avatar2.jpg" />
                                             <div class="message">
                                                 <span class="arrow"></span>
                                                 <a href="javascript:;" class="name">Ella Wong</a>
@@ -506,7 +519,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                             </div>
                                         </div>
                                         <div class="post out">
-                                            <img class="avatar" alt="" src="~/Content/assets/layouts/layout/img/avatar3.jpg" />
+                                            <img class="avatar" alt="" src="../assets/layouts/layout/img/avatar3.jpg" />
                                             <div class="message">
                                                 <span class="arrow"></span>
                                                 <a href="javascript:;" class="name">Bob Nilson</a>
@@ -515,7 +528,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                             </div>
                                         </div>
                                         <div class="post in">
-                                            <img class="avatar" alt="" src="~/Content/assets/layouts/layout/img/avatar2.jpg" />
+                                            <img class="avatar" alt="" src="../assets/layouts/layout/img/avatar2.jpg" />
                                             <div class="message">
                                                 <span class="arrow"></span>
                                                 <a href="javascript:;" class="name">Ella Wong</a>
@@ -524,7 +537,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                             </div>
                                         </div>
                                         <div class="post out">
-                                            <img class="avatar" alt="" src="~/Content/assets/layouts/layout/img/avatar3.jpg" />
+                                            <img class="avatar" alt="" src="../assets/layouts/layout/img/avatar3.jpg" />
                                             <div class="message">
                                                 <span class="arrow"></span>
                                                 <a href="javascript:;" class="name">Bob Nilson</a>
@@ -904,38 +917,79 @@ License: You must have a valid license purchased only from themeforest(the above
         </div>
         <!-- END FOOTER -->
     </div>
-    
+
     <!--[if lt IE 9]>
     <script src="../assets/global/plugins/respond.min.js"></script>
     <script src="../assets/global/plugins/excanvas.min.js"></script>
     <script src="../assets/global/plugins/ie8.fix.min.js"></script>
     <![endif]-->
     <!-- BEGIN CORE PLUGINS -->
-    <script src="~/Content/assets/global/plugins/jquery.min.js" type="text/javascript"></script>
-    <script src="~/Content/assets/global/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
-    <script src="~/Content/assets/global/plugins/js.cookie.min.js" type="text/javascript"></script>
-    <script src="~/Content/assets/global/plugins/jquery-slimscroll/jquery.slimscroll.min.js" type="text/javascript"></script>
-    <script src="~/Content/assets/global/plugins/jquery.blockui.min.js" type="text/javascript"></script>
-    <script src="~/Content/assets/global/plugins/bootstrap-switch/js/bootstrap-switch.min.js" type="text/javascript"></script>
+    <script src="../assets/global/plugins/jquery.min.js" type="text/javascript"></script>
+    <script src="../assets/global/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+    <script src="../assets/global/plugins/js.cookie.min.js" type="text/javascript"></script>
+    <script src="../assets/global/plugins/jquery-slimscroll/jquery.slimscroll.min.js" type="text/javascript"></script>
+    <script src="../assets/global/plugins/jquery.blockui.min.js" type="text/javascript"></script>
+    <script src="../assets/global/plugins/bootstrap-switch/js/bootstrap-switch.min.js" type="text/javascript"></script>
     <!-- END CORE PLUGINS -->
+    <!-- BEGIN ADDITIONAL PLUGINS -->
+    @Scripts.Render("~/bundles/jqueryval")
+    <script src="../assets/global/plugins/jquery-validation/js/additional-methods.min.js" type="text/javascript"></script>
+    <!-- END ADDITIONAL PLUGINS -->
     <!-- BEGIN THEME GLOBAL SCRIPTS -->
-    <script src="~/Content/assets/global/scripts/app.min.js" type="text/javascript"></script>
-    <script src="~/Content/assets/global/scripts/datatable.min.js" type="text/javascript"></script>
-    <script src="~/Content/assets/global/plugins/datatables/datatables.min.js" type="text/javascript"></script>    
-    <script src="~/Content/assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.js" type="text/javascript"></script>
-    <script src="~/Content/assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js" type="text/javascript"></script>
+    <script src="../assets/global/scripts/app.min.js" type="text/javascript"></script>
+    <script src="../assets/global/scripts/datatable.min.js" type="text/javascript"></script>
+    <script src="../assets/global/plugins/datatables/datatables.min.js" type="text/javascript"></script>    
+    <script src="../assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.js" type="text/javascript"></script>
+    <script src="../assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js" type="text/javascript"></script>
     @*@Scripts.Render("~/bundles/jquery")*@
     @*@Scripts.Render("~/bundles/datatables")*@    
     <!-- END THEME GLOBAL SCRIPTS -->
     <!-- BEGIN THEME LAYOUT SCRIPTS -->
-    <script src="~/Content/assets/layouts/layout/scripts/layout.min.js" type="text/javascript"></script>
-    <script src="~/Content/assets/layouts/layout/scripts/demo.min.js" type="text/javascript"></script>
-    <script src="~/Content/assets/layouts/global/scripts/quick-sidebar.min.js" type="text/javascript"></script>
-    <script src="~/Content/assets/layouts/global/scripts/quick-nav.min.js" type="text/javascript"></script>
-    <script src="~/Content/assets/global/plugins/bootstrap-fileinput/bootstrap-fileinput.js" type="text/javascript"></script>
-    <script src="~/Content/assets/pages/scripts/ui-modals.min.js" type="text/javascript"></script>
+    <script src="../assets/layouts/layout/scripts/layout.min.js" type="text/javascript"></script>
+    <script src="../assets/layouts/layout/scripts/demo.min.js" type="text/javascript"></script>
+    <script src="../assets/layouts/global/scripts/quick-sidebar.min.js" type="text/javascript"></script>
+    <script src="../assets/layouts/global/scripts/quick-nav.min.js" type="text/javascript"></script>
+    <script src="../assets/global/plugins/bootstrap-fileinput/bootstrap-fileinput.js" type="text/javascript"></script>
+    <!-- END THEME LAYOUT SCRIPTS --> 
+
+    <!-- BEGIN LOGIN POPUP SCRIPTS -->
+    <script src="../assets/pages/scripts/login.js" type="text/javascript"></script>
+    <script src="~/Scripts/login.js" type="text/javascript"></script>
+    <script>
+        slk.login.setLoader(`@(Html.Partial("ModalLoading"))`);
+    </script>
+    <!-- END LOGIN POPUP SCRIPTS -->
+
+    @* AJAX POPUPS BEGIN *@
+    @helper AjaxPopup(string id, string bodyClass, string contentClass = null, string onShown = null)
+    {
+        <!--DOC: Aplly "modal-cached" class after "modal" class to enable ajax content caching-->
+        <div class="modal fade @bodyClass" id="@id" role="basic" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content @contentClass">
+                    @Html.Partial("ModalLoading")
+                </div>
+            </div>
+        </div>
+        if (onShown != null)
+        {
+            <script>
+                $(function () {
+                    $('#' + '@id').on('shown.bs.modal', function () {
+                        @onShown;
+                    });
+                });
+            </script>
+        }
+    }
+    @if (!User.Identity.IsAuthenticated)
+    {
+        @:@AjaxPopup("login", "login", "content", "slk.login.initMetronicLogin()")
+    }
+    @* AJAX POPUPS END *@
+
     @RenderSection("scripts", required: false)
-    <!-- END THEME LAYOUT SCRIPTS -->    
+   
     @RenderLocalizationIncludes(true/*User.IsInRole("Admin")*/)
 
 </body>
