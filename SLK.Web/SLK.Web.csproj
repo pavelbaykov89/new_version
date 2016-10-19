@@ -5992,18 +5992,19 @@
     <Content Include="assets\layouts\layout7\img\Thumbs.db" />
     <Content Include="assets\pages\media\blog\Thumbs.db" />
     <Content Include="assets\pages\media\pages\Thumbs.db" />
-    <None Include="Properties\PublishProfiles\SlkDevelop.pubxml" />
-    <None Include="Properties\PublishProfiles\SlkDevelop2.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\datatables.js" />
     <Content Include="Scripts\datatables.min.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\login.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
@@ -6063,6 +6064,8 @@
     <Content Include="Views\Manufacturer\Table.cshtml" />
     <Content Include="Views\Account\Popup\LoginPopup.cshtml" />
     <Content Include="Views\Account\Popup\RegisterPopup.cshtml" />
+    <Content Include="Views\Shared\ModalLoading.cshtml" />
+    <Content Include="Views\Shared\_LoginLayout.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="assets\apps\img\" />
