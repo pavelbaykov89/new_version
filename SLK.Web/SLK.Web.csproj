@@ -3329,8 +3329,6 @@
     <Content Include="assets\global\plugins\codemirror\mode\sparql\sparql.js" />
     <Content Include="assets\global\plugins\codemirror\mode\spreadsheet\index.html" />
     <Content Include="assets\global\plugins\codemirror\mode\spreadsheet\spreadsheet.js" />
-    <Content Include="assets\global\plugins\codemirror\mode\sql\index.html" />
-    <Content Include="assets\global\plugins\codemirror\mode\sql\sql.js" />
     <Content Include="assets\global\plugins\codemirror\mode\stex\index.html" />
     <Content Include="assets\global\plugins\codemirror\mode\stex\stex.js" />
     <Content Include="assets\global\plugins\codemirror\mode\stex\test.js" />
@@ -3817,7 +3815,6 @@
     <Content Include="assets\global\plugins\icheck\demo\css\montserrat-regular.svg" />
     <Content Include="assets\global\plugins\icheck\demo\css\normalize.css" />
     <Content Include="assets\global\plugins\icheck\demo\index.html" />
-    <Content Include="assets\global\plugins\icheck\demo\js\custom.js" />
     <Content Include="assets\global\plugins\icheck\demo\js\custom.min.js" />
     <Content Include="assets\global\plugins\icheck\demo\js\jquery.js" />
     <Content Include="assets\global\plugins\icheck\demo\js\zepto.js" />
@@ -5611,6 +5608,7 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\datatables.css" />
     <Content Include="Content\datatables.min.css" />
+    <Content Include="Content\login.popup.css" />
     <Content Include="Content\Site.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -5635,7 +5633,6 @@
     <Content Include="App_Data\Temp\Products_9-13-2016 4-23-46 PM.xlsx" />
     <Content Include="App_Data\Temp\Products_9-13-2016 4-23-51 PM.xlsx" />
     <Content Include="App_Data\Temp\Products_9-20-2016 2-08-44 PM.xlsx" />
-    <Content Include="assets\global\img\social\Thumbs.db" />
     <Content Include="assets\global\plugins\amcharts\amcharts\plugins\dataloader\examples\data\gauge.json" />
     <Content Include="assets\global\plugins\amcharts\amcharts\plugins\dataloader\examples\data\map.json" />
     <Content Include="assets\global\plugins\amcharts\amcharts\plugins\dataloader\examples\data\MSFT.csv" />
@@ -5792,7 +5789,6 @@
     <Content Include="assets\global\plugins\gmaps\README.md" />
     <Content Include="assets\global\plugins\icheck\bower.json" />
     <Content Include="assets\global\plugins\icheck\CHANGELOG.md" />
-    <Content Include="assets\global\plugins\icheck\demo\css\custom.styl" />
     <Content Include="assets\global\plugins\icheck\demo\css\montserrat-bold.eot" />
     <Content Include="assets\global\plugins\icheck\demo\css\montserrat-bold.ttf" />
     <Content Include="assets\global\plugins\icheck\demo\css\montserrat-bold.woff" />
@@ -5890,7 +5886,6 @@
     <Content Include="assets\global\plugins\simple-line-icons\fonts\Simple-Line-Icons.eot" />
     <Content Include="assets\global\plugins\simple-line-icons\fonts\Simple-Line-Icons.ttf" />
     <Content Include="assets\global\plugins\simple-line-icons\fonts\Simple-Line-Icons.woff" />
-    <Content Include="assets\global\plugins\socicon\.DS_Store" />
     <Content Include="assets\global\plugins\socicon\eps\socicon_500px.eps" />
     <Content Include="assets\global\plugins\socicon\eps\socicon_8tracks.eps" />
     <Content Include="assets\global\plugins\socicon\eps\socicon_amazon.eps" />
@@ -5975,7 +5970,6 @@
     <Content Include="assets\global\plugins\socicon\eps\socicon_youtube.eps" />
     <Content Include="assets\global\plugins\socicon\eps\socicon_zerply.eps" />
     <Content Include="assets\global\plugins\socicon\eps\socicon_zynga.eps" />
-    <Content Include="assets\global\plugins\socicon\font\.DS_Store" />
     <Content Include="assets\global\plugins\socicon\font\.empty" />
     <Content Include="assets\global\plugins\socicon\font\socicon.eot" />
     <Content Include="assets\global\plugins\socicon\font\socicon.ttf" />
@@ -5989,26 +5983,20 @@
     <Content Include="assets\global\plugins\wysihtml\minified\wysihtml.min.map" />
     <Content Include="assets\global\plugins\wysihtml\minified\wysihtml.table_editing.min.map" />
     <Content Include="assets\global\plugins\wysihtml\minified\wysihtml.toolbar.min.map" />
-    <Content Include="assets\layouts\layout7\img\Thumbs.db" />
-    <Content Include="assets\pages\media\blog\Thumbs.db" />
-    <Content Include="assets\pages\media\pages\Thumbs.db" />
-    <Content Include="FilesToDownload\Products_19-23-2016_17-23.xlsx" />
-    <Content Include="FilesToDownload\Products_20-32-2016_11-32.xlsx" />
-    <Content Include="FilesToDownload\Products_20-56-2016_10-56.xlsx" />
-    <None Include="Properties\PublishProfiles\SlkDevelop %282%29.pubxml" />
-    <None Include="Properties\PublishProfiles\SlkDevelop.pubxml" />
-    <None Include="Properties\PublishProfiles\SlkDevelop2.pubxml" />
-    <None Include="Properties\PublishProfiles\SLKDevelopNEW.pubxml" />
+    <None Include="Properties\PublishProfiles\SlkDevelop - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\datatables.js" />
     <Content Include="Scripts\datatables.min.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\login.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
@@ -6068,7 +6056,8 @@
     <Content Include="Views\Manufacturer\Table.cshtml" />
     <Content Include="Views\Account\Popup\LoginPopup.cshtml" />
     <Content Include="Views\Account\Popup\RegisterPopup.cshtml" />
-    <Content Include="Views\Shared\EditorTemplates\ShopTypeID.cshtml" />
+    <Content Include="Views\Shared\ModalLoading.cshtml" />
+    <Content Include="Views\Shared\_LoginLayout.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="assets\apps\img\" />
