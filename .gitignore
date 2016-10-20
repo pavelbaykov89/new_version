@@ -154,6 +154,7 @@ $RECYCLE.BIN/
 
 # Mac desktop service store files
 .DS_Store
+.vs/
 /packages
 /ToDemid
 /SLK.Web/Content/ImportedProductImages
