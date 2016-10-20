@@ -5992,8 +5992,13 @@
     <Content Include="assets\layouts\layout7\img\Thumbs.db" />
     <Content Include="assets\pages\media\blog\Thumbs.db" />
     <Content Include="assets\pages\media\pages\Thumbs.db" />
+    <Content Include="FilesToDownload\Products_19-23-2016_17-23.xlsx" />
+    <Content Include="FilesToDownload\Products_20-32-2016_11-32.xlsx" />
+    <Content Include="FilesToDownload\Products_20-56-2016_10-56.xlsx" />
+    <None Include="Properties\PublishProfiles\SlkDevelop %282%29.pubxml" />
     <None Include="Properties\PublishProfiles\SlkDevelop.pubxml" />
     <None Include="Properties\PublishProfiles\SlkDevelop2.pubxml" />
+    <None Include="Properties\PublishProfiles\SLKDevelopNEW.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\datatables.js" />
     <Content Include="Scripts\datatables.min.js" />
@@ -6063,6 +6068,7 @@
     <Content Include="Views\Manufacturer\Table.cshtml" />
     <Content Include="Views\Account\Popup\LoginPopup.cshtml" />
     <Content Include="Views\Account\Popup\RegisterPopup.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\ShopTypeID.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="assets\apps\img\" />

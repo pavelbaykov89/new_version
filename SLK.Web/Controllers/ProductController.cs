@@ -285,14 +285,17 @@ namespace SLK.Web.Controllers
             Task.Factory.StartNew(() =>
             {
                 var context = new ApplicationDbContext();
-                
+
                 ProductsExportService.ExportProductsToExcelFile(
                             typeof(ProductExportModel).GetProperties(),
                             context.Products.ProjectTo<ProductExportModel>(),
                             task,
                             context.Products.Count(),
-                            fullname);                        
-            });
+                            fullname
+                            );
+
+
+            });           
 
             return RedirectToAction<ProductController>(c => c.Table()).WithSuccess("Products are exporting to file!");
         }
@@ -314,6 +317,28 @@ namespace SLK.Web.Controllers
 
             return RedirectToAction<ProductController>(c => c.Table())
                 .WithSuccess("Product deleted!");
+        }
+
+        [HttpGet]
+        public ActionResult DeleteFile(string filename)
+        {
+            System.IO.File.Delete(Server.MapPath("~/FilesToDownload/") + filename);
+
+            return RedirectToAction<ProductController>(c => c.Table())
+                .WithSuccess("File deleted!");
+        }
+
+        [HttpGet]
+        public ActionResult FilesCount()
+        {
+            var files = System.IO.Directory.EnumerateFiles(Server.MapPath("~/FilesToDownload/")).Select(f => f.Substring(f.LastIndexOf('\\') + 1));
+
+            return Json(new
+            {
+                count = files.Count(),
+                files = files
+            },
+            JsonRequestBehavior.AllowGet);
         }
 
         [HttpGet]

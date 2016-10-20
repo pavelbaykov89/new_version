@@ -73,15 +73,39 @@
 
         $(setTasksCount());
 
+        $(setFilesCount());
+
         $(TableDatatablesAjax.init("/Product/List", @Html.CreateColumnsInfo(ViewData.ModelMetadata.Properties, true)));
+
+        function setFilesCount() {
+            $.get('/Product/FilesCount', {}, function callback(data) {
+                $('#header_files_bar span.badge')[0].innerText = data.count;
+                if (data.count == 1)
+                    $('#header_files_bar h3')[0].innerText = '1 file is available';
+                else
+                    $('#header_files_bar h3')[0].innerText = data.count + ' files are available';
+
+                var list = $('#header_files_bar .dropdown-menu-list')[0];
+                list.innerHTML = "";
+
+                for (var i = 0; i < data.count; ++i) {
+                    list.innerHTML +=
+                        "<li>\
+                            <a href='/Product/DeleteFile/" + "" + "' type='button' class='close' data-dismiss='alert' aria-hidden='true'></a>\
+                            <a href='/FilesToDownload/" + data.files[i] + "'>\
+                                <span class='task'>\
+                                    <span class='desc font-blue-soft'>" + data.files[i] + "</span></span></a></li>";
+                }
+            });
+        }
 
         function setTasksCount() {
             $.get('/Product/TasksCount', {}, function callback(data) {
-                $('.dropdown-tasks span.badge')[0].innerText = data.count;
+                $('#header_task_bar span.badge')[0].innerText = data.count;
                 if (data.count == 1)
-                    $('.tasks h3')[0].innerText = '1 task is active';
+                    $('#header_task_bar h3')[0].innerText = '1 task is active';
                 else
-                    $('.tasks h3')[0].innerText = data.count + ' tasks are active';
+                    $('#header_task_bar h3')[0].innerText = data.count + ' tasks are active';
             });
         }
 
@@ -89,7 +113,7 @@
 
             var taskdata;
 
-            if (anyway || $.inArray('open', $('.dropdown-tasks')[0].classList) !== -1) {
+            if (anyway || $.inArray('open', $('#header_task_bar')[0].classList) !== -1) {
 
                 $.ajax({
                     async: false,
@@ -100,7 +124,7 @@
                     }
                 });
 
-                var list = $('.dropdown-tasks .dropdown-menu-list')[0];
+                var list = $('#header_task_bar .dropdown-menu-list')[0];
                 list.innerHTML = "";
 
                 for (var i = 0; i < taskdata.count; ++i) {
@@ -129,22 +153,22 @@
                     type: 'GET',
                     url: '/Product/TasksCount',
                     success: function (data) {
-                        $('.dropdown-tasks span.badge')[0].innerText = data.count;
+                        $('#header_task_bar span.badge')[0].innerText = data.count;
                         if (data.count == 1)
-                            $('.tasks h3')[0].innerText = '1 task is active';
+                            $('#header_task_bar h3')[0].innerText = '1 task is active';
                         else
-                            $('.tasks h3')[0].innerText = data.count + ' tasks are active';
+                            $('#header_task_bar h3')[0].innerText = data.count + ' tasks are active';
 
                         if (data.count) setTimeout(drawTasks, 1000);
                     }
                 });
             }
             else {
-                $('.dropdown-tasks span.badge')[0].innerText = taskdata.count;
+                $('#header_task_bar span.badge')[0].innerText = taskdata.count;
                 if (taskdata.count == 1)
-                    $('.tasks h3')[0].innerText = '1 task is active';
+                    $('#header_task_bar h3')[0].innerText = '1 task is active';
                 else
-                    $('.tasks h3')[0].innerText = taskdata.count + ' tasks are active';
+                    $('#header_task_bar h3')[0].innerText = taskdata.count + ' tasks are active';
 
                 if (taskdata.count) setTimeout(drawTasks, 1000);
             }

@@ -20,9 +20,9 @@ namespace SLK.Domain.Core
                 
         public virtual User Owner { get; protected set; }
 
-        public int ShopTypeID { get; protected set; }
+        public List<int> ShopTypeID { get; protected set; }
 
-        public virtual ShopType ShopType { get; protected set; }
+        public virtual List<ShopType> ShopType { get; protected set; }
 
         public DateTime CreationDate { get; protected set; }
 

@@ -1,0 +1,15 @@
+﻿@using SLK.DataLayer
+@using SLK.Web.Infrastructure
+@model string
+@{
+    var dbContext = Context.GetContainer().GetInstance<ApplicationDbContext>();
+
+    var availableShopTypes = dbContext.ShopTypes.Select(c => new SelectListItem
+    {
+        Text = c.Name,
+        Value = c.ID.ToString(),
+        Selected = c.ID.ToString() == Model
+    }).ToArray();
+}
+
+@Html.DropDownList("", availableShopTypes, new { @class = "form-control" })
