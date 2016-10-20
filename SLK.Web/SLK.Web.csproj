@@ -5983,6 +5983,9 @@
     <Content Include="assets\global\plugins\wysihtml\minified\wysihtml.min.map" />
     <Content Include="assets\global\plugins\wysihtml\minified\wysihtml.table_editing.min.map" />
     <Content Include="assets\global\plugins\wysihtml\minified\wysihtml.toolbar.min.map" />
+    <Content Include="FilesToDownload\Products_19-23-2016_17-23.xlsx" />
+    <Content Include="FilesToDownload\Products_20-32-2016_11-32.xlsx" />
+    <Content Include="FilesToDownload\Products_20-56-2016_10-56.xlsx" />
     <None Include="Properties\PublishProfiles\SlkDevelop - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\datatables.js" />
@@ -6058,6 +6061,7 @@
     <Content Include="Views\Account\Popup\RegisterPopup.cshtml" />
     <Content Include="Views\Shared\ModalLoading.cshtml" />
     <Content Include="Views\Shared\_LoginLayout.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\ShopTypeID.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="assets\apps\img\" />
