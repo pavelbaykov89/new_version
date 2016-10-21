@@ -5,13 +5,13 @@ namespace SLK.Domain.Core
 {
     public class Product
     {
-        protected Product() { }
+        public Product() { }
 
         public Product(string name, Category category, Manufacturer manufacturer, string shortDesc, string fullDesc, string sku, string imagePath)        
         {
             Name = name;
             Category = category;
-            ProductManufacturer = manufacturer;
+            Manufacturer = manufacturer;
             ShortDescription = shortDesc;
             FullDescription = fullDesc;
             SKU = sku;
@@ -26,9 +26,9 @@ namespace SLK.Domain.Core
 
         public int ID { get; protected set; }
 
-        public string SKU { get; protected set; }
+        public string SKU { get; set; }
 
-        public string Name { get; protected set; }
+        public string Name { get; set; }
 
         public string ShortDescription { get; set; }
 
@@ -40,9 +40,9 @@ namespace SLK.Domain.Core
         
         public int RateCount { get; set; }
 
-        public int CategoryID { get; protected set; }
+        public int CategoryID { get; set; }
 
-        public virtual Category Category { get; protected set; }
+        public virtual Category Category { get; set; }
 
         public bool NoTax { get; set; }
 
@@ -72,13 +72,13 @@ namespace SLK.Domain.Core
 
         public bool HasImage { get; protected set; }
 
-        public int ProductManufacturerID { get; protected set; }
+        public int ManufacturerID { get; protected set; }
 
-        public virtual Manufacturer ProductManufacturer { get; protected set; }
+        public virtual Manufacturer Manufacturer { get; set; }
         
         public int DisplayOrder { get; set; }
 
-        public bool Deleted { get; protected set; }
+        public bool Deleted { get; set; }
         
         public int? ProductMeasureID { get; set; }
 

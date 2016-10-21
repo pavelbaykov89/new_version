@@ -20,7 +20,8 @@ namespace SLK.Web.ProductModels
         [Required]
         public string SKU { get; set; }
         
-        public string ImagePath { get; set; }
+        [Display(Name = "Image Path")]
+        public string Image { get; set; }
 
         [DataType("Integer")]
         public int DisplayOrder { get; set; }

@@ -6,41 +6,44 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Text;
 
 namespace SLK.Services
 {
     public static class ProductsExportService
     {
-        public static void ExportProductsToExcelFile(PropertyInfo[] properties, IQueryable<dynamic> products, TaskDescription task, int total, string path)
+        public static byte[] ExportProductsToExcelFile(PropertyInfo[] properties, IQueryable<dynamic> products)
         {
             var package = new ExcelPackage();
             var worksheet = package.Workbook.Worksheets.Add("Products");
             
             worksheet.Row(1).Style.Font.Bold = true;
+                        
+            int row = 1, num = 1;
 
             string col = "A";
-            int row = 1;
-            
+            var sb = new StringBuilder(col);
+
             foreach (var prop in properties)
             {                
-                worksheet.Cells[$"{col}{row}"].Value = prop.Name;
+                worksheet.Cells[$"{col}{row}"].Value = prop.Name;               
 
-                col = (++col.ToArray()[col.Length - 1]).ToString();
-
-                if (col.EndsWith("["))
+                col = sb.Append(sb[sb.Length - 1]++, 1).Remove(sb.Length - 1, 1).ToString();
+                
+                if (sb.ToString().EndsWith("["))
                 {
-                    col = "AA";
+                    sb = new StringBuilder("AA");
+                    col = sb.ToString();
                 }
             }
-           
-            task.Start();
-
-            col = "A";
+            worksheet.Cells[$"{col}{row}"].Value = "Flag";
+            
             row = 2;
 
             foreach (var product in products)
             {
                 col = "A";
+                sb = new StringBuilder(col);
 
                 foreach (var prop in properties)
                 {
@@ -53,25 +56,20 @@ namespace SLK.Services
                         worksheet.Cells[$"{col}{row}"].Value = prop.GetValue(product);
                     }
 
-                    col = (++col.ToArray()[col.Length - 1]).ToString();
+                    col = sb.Append(sb[sb.Length - 1]++, 1).Remove(sb.Length - 1, 1).ToString();
 
-                    if (col.EndsWith("["))
+                    if (sb.ToString().EndsWith("["))
                     {
-                        col = "AA";
+                        sb = new StringBuilder("AA");
+                        col = sb.ToString();
                     }
                 }
+                worksheet.Cells[$"{col}{row}"].Value = "1";
 
                 ++row;
-
-                if (row % 100 == 0)
-                {
-                    task.Progress = row * 100 / total;
-                }
             }
 
-            task.Progress = 100;
-
-            package.SaveAs(new FileInfo(path));
+            return package.GetAsByteArray();
         }
     }
 }

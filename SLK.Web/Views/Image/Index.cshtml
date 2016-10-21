@@ -1,0 +1,35 @@
+﻿@model IEnumerable<string>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    int step = 0;
+
+    var arrModel = Model.ToArray();
+}
+
+@for (step = 0; step < arrModel.Count() - 4; step += 4)
+{        
+    <div class="row">        
+        <div class="col-sm-6 col-md-3">
+            <a href="javascript:;" class="thumbnail">
+                <img src="@arrModel[step]">
+            </a>
+        </div>        
+        <div class="col-sm-6 col-md-3">
+            <a href="javascript:;" class="thumbnail">
+                <img src="@arrModel[step+1]">
+            </a>
+        </div>        
+        <div class="col-sm-6 col-md-3">
+            <a href="javascript:;" class="thumbnail">
+                <img src="@arrModel[step+2]">
+            </a>
+        </div>        
+        <div class="col-sm-6 col-md-3">
+            <a href="javascript:;" class="thumbnail">
+                <img src="@arrModel[step+3]">
+            </a>
+        </div>        
+    </div>        
+}                

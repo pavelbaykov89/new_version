@@ -73,31 +73,7 @@
 
         $(setTasksCount());
 
-        $(setFilesCount());
-
         $(TableDatatablesAjax.init("/Product/List", @Html.CreateColumnsInfo(ViewData.ModelMetadata.Properties, true)));
-
-        function setFilesCount() {
-            $.get('/Product/FilesCount', {}, function callback(data) {
-                $('#header_files_bar span.badge')[0].innerText = data.count;
-                if (data.count == 1)
-                    $('#header_files_bar h3')[0].innerText = '1 file is available';
-                else
-                    $('#header_files_bar h3')[0].innerText = data.count + ' files are available';
-
-                var list = $('#header_files_bar .dropdown-menu-list')[0];
-                list.innerHTML = "";
-
-                for (var i = 0; i < data.count; ++i) {
-                    list.innerHTML +=
-                        "<li>\
-                            <a href='/Product/DeleteFile/" + "" + "' type='button' class='close' data-dismiss='alert' aria-hidden='true'></a>\
-                            <a href='/FilesToDownload/" + data.files[i] + "'>\
-                                <span class='task'>\
-                                    <span class='desc font-blue-soft'>" + data.files[i] + "</span></span></a></li>";
-                }
-            });
-        }
 
         function setTasksCount() {
             $.get('/Product/TasksCount', {}, function callback(data) {
