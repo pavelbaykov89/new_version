@@ -15,7 +15,7 @@ namespace SLK.Web.Helpers
         {
             return helper.LabelFor(property, new
             {
-                @class = "col-md-2 control-label"
+                @class = "col-md-3 control-label"
             });
         }
 
@@ -25,7 +25,7 @@ namespace SLK.Web.Helpers
         {
             return helper.Label(propertyName, new
             {
-                @class = "col-md-2 control-label"
+                @class = "col-md-3 control-label"
             });
         }
     }

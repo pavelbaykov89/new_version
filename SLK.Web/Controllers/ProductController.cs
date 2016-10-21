@@ -12,6 +12,7 @@ using SLK.Web.ProductModels;
 using System;
 using System.Linq;
 using System.Linq.Dynamic;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
@@ -33,11 +34,7 @@ namespace SLK.Web.Controllers
             ViewBag.ProductMenuActive = "active open";
             ViewBag.ProductActive = "active open";
 
-            var model = _context.Products
-               .ProjectTo<ProductsListViewModel>()
-               .FirstOrDefault();
-
-            return View(model);
+            return View(new ProductsListViewModel());
         }
 
         public ActionResult List(jQueryDataTableParamModel param)
@@ -274,30 +271,15 @@ namespace SLK.Web.Controllers
                
         public ActionResult Download()
         {
-            var fileName = "Products_" + DateTime.Now.ToString("dd-mm-yyyy_HH-mm") + ".xlsx";
+            var fileName = "Products_" + DateTime.Now.ToString("dd-MM-yyyy_HH-mm") + ".xlsx";
+            
+            var context = new ApplicationDbContext();
 
-            var fullname = Server.MapPath("~/FilesToDownload/") + fileName;
-
-            var task = new TaskDescription("Products exporting to", fileName);
-
-            TaskManager.AddTask(task);
-
-            Task.Factory.StartNew(() =>
-            {
-                var context = new ApplicationDbContext();
-
-                ProductsExportService.ExportProductsToExcelFile(
-                            typeof(ProductExportModel).GetProperties(),
-                            context.Products.ProjectTo<ProductExportModel>(),
-                            task,
-                            context.Products.Count(),
-                            fullname
-                            );
-
-
-            });           
-
-            return RedirectToAction<ProductController>(c => c.Table()).WithSuccess("Products are exporting to file!");
+            return File(ProductsExportService.ExportProductsToExcelFile(
+                        typeof(ProductExportModel).GetProperties(),
+                        context.Products.ProjectTo<ProductExportModel>()), 
+                        "application/xlsx", 
+                        fileName);
         }
 
         [Log("Deleted product {id}")]
@@ -318,16 +300,7 @@ namespace SLK.Web.Controllers
             return RedirectToAction<ProductController>(c => c.Table())
                 .WithSuccess("Product deleted!");
         }
-
-        [HttpGet]
-        public ActionResult DeleteFile(string filename)
-        {
-            System.IO.File.Delete(Server.MapPath("~/FilesToDownload/") + filename);
-
-            return RedirectToAction<ProductController>(c => c.Table())
-                .WithSuccess("File deleted!");
-        }
-
+        
         [HttpGet]
         public ActionResult FilesCount()
         {

@@ -11,11 +11,11 @@
     else
     {
         <div class="form-group">
-            @Html.BootstrapLabelFor(prop.PropertyName)
-            <div class="col-md-10">
-                @Html.Editor(prop.PropertyName)
-                @Html.ValidationMessage(prop.PropertyName)
+            @Html.BootstrapLabelFor(prop.PropertyName)            
+                <div class="col-md-9">
+                    @Html.Editor(prop.PropertyName)
+                    @Html.ValidationMessage(prop.PropertyName)
+                </div>
             </div>
-        </div>
     }
 }

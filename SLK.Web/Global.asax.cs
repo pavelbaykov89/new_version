@@ -86,6 +86,8 @@ namespace SLK.Web
 
         public void Application_Error()
         {
+            Container = IoC.Container.GetNestedContainer();
+
             foreach (var task in Container.GetAllInstances<IRunOnError>())
             {
                 task.Execute();
@@ -94,6 +96,8 @@ namespace SLK.Web
 
         public void Application_EndRequest()
         {
+            Container = IoC.Container.GetNestedContainer();
+
             try
             {
                 foreach (var task in

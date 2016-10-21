@@ -5,7 +5,7 @@
     <div class="table-container">
         <table class="table table-striped table-bordered table-hover dataTable" id="datatable_ajax">
             <thead>
-                <tr role="row">
+                <tr role="row">                    
                     @foreach (var prop in ViewData.ModelMetadata.Properties
                         .Where(p => p.ShowForEdit))
                     {
