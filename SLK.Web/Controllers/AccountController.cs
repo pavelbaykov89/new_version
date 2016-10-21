@@ -1,10 +1,12 @@
 ﻿using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
+using SLK.DataLayer;
 using SLK.Domain.Core;
 using SLK.Web.Filters;
 using SLK.Web.Infrastructure;
 using SLK.Web.Models;
+using SLK.Web.Models.UserModels;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
@@ -18,15 +20,17 @@ namespace SLK.Web.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
+        private readonly ApplicationDbContext _context;
 
         public AccountController()
         {
         }
 
-        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
+        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager, ApplicationDbContext context)
         {
             UserManager = userManager;
             SignInManager = signInManager;
+            _context = context;
         }
 
         public ApplicationSignInManager SignInManager
@@ -141,7 +145,10 @@ namespace SLK.Web.Controllers
         [AllowAnonymous]
         public ActionResult Register()
         {
-            return PartialView("Popup/RegisterPopup");
+            var model = new RegisterUserModel();
+            model.FollowSLKNews = true;
+
+            return PartialView("Popup/RegisterPopup", model);
         }
 
         //
@@ -150,12 +157,21 @@ namespace SLK.Web.Controllers
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
         [Log("New User regitering")]
-        public async Task<ActionResult> Register(RegisterViewModel model)
+        public async Task<ActionResult> Register(RegisterUserModel model)
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var user = new ApplicationUser { UserName = model.UserName, Email = model.Email };
                 var result = await UserManager.CreateAsync(user, model.Password);
+
+                var domainUser = new User(user.Id, model.UserName, model.Email);
+                domainUser.FirstName = model.FirstName;
+                domainUser.LastName = model.LastName;
+                domainUser.FollowSLKNews = model.FollowSLKNews;
+
+                _context.DomainUsers.Add(domainUser);
+                _context.SaveChanges();
+
                 if (result.Succeeded)
                 {
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);

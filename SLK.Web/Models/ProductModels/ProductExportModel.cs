@@ -49,7 +49,9 @@ namespace SLK.Web.Models.ProductModels
 
         public bool HasImage { get; set; }
                 
-        public string ProductManufacturerName { get; set; }
+        public string ManufacturerName { get; set; }
+
+        public string Brand { get; set; }
 
         public int DisplayOrder { get; set; }
 

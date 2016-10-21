@@ -30,12 +30,8 @@ namespace SLK.Web.Controllers
         {
             ViewBag.CategoryMenuActive = "active open";
             ViewBag.CategoryActive = "active open";
-
-            var model = _context.Categories
-               .ProjectTo<CategoryListViewModel>()
-               .FirstOrDefault();
-
-            return View(model);
+             
+            return View(new CategoryListViewModel());
         }
 
         public ActionResult List(jQueryDataTableParamModel param)

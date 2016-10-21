@@ -9,12 +9,12 @@ namespace SLK.Domain.Core
 
         protected User() { }
 
-        public User(string identityID, string email, string password)
+        public User(string identityID, string userName, string email)
             : this()
         {
             IdentityID = identityID;
-            Email = email;
-            Password = password;
+            UserName = userName;
+            Email = email;            
 
             CreationDate = DateTime.Now;
  
@@ -28,10 +28,10 @@ namespace SLK.Domain.Core
 
         public string IdentityID { get; protected set; }
 
+        public string UserName { get; protected set; }
+
         public string Email { get; protected set; }
-
-        public string Password { get; protected set; }
-
+        
         public DateTime CreationDate { get; protected set; }
 
         public string FirstName { get; set; }

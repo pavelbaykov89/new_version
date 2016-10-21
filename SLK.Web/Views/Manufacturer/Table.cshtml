@@ -1,7 +1,7 @@
 ﻿@using SLK.Web.Helpers
 @model SLK.Web.Models.ListModel
 @{
-    ViewBag.Title = "ManufacturerTable";
+    ViewBag.Title = "ManufacturerTable";    
 }
 
 <div class="portlet light portlet-fit portlet-datatable bordered">
@@ -18,7 +18,7 @@
 {
     <script src="~/Scripts/app/data-tables.js" type="text/javascript"></script>
     <script>
-        $(TableDatatablesAjax.init("/Manufacturer/List", @Html.CreateColumnsInfo(ViewData.ModelMetadata.Properties, true)));
+        $(TableDatatablesAjax.init("/Manufacturer/List", @Html.CreateColumnsInfo(ViewData.ModelMetadata.Properties, true, "Manufacturer")));
     </script>
 }
 
