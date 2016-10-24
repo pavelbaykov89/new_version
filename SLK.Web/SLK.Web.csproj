@@ -250,6 +250,7 @@
     <Compile Include="Infrastructure\TransactionPerRequest.cs" />
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\AddEditForm.cs" />
     <Compile Include="Models\CategoryModels\CategoryListViewModel.cs" />
     <Compile Include="Models\ManufacturerModels\ManufacturerListViewModel.cs" />
     <Compile Include="Models\ProductModels\EditProductForm.cs" />
@@ -261,6 +262,7 @@
     <Compile Include="Models\ProductModels\PaginationProductList.cs" />
     <Compile Include="Models\ProductModels\ProductExportModel.cs" />
     <Compile Include="Models\ProductModels\ProductsListViewModel.cs" />
+    <Compile Include="Models\ShopModels\AddEditShopTypeForm.cs" />
     <Compile Include="Models\ShopModels\ShopTypeListViewModel.cs" />
     <Compile Include="Models\UserModel\NewUserModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -5609,6 +5611,7 @@
     <Content Include="assets\pages\scripts\ui-tree.min.js" />
     <Content Include="assets\pages\scripts\widgets.js" />
     <Content Include="assets\pages\scripts\widgets.min.js" />
+    <Content Include="Content\addeditform.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\datatables.css" />
@@ -6168,6 +6171,8 @@
     <Content Include="Views\Shared\EditorTemplates\ShopTypeID.cshtml" />
     <Content Include="Views\ShopType\Table.cshtml" />
     <Content Include="Views\Image\Index.cshtml" />
+    <Content Include="Views\Shared\AddNewPopup.cshtml" />
+    <Content Include="Views\Shared\EditPopup.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="assets\apps\img\" />

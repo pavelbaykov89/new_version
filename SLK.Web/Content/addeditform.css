@@ -1,0 +1,9 @@
+﻿.modal .form-horizontal input[type="number"]{
+    max-width: 55px;
+}
+.modal .form-horizontal input[type="text"]{
+    max-width: 330px;
+}
+.modal .field-validation-error {
+    color: red;
+}

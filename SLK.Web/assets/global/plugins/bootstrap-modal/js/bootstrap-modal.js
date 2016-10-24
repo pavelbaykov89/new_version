@@ -322,11 +322,11 @@
 	/* MODAL PLUGIN DEFINITION
 	* ======================= */
 
-	$.fn.modal = function (option, args) {
+	$.fn.modal_extended = function (option, args) {
 		return this.each(function () {
 			var $this = $(this),
 				data = $this.data('modal'),
-				options = $.extend({}, $.fn.modal.defaults, $this.data(), typeof option == 'object' && option);
+				options = $.extend({}, $.fn.modal_extended.defaults, $this.data(), typeof option == 'object' && option);
 
 			if (!data) $this.data('modal', (data = new Modal(this, options)));
 			if (typeof option == 'string') data[option].apply(data, [].concat(args));
@@ -334,7 +334,7 @@
 		})
 	};
 
-	$.fn.modal.defaults = {
+	$.fn.modal_extended.defaults = {
 		keyboard: true,
 		backdrop: true,
 		loading: false,
@@ -353,22 +353,25 @@
 		backdropTemplate: '<div class="modal-backdrop" />'
 	};
 
-	$.fn.modal.Constructor = Modal;
+	$.fn.modal_extended.Constructor = Modal;
 
 
 	/* MODAL DATA-API
 	* ============== */
 
+	var copy;
+
 	$(function () {
-		$(document).off('click.modal').on('click.modal.data-api', '[data-toggle="modal"]', function ( e ) {
+	    $(document).off('click.modal', '[data-toggle="modal-extended"]').on('click.modal.data-api', '[data-toggle="modal-extended"]', function (e) {
 			var $this = $(this),
 				href = $this.attr('href'),
 				$target = $($this.attr('data-target') || (href && href.replace(/.*(?=#[^\s]+$)/, ''))), //strip for ie7
 				option = $target.data('modal') ? 'toggle' : $.extend({ remote: !/#/.test(href) && href }, $target.data(), $this.data());
 
 			e.preventDefault();
-			$target
-				.modal(option)
+			
+	        $target                
+				.modal_extended(option)
 				.one('hide', function () {
 					$this.focus();
 				})

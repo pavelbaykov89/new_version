@@ -4,13 +4,13 @@ namespace SLK.Domain.Core
 {
     public class ShopType
     {
-        protected ShopType() { }
+        public ShopType() { }
 
         public int ID { get; protected set; }
 
-        public string Name { get; protected set; }
+        public string Name { get; set; }
 
-        public int DisplayOrder { get; protected set; }
+        public int DisplayOrder { get; set; }
 
         public virtual ICollection<Shop> Shops { get; set; } = new List<Shop>();
     }

@@ -6,6 +6,7 @@ using System;
 using System.Linq;
 using System.Web.Mvc;
 using System.Linq.Dynamic;
+using SLK.Domain.Core;
 
 namespace SLK.Web.Controllers
 {
@@ -33,6 +34,11 @@ namespace SLK.Web.Controllers
             var model = _context.ShopTypes
                .ProjectTo<ShopTypeListViewModel>()
                .FirstOrDefault();
+
+            model = model ?? new ShopTypeListViewModel();
+            model.AddNewForm = new AddEditShopTypeForm(Url.Action("AddNew"));
+            model.EditUrl = Url.Action("Edit");
+            model.DeleteUrl = Url.Action("Delete");
 
             return View(model);
         }
@@ -97,6 +103,59 @@ namespace SLK.Web.Controllers
                 data = items.ToArray()
             },
              JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost, ValidateAntiForgeryToken]
+        public ActionResult AddNew(AddEditShopTypeForm model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return PartialView("~/Views/Shared/AddNewPopup.cshtml", model);
+            }
+
+            var newType = new ShopType();
+            newType.Name = model.Name;
+            newType.DisplayOrder = model.DisplayOrder;
+            _context.ShopTypes.Add(newType);
+            _context.SaveChanges();
+
+            return Json(new { success = true });
+        }
+
+        public ActionResult Edit(int id)
+        {
+            var shopType = _context.ShopTypes.Find(id);
+            var model = new AddEditShopTypeForm(Url.Action("Edit"), id);
+            model.Name = shopType.Name;
+            model.DisplayOrder = shopType.DisplayOrder;
+
+            return PartialView("~/Views/Shared/EditPopup.cshtml", model);
+        }
+
+        [HttpPost, ValidateAntiForgeryToken]
+        public ActionResult Edit(AddEditShopTypeForm model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return PartialView("~/Views/Shared/EditPopup.cshtml", model);
+            }
+
+            var shopType = _context.ShopTypes.Find(model.ID.Value);
+            shopType.Name = model.Name;
+            shopType.DisplayOrder = model.DisplayOrder;
+
+            _context.SaveChanges();
+
+            return Json(new { success = true });
+        }
+
+        public ActionResult Delete(int id)
+        {
+            var shopType = _context.ShopTypes.Find(id);
+            _context.ShopTypes.Remove(shopType);
+            _context.SaveChanges();
+
+            return Json(new { success = true }, JsonRequestBehavior.AllowGet);
         }
     }
 }

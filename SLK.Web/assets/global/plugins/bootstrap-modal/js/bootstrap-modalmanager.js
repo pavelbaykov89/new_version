@@ -53,7 +53,7 @@
 		},
 
 		createModal: function (element, options) {
-			$(element).modal($.extend({ manager: this }, options));
+		    $(element).modal_extended($.extend({ manager: this }, options));
 		},
 
 		appendModal: function (modal) {
@@ -70,6 +70,7 @@
 
 					that.$element
 						.toggleClass('modal-open', that.hasOpenModal())
+                        .toggleClass('modal-open-extended', that.hasOpenModal())				    
 						.toggleClass('page-overflow', $(window).height() < that.$element.height());
 
 					modal.$parent = modal.$element.parent();
@@ -166,6 +167,7 @@
 			var hasOpenModal = this.hasOpenModal();
 
 			this.$element.toggleClass('modal-open', hasOpenModal);
+			this.$element.toggleClass('modal-open-extended', hasOpenModal);
 
 			if (!hasOpenModal){
 				this.$element.removeClass('page-overflow');
@@ -309,6 +311,7 @@
 
 			this.$element
 				.toggleClass('modal-open', !this.isLoading || this.hasOpenModal())
+                .toggleClass('modal-open-extended', !this.isLoading || this.hasOpenModal())
 				.toggleClass('page-overflow', $(window).height() < this.$element.height());
 
 			if (!this.isLoading) {
