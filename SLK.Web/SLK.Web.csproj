@@ -204,6 +204,7 @@
     <Compile Include="Controllers\ManufacturerController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Controllers\ShopTypeController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Filters\CategorySelectListPopulatorAttribute.cs" />
     <Compile Include="Filters\LogAttribute.cs" />
     <Compile Include="Filters\ManufacturerSelectListPopulatorAttribute.cs" />
@@ -264,7 +265,9 @@
     <Compile Include="Models\ProductModels\ProductsListViewModel.cs" />
     <Compile Include="Models\ShopModels\AddEditShopTypeForm.cs" />
     <Compile Include="Models\ShopModels\ShopTypeListViewModel.cs" />
-    <Compile Include="Models\UserModel\NewUserModel.cs" />
+    <Compile Include="Models\UserModels\NewUserModel.cs" />
+    <Compile Include="Models\UserModels\RegisterUserModel.cs" />
+    <Compile Include="Models\UserModels\UserListViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Localization\LocalizationCache.cs" />
     <Compile Include="Localization\LocalizationContext.cs" />
@@ -6165,7 +6168,7 @@
     <Content Include="Views\Category\Table.cshtml" />
     <Content Include="Views\Manufacturer\Table.cshtml" />
     <Content Include="Views\Account\Popup\LoginPopup.cshtml" />
-    <Content Include="Views\Account\Popup\RegisterPopup.cshtml" />
+    <Content Include="Views\Account\Popup\RegisterPopup1.cshtml" />
     <Content Include="Views\Shared\ModalLoading.cshtml" />
     <Content Include="Views\Shared\_LoginLayout.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\ShopTypeID.cshtml" />
@@ -6173,6 +6176,8 @@
     <Content Include="Views\Image\Index.cshtml" />
     <Content Include="Views\Shared\AddNewPopup.cshtml" />
     <Content Include="Views\Shared\EditPopup.cshtml" />
+    <Content Include="Views\User\Table.cshtml" />
+    <Content Include="Views\Account\Popup\RegisterPopup.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="assets\apps\img\" />

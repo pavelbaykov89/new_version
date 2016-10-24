@@ -30,7 +30,9 @@ namespace SLK.Web.ProductModels
         public string CategoryID { get; set; }
 
         [Required, Display(Name = "Manufacturer")]
-        public string ProductManufacturerID { get; set; }        
+        public string ManufacturerID { get; set; }
+
+        public string Brand { get; set; }
 
         public bool IsKosher { get; set; }
 

@@ -23,7 +23,9 @@ namespace SLK.Web.ProductModels
         public string CategoryName { get; set; }
 
         [DisplayName("Manufacturer")]
-        public string ProductManufacturerName { get; set; }
+        public string ManufacturerName { get; set; }
+
+        public string Brand { get; set; }
 
         public string ShortDescription { get; set; }
 

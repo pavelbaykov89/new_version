@@ -1,8 +1,13 @@
 ﻿var TableDatatablesAjax = function () {
-
     var table;
 
-    var e = function (actionUrl, columnsInfo) {
+    var a = function() {
+        $(".date-picker").datepicker({
+            rtl: App.isRTL(),
+            autoclose: !0
+        })
+    },
+    e = function (actionUrl, columnsInfo) {
         var a = new Datatable;
         var i = {};
 
@@ -120,6 +125,7 @@
 
     return {
         init: function (actionUrl, columnsInfo) {
+            a(),
             e(actionUrl, columnsInfo)
         },
         onAddEdit: function(data, status, xhr, formId) {

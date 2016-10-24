@@ -29,12 +29,8 @@ namespace SLK.Web.Controllers
         {
             ViewBag.ManufacturerMenuActive = "active open";
             ViewBag.ManufacturerActive = "active open";
-
-            var model = _context.Manufacturers
-               .ProjectTo<ManufacturerListViewModel>()
-               .FirstOrDefault();
-
-            return View(model);
+            
+            return View(new ManufacturerListViewModel());
         }
 
         public ActionResult List(jQueryDataTableParamModel param)

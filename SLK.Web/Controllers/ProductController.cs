@@ -33,7 +33,7 @@ namespace SLK.Web.Controllers
         {
             ViewBag.ProductMenuActive = "active open";
             ViewBag.ProductActive = "active open";
-
+            
             return View(new ProductsListViewModel());
         }
 
@@ -51,6 +51,7 @@ namespace SLK.Web.Controllers
             var fullDescFilter = Convert.ToString(Request["FullDescription"]);
             var skuFilter = Convert.ToString(Request["SKU"]);
             var manufacturerFilter = Convert.ToString(Request["Manufacturer"]);
+            var brandFilter = Convert.ToString(Request["Brand"]);
             var hasImageFilter = Convert.ToString(Request["HasImage"]);
             var displayOrderFilter = (Int32.TryParse(Request["DisplayOrder"], out displayOrderFilterInteger)) ? "y" : "";
 
@@ -82,7 +83,12 @@ namespace SLK.Web.Controllers
 
             if (!string.IsNullOrEmpty(manufacturerFilter))
             {
-                products = products.Where(p => p.ProductManufacturerName.Contains(manufacturerFilter));
+                products = products.Where(p => p.ManufacturerName.Contains(manufacturerFilter));
+            }
+
+            if (!string.IsNullOrEmpty(brandFilter))
+            {
+                products = products.Where(p => p.Brand.Contains(brandFilter));
             }
 
             if (!string.IsNullOrEmpty(hasImageFilter) && hasImageFilter != "any")
@@ -109,8 +115,9 @@ namespace SLK.Web.Controllers
                             sortColumnIndex == 2 ? "ShortDescription" :
                             sortColumnIndex == 3 ? "FullDescription" :
                             sortColumnIndex == 4 ? "SKU" :
-                            sortColumnIndex == 5 ? "ProductManufacturerName" :
-                            sortColumnIndex == 7 ? "DisplayOrder" : "";
+                            sortColumnIndex == 5 ? "ManufacturerName" :
+                            sortColumnIndex == 6 ? "Brand" :
+                            sortColumnIndex == 8 ? "DisplayOrder" : "";
                             
 
                 // asc or desc
@@ -168,9 +175,9 @@ namespace SLK.Web.Controllers
                 return View(model).WithWarning("Some fields are invalid!");
             }
 
-            var catID = Convert.ToInt64(model.CategoryID);
+            var catID = Convert.ToInt32(model.CategoryID);
 
-            var manID = Convert.ToInt64(model.ProductManufacturerID);
+            var manID = Convert.ToInt32(model.ManufacturerID);
 
             var product = new Product(model.Name, _context.Categories.FirstOrDefault(c => c.ID == catID),
                 _context.Manufacturers.FirstOrDefault(m => m.ID == manID), 

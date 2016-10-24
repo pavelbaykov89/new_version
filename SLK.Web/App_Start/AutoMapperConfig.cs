@@ -3,6 +3,7 @@ using SLK.Domain.Core;
 using SLK.Web.Infrastructure.Mapping;
 using SLK.Web.Infrastructure.Tasks;
 using SLK.Web.Models;
+using SLK.Web.Models.UserModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -34,7 +35,7 @@ namespace SLK.Web.App_Start
                             Destination = t
                         }).ToArray();
 
-            
+
             Mapper.Initialize(cfg =>
             {
                 foreach (var map in maps)

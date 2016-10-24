@@ -9,7 +9,7 @@ namespace SLK.Web.Helpers
 {
     public static class DataTableColumnsHelper
     {
-        public static IHtmlString CreateColumnsInfo(this HtmlHelper helper, IEnumerable<ModelMetadata> properties, bool manage_section)
+        public static IHtmlString CreateColumnsInfo(this HtmlHelper helper, IEnumerable<ModelMetadata> properties, bool manage_section, string controllerName)
         {
             StringBuilder result = new StringBuilder();
 
@@ -37,9 +37,10 @@ namespace SLK.Web.Helpers
             if (manage_section)
             {
                 result.Append( "{data: 'EditDelete', bSortable: false, render: function(data, type, row) {");
-                result.Append("return '<a class=\"btn btn-sm btn-outline grey-salsa\" href=/Product/Edit/' + row['ID'] + '>");
+                result.Append($"return '<a class=\"btn btn-sm btn-outline grey-salsa edit-delete\" href=/{controllerName}/Edit/' + row['ID'] + '>");
                 result.Append("<i class=\"glyphicon glyphicon-edit\"></i> Edit</a><a class=\"btn btn-sm btn-outline red-mint\" ");
-                result.Append("href =/Product/Delete/' + row['ID'] + '><i class=\"fa fa-close\"></i> Delete</a>';}}");
+                result.Append($"href =/{controllerName}/Delete/'");
+                result.Append(" + row['ID'] + '><i class=\"fa fa-close\"></i> Delete</a>';}}");
             }
 
             result.Append("]");

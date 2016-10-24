@@ -73,7 +73,7 @@
 
         $(setTasksCount());
 
-        $(TableDatatablesAjax.init("/Product/List", @Html.CreateColumnsInfo(ViewData.ModelMetadata.Properties, true)));
+        $(TableDatatablesAjax.init("/Product/List", @Html.CreateColumnsInfo(ViewData.ModelMetadata.Properties, true, "Product")));
 
         function setTasksCount() {
             $.get('/Product/TasksCount', {}, function callback(data) {

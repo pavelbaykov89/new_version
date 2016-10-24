@@ -75,6 +75,8 @@ namespace SLK.Domain.Core
         public int ManufacturerID { get; protected set; }
 
         public virtual Manufacturer Manufacturer { get; set; }
+
+        public string Brand { get; set; }
         
         public int DisplayOrder { get; set; }
 
