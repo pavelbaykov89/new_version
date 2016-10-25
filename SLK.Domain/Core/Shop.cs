@@ -6,7 +6,10 @@ namespace SLK.Domain.Core
 {
     public class Shop
     {
-        protected Shop() { }
+        public Shop()
+        {
+            CreationDate = DateTime.UtcNow;
+        }
 
         public int ID { get; protected set; }
 
