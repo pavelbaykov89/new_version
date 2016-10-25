@@ -40,8 +40,6 @@ namespace SLK.Web.ProductModels
 
         public string Components { get; set; }
 
-        public decimal MeasureUnitStep { get; set; }
-
         public decimal UnitsPerPackage { get; set; }
 
         public string ContentUnitMeasureName { get; set; }

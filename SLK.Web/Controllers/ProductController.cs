@@ -10,6 +10,7 @@ using SLK.Web.Models;
 using SLK.Web.Models.ProductModels;
 using SLK.Web.ProductModels;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Dynamic;
 using System.Threading;
@@ -34,6 +35,8 @@ namespace SLK.Web.Controllers
             ViewBag.ProductMenuActive = "active open";
             ViewBag.ProductActive = "active open";
             
+            ViewBag.Shops = new List<string>{ "supertlv", "nehama", "superyuda" };
+
             return View(new ProductsListViewModel());
         }
 
@@ -51,8 +54,7 @@ namespace SLK.Web.Controllers
             var fullDescFilter = Convert.ToString(Request["FullDescription"]);
             var skuFilter = Convert.ToString(Request["SKU"]);
             var manufacturerFilter = Convert.ToString(Request["Manufacturer"]);
-            var brandFilter = Convert.ToString(Request["Brand"]);
-            var hasImageFilter = Convert.ToString(Request["HasImage"]);
+            var brandFilter = Convert.ToString(Request["Brand"]);            
             var displayOrderFilter = (Int32.TryParse(Request["DisplayOrder"], out displayOrderFilterInteger)) ? "y" : "";
 
 
@@ -90,13 +92,7 @@ namespace SLK.Web.Controllers
             {
                 products = products.Where(p => p.Brand.Contains(brandFilter));
             }
-
-            if (!string.IsNullOrEmpty(hasImageFilter) && hasImageFilter != "any")
-            {
-                bool flag = hasImageFilter == "true" ? true : false;
-                products = products.Where(p => p.HasImage == flag);
-            }
-
+            
             if (!string.IsNullOrEmpty(displayOrderFilter))
             {                
                 products = products.Where(p => p.DisplayOrder == displayOrderFilterInteger);
@@ -188,8 +184,7 @@ namespace SLK.Web.Controllers
             product.DisplayOrder = model.DisplayOrder;
             product.IsKosher = model.IsKosher;
             //product.IsVegan = model.IsVegan;
-            product.KosherType = model.KosherType;
-            product.MeasureUnitStep = model.MeasureUnitStep;
+            product.KosherType = model.KosherType;            
             product.UnitsPerPackage = model.UnitsPerPackage;
 
             _context.Products.Add(product);
@@ -238,8 +233,7 @@ namespace SLK.Web.Controllers
             product.ProductMeasure = _context.Measuries.FirstOrDefault(m => m.Name == model.ContentUnitMeasureName);
             product.DisplayOrder = model.DisplayOrder;
             product.IsKosher = model.IsKosher;         
-            product.KosherType = model.KosherType;
-            product.MeasureUnitStep = model.MeasureUnitStep;
+            product.KosherType = model.KosherType;            
             product.UnitsPerPackage = model.UnitsPerPackage;
 
             _context.SaveChanges();
@@ -278,14 +272,30 @@ namespace SLK.Web.Controllers
                
         public ActionResult Download()
         {
+            var pictureFilter = Convert.ToString(Request["picture"]);
+            var categoryFilter = Convert.ToString(Request["category"]);
+            var anyShop = true;
+            var shopFilter = new Dictionary<string, bool>();
+
+            foreach (var shop in new List<string> { "supertlv", "nehama", "superyuda" })
+            {
+                var value = (Request[shop] != null);
+
+                if (anyShop) anyShop = !value;
+
+                shopFilter.Add(shop, value);
+            }
+
+
             var fileName = "Products_" + DateTime.Now.ToString("dd-MM-yyyy_HH-mm") + ".xlsx";
             
             var context = new ApplicationDbContext();
 
             return File(ProductsExportService.ExportProductsToExcelFile(
                         typeof(ProductExportModel).GetProperties(),
-                        context.Products.ProjectTo<ProductExportModel>()), 
-                        "application/xlsx", 
+                        context.Products.Where(p => !p.Deleted).ProjectTo<ProductExportModel>(),
+                        pictureFilter, categoryFilter, anyShop, shopFilter),
+                        "application/xlsx",
                         fileName);
         }
 

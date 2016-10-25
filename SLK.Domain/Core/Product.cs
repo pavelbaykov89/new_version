@@ -16,11 +16,9 @@ namespace SLK.Domain.Core
             FullDescription = fullDesc;
             SKU = sku;
             Image = imagePath;
-
-            HasImage = imagePath?.Length > 0;
+            
             Deleted = false;
 
-            MeasureUnitStep = 0;
             UnitsPerPackage = 0;
         }
 
@@ -36,20 +34,12 @@ namespace SLK.Domain.Core
 
         public string Image { get; protected set; }
 
-        public decimal Rate { get; set; }
-        
-        public int RateCount { get; set; }
-
         public int CategoryID { get; set; }
 
         public virtual Category Category { get; set; }
 
         public bool NoTax { get; set; }
-
-        public bool IsFeaturedTop { get; set; }
-
-        public bool IsFeaturedLeft { get; set; }
-
+        
         public bool IsKosher { get; set; }
 
         public string KosherType { get; set; }
@@ -57,9 +47,7 @@ namespace SLK.Domain.Core
         public string Capacity { get; set; }
 
         public string MeasureUnit { get; set; }
-
-        public decimal MeasureUnitStep { get; set; }
-
+        
         public bool SoldByWeight { get; set; }
 
         public decimal UnitsPerPackage { get; set; }
@@ -67,11 +55,7 @@ namespace SLK.Domain.Core
         public string ProductShopOptions { get; set; }
 
         public string Components { get; set; }
-
-        public bool IgnoreOnImport { get; set; }
-
-        public bool HasImage { get; protected set; }
-
+               
         public int ManufacturerID { get; protected set; }
 
         public virtual Manufacturer Manufacturer { get; set; }

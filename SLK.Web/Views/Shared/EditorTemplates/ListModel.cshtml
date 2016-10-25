@@ -33,7 +33,7 @@
                         if (prop.TemplateHint != "HiddenInput")
                         {
                             if (prop.ModelType == typeof(bool))
-                            {                                
+                            {
                                 <td>                                    
                                     <select name="@prop.PropertyName" class="form-control form-filter input-sm">                                        
                                         <option value="any">Any</option>
@@ -44,9 +44,10 @@
                             }
                             else if (prop.DisplayName.Contains("Date"))
                             {
+                                var from = prop.PropertyName + "From"; var to = prop.PropertyName + "To";
                                 <td rowspan="1" colspan="1">
                                     <div class="input-group date date-picker margin-bottom-5" data-date-format="dd/mm/yyyy">
-                                        <input type="text" class="form-control form-filter input-sm" readonly="" name="order_date_from" placeholder="From">
+                                        <input type="text" class="form-control form-filter input-sm" readonly="" name="@from"  placeholder="From">
                                         <span class="input-group-btn">
                                             <button class="btn btn-sm default" type="button">
                                                 <i class="fa fa-calendar"></i>
@@ -54,7 +55,7 @@
                                         </span>
                                     </div>
                                     <div class="input-group date date-picker" data-date-format="dd/mm/yyyy">
-                                        <input type="text" class="form-control form-filter input-sm" readonly="" name="order_date_to" placeholder="To">
+                                        <input type="text" class="form-control form-filter input-sm" readonly="" name="@to" placeholder="To">
                                         <span class="input-group-btn">
                                             <button class="btn btn-sm default" type="button">
                                                 <i class="fa fa-calendar"></i>
