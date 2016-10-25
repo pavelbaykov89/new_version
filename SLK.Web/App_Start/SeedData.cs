@@ -1,8 +1,8 @@
 ﻿using SLK.Domain.Core;
 using SLK.DataLayer;
 using SLK.Web.Infrastructure.Tasks;
-using SLK.Web.Models;
 using System.Linq;
+using System;
 
 namespace SLK.Web.App_Start
 {
@@ -15,15 +15,43 @@ namespace SLK.Web.App_Start
             _context = context;
         }
 
+
+        private  ApplicationUserManager _userManager;
+
+        public ApplicationUserManager UserManager
+        {
+            get
+            {
+                if(_userManager == null)
+                    _userManager = ApplicationUserManager.Create(null, _context);
+                return _userManager;
+            }
+        }
+
         public void Execute()
         {
-            if (!_context.Users.Any())
+            //TODO - обновлять данные (которые нужны) в этом аккаунте, если он уже есть
+            if (!_context.Users.Any(u => u.Email == "a@slk.co.il"))
             {
-                var user = _context.Users.Add(new ApplicationUser
-                {
-                    Email = "test@test.test",
-                    UserName = "TestUser"                    
-                });
+                //var user = _context.Users.Add(new ApplicationUser
+                //{
+                //    Email = "test@test.test",
+                //    UserName = "TestUser"                    
+                //});
+                
+                var user = new ApplicationUser { UserName = "a@slk.co.il", Email = "a@slk.co.il" };
+                var result = UserManager.CreateAsync(user, "dina1212").Result;
+                if (result.Succeeded)
+                {                
+                    var domainUser = new User(user.Id, "a@slk.co.il", "a@slk.co.il");
+                    domainUser.FirstName = "Main";
+                    domainUser.LastName = "Admin";
+                    domainUser.FollowSLKNews = true;
+
+                    _context.DomainUsers.Add(domainUser);
+                    _context.SaveChanges();
+                }
+
             }
 
             var category = _context.Categories.FirstOrDefault() ??

@@ -21,3 +21,7 @@
 .login .content .register-form{
     display: block;
 }
+.login .content .form-actions {
+    padding-bottom: 7px;
+    border-bottom: 0;
+}

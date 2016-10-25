@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SLK.Domain.Core
 {
@@ -26,7 +27,10 @@ namespace SLK.Domain.Core
 
         public int ID { get; protected set; }
 
+        [ForeignKey("Identity")]
         public string IdentityID { get; protected set; }
+
+        public ApplicationUser Identity { get; protected set; }
 
         public string UserName { get; protected set; }
 

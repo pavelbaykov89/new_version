@@ -8,13 +8,13 @@
  * Boostrap 3 patch for for bootstrap-modal. Include BEFORE bootstrap-modal.css!
  */
 
-body.modal-open, 
-.modal-open .navbar-fixed-top, 
-.modal-open .navbar-fixed-bottom {
+body.modal-open-extended, 
+.modal-open-extended .navbar-fixed-top, 
+.modal-open-extended.navbar-fixed-bottom {
   margin-right: 0;
 }
 
-.modal {
+.modal-extended {
   left: 50%;
   bottom: auto;
   right: auto;
@@ -30,6 +30,6 @@ body.modal-open,
   background-clip: padding-box;
 }
 
-.modal.container {
+.modal-extended.container {
   max-width: none;
 }

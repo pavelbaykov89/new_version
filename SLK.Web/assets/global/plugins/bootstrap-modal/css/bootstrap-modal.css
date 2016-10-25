@@ -7,22 +7,22 @@
  *
  */
 
-.modal-open {
+.modal-open-extended {
 	overflow: hidden;
 }
 
 
 /* add a scroll bar to stop page from jerking around */
-.modal-open.page-overflow .page-container,
-.modal-open.page-overflow .page-container .navbar-fixed-top,
-.modal-open.page-overflow .page-container .navbar-fixed-bottom,
-.modal-open.page-overflow .modal-scrollable {
+.modal-open-extended.page-overflow .page-container,
+.modal-open-extended.page-overflow .page-container .navbar-fixed-top,
+.modal-open-extended.page-overflow .page-container .navbar-fixed-bottom,
+.modal-open-extended.page-overflow .modal-scrollable {
 	overflow-y: scroll;
 }
 
 @media (max-width: 979px) {
-	.modal-open.page-overflow .page-container .navbar-fixed-top,
-	.modal-open.page-overflow .page-container .navbar-fixed-bottom  {
+	.modal-open-extended.page-overflow .page-container .navbar-fixed-top,
+	.modal-open-extended.page-overflow .page-container .navbar-fixed-bottom  {
 		overflow-y: visible;
 	}
 }
@@ -37,7 +37,7 @@
 	overflow: auto;
 }
 
-.modal {
+.modal-extended {
 	outline: none;
 	position: absolute;
 	margin-top: 0;
@@ -45,7 +45,7 @@
 	overflow: visible; /* allow content to popup out (i.e tooltips) */
 }
 
-.modal.fade {
+.modal-extended.fade {
 	top: -100%;
 	-webkit-transition: opacity 0.3s linear, top 0.3s ease-out, bottom 0.3s ease-out, margin-top 0.3s ease-out;	
 	   -moz-transition: opacity 0.3s linear, top 0.3s ease-out, bottom 0.3s ease-out, margin-top 0.3s ease-out;
@@ -53,21 +53,21 @@
 	        transition: opacity 0.3s linear, top 0.3s ease-out, bottom 0.3s ease-out, margin-top 0.3s ease-out;
 }
 
-.modal.fade.in {
+.modal-extended.fade.in {
 	top: 50%;
 }
 
-.modal-body {
+.modal-extended .modal-body {
 	max-height: none;
 	overflow: visible;
 }
 
-.modal.modal-absolute {
+.modal-extended.modal-absolute {
 	position: absolute;
 	z-index: 950;
 }
 
-.modal .loading-mask {
+.modal-extended .loading-mask {
 	position: absolute;
 	top: 0;
 	bottom: 0;
@@ -89,7 +89,7 @@
 	background: #fff;
 }
 
-.modal.container {
+.modal-extended.container {
   width: 940px;
   margin-left: -470px;
 }
@@ -116,16 +116,16 @@
 /* Responsive */
 
 @media (min-width: 1200px) {
-	.modal.container {
+	.modal-extended.container {
 		width: 1170px;
 		margin-left: -585px;
 	}
 }
 
 @media (max-width: 979px) {
-	.modal, 
-	.modal.container,
-	.modal.modal-overflow 	{
+	.modal-extended, 
+	.modal-extended.container,
+	.modal-extended.modal-overflow 	{
 		top: 1%;
 		right: 1%;
 		left: 1%;
@@ -136,15 +136,15 @@
 		padding: 0 !important;
 	}
 	
-	.modal.fade.in, 
-	.modal.container.fade.in,
-	.modal.modal-overflow.fade.in {
+	.modal-extended.fade.in, 
+	.modal-extended.container.fade.in,
+	.modal-extended.modal-overflow.fade.in {
 		top: 1%;
 		bottom: auto;
 	}
 	
-	.modal-body,
-	.modal-overflow .modal-body {
+	.modal-extended .modal-body,
+	.modal-extended.modal-overflow .modal-body {
 		position: static;
 		margin: 0;
 		height: auto !important;
@@ -152,8 +152,8 @@
 		overflow: visible !important;
 	}
 	
-	.modal-footer,
-	.modal-overflow .modal-footer {
+	.modal-extended .modal-footer,
+	.modal-extended.modal-overflow .modal-footer {
 		position: static;
 	}
 }
