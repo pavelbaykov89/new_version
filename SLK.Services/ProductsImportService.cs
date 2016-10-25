@@ -95,6 +95,9 @@ namespace SLK.Services
                         }
                     }
 
+                    var imageProp = propToCol.FirstOrDefault(p => p.Value?.Name == "Image");
+                    propToCol.Remove(imageProp.Key == null ? "" : imageProp.Key);
+
                     int row = 2;
                     while (worksheet.Cells[$"A{row}"].Value != null && worksheet.Cells[$"A{row}"].Value.ToString().Length != 0)
                     {

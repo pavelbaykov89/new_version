@@ -67,6 +67,11 @@
             a.getDataTable().ajax.reload();
         });
 
+        $('.date-picker input.form-filter').on('change', function () {
+            i[this.name] = this.value;
+            a.getDataTable().ajax.reload();
+        });
+
         $('select.form-filter').on('change', function () {            
             i[this.name] = this.value;
             a.getDataTable().ajax.reload();

@@ -31,9 +31,6 @@ namespace SLK.Web.ProductModels
 
         public string FullDescription { get; set; }
 
-        [DisplayName("Has Image")]
-        public bool HasImage { get; set; }
-
         public int DisplayOrder { get; set; }
 
     }

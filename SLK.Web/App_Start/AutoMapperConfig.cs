@@ -39,10 +39,10 @@ namespace SLK.Web.App_Start
             Mapper.Initialize(cfg =>
             {
                 foreach (var map in maps)
-                {
-                    cfg.CreateMap(map.Source, map.Destination);
+                {                    
+                    cfg.CreateMap(map.Source, map.Destination);                    
                 }
-            });
+            });          
         }
 
         private static void LoadCustomMappings(IEnumerable<Type> types)

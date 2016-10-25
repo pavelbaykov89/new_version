@@ -25,7 +25,9 @@ namespace SLK.Web.Models.UserModels
         [Display(Name="Linked To Shop")]
         public string LinkedToShopName { get; set; }
 
-        [Display(Name = "Registration Date")]
-        public string CreationDate { get; set; }
+        [HiddenInput]
+        public DateTime CreationDate { get; set; }
+
+        public string RegistrationDate { get; set; }
     }
 }

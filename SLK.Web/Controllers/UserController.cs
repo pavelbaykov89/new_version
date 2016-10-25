@@ -38,8 +38,9 @@ namespace SLK.Web.Controllers
             var firstNameFilter = Convert.ToString(Request["FirstName"]);
             var lastNameFilter = Convert.ToString(Request["LastName"]);
             var linkedFilter = Convert.ToString(Request["LinkedToShopName"]);
-            var creationFilter = Convert.ToString(Request["CreationDate"]);
-                        
+            var creationFilterFrom = Convert.ToString(Request["RegistrationDateFrom"]);
+            var creationFilterTo = Convert.ToString(Request["RegistrationDateTo"]);
+
             if (!string.IsNullOrEmpty(userNameFilter))
             {
                 users = users.Where(u => u.UserName.Contains(userNameFilter));
@@ -65,11 +66,24 @@ namespace SLK.Web.Controllers
                 users = users.Where(u => u.LinkedToShopName.Contains(linkedFilter));
             }
 
-            if (!string.IsNullOrEmpty(creationFilter))
+            if (!string.IsNullOrEmpty(creationFilterFrom) )
             {
-                //users = users.Where(u => u.CreationDate.Contains(creationFilter));
+                var nums = creationFilterFrom.Split('/').Select(d => Convert.ToInt32(d)).ToArray();
+
+                var fromDate = new DateTime(nums[2], nums[1], nums[0]);
+
+                users = users.Where(u => u.CreationDate >= fromDate);
             }
-                        
+
+            if (!string.IsNullOrEmpty(creationFilterTo))
+            {
+                var nums = creationFilterTo.Split('/').Select(d => Convert.ToInt32(d)).ToArray();
+
+                var toDate = new DateTime(nums[2], nums[1], nums[0], 23, 59, 59);
+
+                users = users.Where(u => u.CreationDate <= toDate);
+            }
+
             string ordering = "";
             int ind = 0;
 
@@ -100,18 +114,24 @@ namespace SLK.Web.Controllers
 
             var count = users.Count();
 
-            users = users
+            var usersArray = users
                 .Skip(param.start)
-                .Take(param.length);
+                .Take(param.length)
+                .ToArray();
 
             var totalCount = _context.DomainUsers.Where(u => !u.Deleted).Count();
+
+            foreach (var user in usersArray)
+            {
+                user.RegistrationDate = user.CreationDate.ToString("dd/MM/yyyy");
+            }
 
             return Json(new
             {
                 draw = param.draw,
                 recordsTotal = totalCount,
                 recordsFiltered = count,
-                data = users.ToArray()
+                data = usersArray
             },
              JsonRequestBehavior.AllowGet);
         }
