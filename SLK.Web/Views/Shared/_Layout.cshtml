@@ -302,21 +302,41 @@ License: You must have a valid license purchased only from themeforest(the above
                                 </li>                                
                             </ul>
                         </li>
-                        <li class="nav-item @ViewBag.ShopTypeMenuActive">
+                        <li class="nav-item @ViewBag.ShopTypeMenuActive @ViewBag.ShopMenuActive">
                             <a href="javascript:;" class="nav-link nav-toggle">
-                                <i class="icon-docs"></i>
-                                <span class="title">@R("Shop Types")</span>
+                                <i class="icon-diamond"></i>
+                                <span class="title">@R("Shopping")</span>
                                 <span class="arrow"></span>
                             </a>
                             <ul class="sub-menu">
-                                <li class="nav-item @ViewBag.ShopTypeActive">
-                                    <a href="/ShopType/Table" class="nav-link">
-                                        <i class="icon-list"></i>
-                                        <span class="title">@R("Shop Types List")</span>
+                                <li class="nav-item @ViewBag.ShopActive">
+                                    <a href="@Url.Action("Table", "Shop")" class="nav-link">
+                                        <span class="title">@R("Shops")</span>
                                     </a>
+                                    @*<ul class="sub-menu">
+                                        <li class="nav-item @ViewBag.ShopActive">
+                                            <a href="@Url.Action("Table", "Shop")" class="nav-link">
+                                                <i class="icon-list"></i>
+                                                <span class="title">@R("Shops List")</span>
+                                            </a>
+                                        </li>
+                                    </ul>*@
                                 </li>
-                            </ul>
-                        </li>
+                                <li class="nav-item @ViewBag.ShopTypeActive">
+                                    <a href="@Url.Action("Table", "ShopType")" class="nav-link">
+                                        <span class="title">@R("Shop Types")</span>
+                                    </a>
+                                    @*<ul class="sub-menu">
+                                        <li class="nav-item @ViewBag.ShopTypeActive">
+                                            <a href="@Url.Action("Table", "ShopType")" class="nav-link">
+                                                <i class="icon-list"></i>
+                                                <span class="title">@R("Shop Types List")</span>
+                                            </a>
+                                        </li>
+                                    </ul>*@
+                                </li>  
+                            </ul>                                                        
+                        </li>                       
                     </ul>
                     <!-- END SIDEBAR MENU -->
                     <!-- END SIDEBAR MENU -->

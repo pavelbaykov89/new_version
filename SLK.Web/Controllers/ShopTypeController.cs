@@ -1,16 +1,17 @@
 ﻿using AutoMapper.QueryableExtensions;
 using SLK.DataLayer;
 using SLK.Web.Models;
-using SLK.Web.Models.ShopModels;
+using SLK.Web.Models.ShopTypeModels;
 using System;
 using System.Linq;
 using System.Web.Mvc;
 using System.Linq.Dynamic;
 using SLK.Domain.Core;
+using SLK.Web.Infrastructure;
 
 namespace SLK.Web.Controllers
 {
-    public class ShopTypeController : Controller
+    public class ShopTypeController : SLKController
     {
         private readonly ApplicationDbContext _context;
 
@@ -19,13 +20,6 @@ namespace SLK.Web.Controllers
             _context = context;
         }
 
-        // GET: Manufacturer
-        public ActionResult Index()
-        {
-            return View();
-        }
-
-        // GET: Manufacturer
         public ActionResult Table()
         {
             ViewBag.ShopTypeMenuActive = "active open";

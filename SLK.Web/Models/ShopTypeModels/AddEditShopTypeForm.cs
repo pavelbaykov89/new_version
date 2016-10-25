@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.Web.Mvc;
 
-namespace SLK.Web.Models.ShopModels
+namespace SLK.Web.Models.ShopTypeModels
 {
     public class AddEditShopTypeForm : AddEditForm
     {

@@ -73,6 +73,7 @@
     <Compile Include="Core\ProductNote.cs" />
     <Compile Include="Core\ProductRate.cs" />
     <Compile Include="Core\ProductSKUMap.cs" />
+    <Compile Include="Extensions\FilterExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Core\Role.cs" />
     <Compile Include="Core\Shop.cs" />

@@ -203,6 +203,7 @@
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ManufacturerController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
+    <Compile Include="Controllers\ShopController.cs" />
     <Compile Include="Controllers\ShopTypeController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Filters\CategorySelectListPopulatorAttribute.cs" />
@@ -263,8 +264,10 @@
     <Compile Include="Models\ProductModels\PaginationProductList.cs" />
     <Compile Include="Models\ProductModels\ProductExportModel.cs" />
     <Compile Include="Models\ProductModels\ProductsListViewModel.cs" />
-    <Compile Include="Models\ShopModels\AddEditShopTypeForm.cs" />
-    <Compile Include="Models\ShopModels\ShopTypeListViewModel.cs" />
+    <Compile Include="Models\ShopModels\AddEditShopForm.cs" />
+    <Compile Include="Models\ShopModels\ShopListViewModel.cs" />
+    <Compile Include="Models\ShopTypeModels\AddEditShopTypeForm.cs" />
+    <Compile Include="Models\ShopTypeModels\ShopTypeListViewModel.cs" />
     <Compile Include="Models\UserModels\NewUserModel.cs" />
     <Compile Include="Models\UserModels\RegisterUserModel.cs" />
     <Compile Include="Models\UserModels\UserListViewModel.cs" />
@@ -6076,6 +6079,8 @@
     <Content Include="Views\Shared\EditPopup.cshtml" />
     <Content Include="Views\User\Table.cshtml" />
     <Content Include="Views\Account\Popup\RegisterPopup.cshtml" />
+    <Content Include="Views\Shop\Table.cshtml" />
+    <Content Include="Views\Shop\New.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="assets\apps\img\" />

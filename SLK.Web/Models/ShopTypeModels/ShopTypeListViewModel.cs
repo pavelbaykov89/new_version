@@ -2,7 +2,7 @@
 using SLK.Web.Infrastructure.Mapping;
 using System.Web.Mvc;
 
-namespace SLK.Web.Models.ShopModels
+namespace SLK.Web.Models.ShopTypeModels
 {
     public class ShopTypeListViewModel : ListModel, IMapFrom<ShopType>
     {
