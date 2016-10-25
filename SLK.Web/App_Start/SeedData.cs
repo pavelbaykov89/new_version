@@ -30,7 +30,8 @@ namespace SLK.Web.App_Start
 
         public void Execute()
         {
-            if (!_context.Users.Any())
+            //TODO - обновлять данные (которые нужны) в этом аккаунте, если он уже есть
+            if (!_context.Users.Any(u => u.Email == "a@slk.co.il"))
             {
                 //var user = _context.Users.Add(new ApplicationUser
                 //{
