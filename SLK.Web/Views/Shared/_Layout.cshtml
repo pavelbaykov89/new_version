@@ -169,7 +169,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                 <button type="button" class="btn btn-circle btn-success btn-sm"
                                         data-toggle="modal"
                                         data-target="#login"
-                                        href="@Url.Action("Login", "Account")"
+                                        @*href="@Url.Action("Login", "Account")"*@
                                         style="margin-top: 11px; margin-bottom: 11px;">
                                     Sign In
                                 </button>
@@ -995,33 +995,30 @@ License: You must have a valid license purchased only from themeforest(the above
     </script>
     <!-- END LOGIN POPUP SCRIPTS -->
 
-    @* AJAX POPUPS BEGIN *@
-    @helper AjaxPopup(string id, string bodyClass, string contentClass = null, string onShown = null)
+    @* GLOBAL POPUPS BEGIN *@
+    @helper Popup(string id, string bodyClass, string contentClass = null, MvcHtmlString content = null)
     {
         <!--DOC: Aplly "modal-cached" class after "modal" class to enable ajax content caching-->
         <div class="modal fade @bodyClass" id="@id" role="basic" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content @contentClass">
-                    @Html.Partial("ModalLoading")
+                    @if (content != null)
+                    {
+                        @content
+                    }
+                    else
+                    {
+                        @Html.Partial("ModalLoading")
+                    }
                 </div>
             </div>
         </div>
-        if (onShown != null)
-        {
-            <script>
-                $(function () {
-                    $('#' + '@id').on('shown.bs.modal', function () {
-                        @onShown;
-                    });
-                });
-            </script>
-        }
     }
     @if (!User.Identity.IsAuthenticated)
     {
-        @:@AjaxPopup("login", "login", "content", "slk.login.initMetronicLogin()")
+        @:@Popup("login", "login", "content", Html.Partial("~/Views/Account/Popup/LoginPopup.cshtml", new SLK.Web.Models.LoginViewModel()))
     }
-    @* AJAX POPUPS END *@
+    @* GLOBAL POPUPS END *@
 
     @RenderSection("scripts", required: false)
    
