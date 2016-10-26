@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity.Spatial;
 using System.Device.Location;
 
 namespace SLK.Domain.Core
@@ -24,7 +25,7 @@ namespace SLK.Domain.Core
 
         public int OwnerID { get; set; }
                 
-        public virtual User Owner { get; protected set; }
+        public virtual User Owner { get; set; }
 
         public List<int> ShopTypeID { get; protected set; }
 
@@ -42,7 +43,8 @@ namespace SLK.Domain.Core
 
         public string Address { get; set; }
 
-        public GeoCoordinate Coordinate { get; protected set; }
+        //public GeoCoordinate Coordinate { get; set; }
+        public DbGeography Coordinate { get; set; }
 
         public string Phone { get; set; }
 

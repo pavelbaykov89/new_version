@@ -141,12 +141,13 @@ namespace SLK.Web.Controllers
             shop.IsShipEnabled = model.IsShipEnabled;
             shop.Active = model.Active;
             shop.SeoUrl = model.SeoUrl;
+            shop.Owner = _context.DomainUsers.First();
 
             _context.Shops.Add(shop);
 
             _context.SaveChanges();
 
-            return RedirectToAction<ProductController>(c => c.Table())
+            return RedirectToAction<ShopController>(c => c.Table())
                 .WithSuccess("Product created!");
         }
 
