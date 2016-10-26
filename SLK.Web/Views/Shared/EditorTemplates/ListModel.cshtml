@@ -1,18 +1,7 @@
 ﻿@using SLK.Web.Helpers
 @model SLK.Web.Models.ListModel
     
-<div class="portlet-body">
-    @if (Model.AddNewForm != null)
-    {
-        <div class="btn-group">
-            <button id="sample_editable_1_new" class="btn sbold green add-popup" data-toggle="modal-extended" href="#add_new">
-                @R("Add New")
-                <i class="fa fa-plus"></i>
-            </button>
-        </div>
-
-        @Html.Partial("~/Views/Shared/AddNewPopup.cshtml", Model.AddNewForm)
-    }
+<div class="portlet-body">    
     <div class="table-container">
         <table class="table table-striped table-bordered table-hover dataTable" id="datatable_ajax">
             <thead>
@@ -78,7 +67,10 @@
                             else
                             {
                                 <td style="@(prop.ModelType == typeof(int) ? "width:140px;" : "")">
-                                    <input type="text" class="form-control form-filter input-sm" name="@prop.PropertyName">                                    
+                                    <div class="input-icon">
+                                        <i class="fa fa-search "></i>
+                                        <input type="text" class="form-control form-filter" name="@prop.PropertyName">                                    
+                                    </div>
                                 </td>
                             }
                         }

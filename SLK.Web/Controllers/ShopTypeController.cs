@@ -22,6 +22,8 @@ namespace SLK.Web.Controllers
         // GET: Manufacturer
         public ActionResult Index()
         {
+            var model = new ShopTypeListViewModel();
+            model.AddNewForm = new AddEditShopTypeForm(Url.Action("AddNew"));            
             return View();
         }
 
