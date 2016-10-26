@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity.Spatial;
 using System.Device.Location;
 
 namespace SLK.Domain.Core
@@ -8,20 +9,23 @@ namespace SLK.Domain.Core
     {
         public Shop()
         {
-            CreationDate = DateTime.UtcNow;
+            Active = true;
+            IsKosher = true;
+            IsShipEnabled = true;
+            CreationDate = DateTime.Now;
         }
 
         public int ID { get; protected set; }
 
-        public string Name { get; protected set; }
+        public string Name { get; set; }
 
         public string ShortDescription { get; set; }
 
         public string FullDescription { get; set; }
 
-        public int OwnerID { get; protected set; }
+        public int OwnerID { get; set; }
                 
-        public virtual User Owner { get; protected set; }
+        public virtual User Owner { get; set; }
 
         public List<int> ShopTypeID { get; protected set; }
 
@@ -29,29 +33,32 @@ namespace SLK.Domain.Core
 
         public DateTime CreationDate { get; protected set; }
 
-        public int DisplayOrder { get; protected set; }
+        public int DisplayOrder { get; set; }
 
-        public bool HasImage { get; protected set; }
+        public bool HasImage { get; set; }
 
-        public string ImagePath { get; protected set; }
+        public string ImagePath { get; set; }
 
-        public string LogoPath { get; protected set; }
+        public string LogoPath { get; set; }
 
-        public string Address { get; protected set; }
+        public string Address { get; set; }
 
-        public GeoCoordinate Coordinate { get; protected set; }
+        //public GeoCoordinate Coordinate { get; set; }
+        public DbGeography Coordinate { get; set; }
 
-        public string Phone { get; protected set; }
+        public string Phone { get; set; }
 
-        public string Phone2 { get; protected set; }
+        public string Phone2 { get; set; }
 
-        public string Email { get; protected set; }
+        public string Email { get; set; }
 
-        public bool IsKosher { get; protected set; }
+        public bool IsKosher { get; set; }
 
-        public bool IsShipEnabled { get; protected set; }
+        public bool IsShipEnabled { get; set; }
 
-        public bool Active { get; protected set; }
+        public bool Active { get; set; }
+
+        public string SeoUrl { get; set; }
 
         public virtual ICollection<UserAddressSearch> UserAddressSearchs { get; set; } = new List<UserAddressSearch>();
 
