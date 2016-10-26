@@ -8,6 +8,7 @@ using System.Web.Mvc;
 using System.Linq.Dynamic;
 using SLK.Domain.Core;
 using SLK.Web.Infrastructure;
+using SLK.Services;
 
 namespace SLK.Web.Controllers
 {
@@ -39,64 +40,12 @@ namespace SLK.Web.Controllers
 
         public ActionResult List(jQueryDataTableParamModel param)
         {
-            var items = _context.ShopTypes
-                .ProjectTo<ShopTypeListViewModel>();
+            var result = PopulateService.PopulateByFilters<ShopTypeListViewModel>(
+                _context.ShopTypes.ProjectTo<ShopTypeListViewModel>(),
+                Request.Params,
+                typeof(ShopTypeListViewModel).GetProperties().Where(p => !p.GetCustomAttributes(false).Any(a => a is HiddenInputAttribute)).ToArray());
 
-            int displayOrderFilterInteger;
-
-            var nameFilter = Convert.ToString(Request["Name"]);
-            var displayOrderFilter = (Int32.TryParse(Request["DisplayOrder"], out displayOrderFilterInteger)) ? "y" : "";
-
-            if (!string.IsNullOrEmpty(nameFilter))
-            {
-                items = items.Where(p => p.Name.Contains(nameFilter));
-            }
-
-            if (!string.IsNullOrEmpty(displayOrderFilter))
-            {
-                items = items.Where(p => p.DisplayOrder == displayOrderFilterInteger);
-            }
-
-            string ordering = "";
-            int ind = 0;
-
-            while (Request[$"order[{ind}][column]"] != null)
-            {
-                int sortColumnIndex = Convert.ToInt32(Request[$"order[{ind}][column]"]);
-                var sortDirection = Request[$"order[{ind}][dir]"];
-
-                ordering += sortColumnIndex == 0 ? "Name" :
-                            sortColumnIndex == 1 ? "DisplayOrder" : "";
-
-                // asc or desc
-                ordering += " " + sortDirection.ToUpper() + ", ";
-
-                ++ind;
-            }
-
-            if (!string.IsNullOrEmpty(ordering))
-            {
-                ordering = ordering.Substring(0, ordering.Length - 2);
-
-                items = items.OrderBy(ordering).AsQueryable();
-            }
-
-            var count = items.Count();
-
-            items = items
-                .Skip(param.start)
-                .Take(param.length);
-
-            var totalCount = _context.ShopTypes.Count();
-
-            return Json(new
-            {
-                draw = param.draw,
-                recordsTotal = totalCount,
-                recordsFiltered = count,
-                data = items.ToArray()
-            },
-             JsonRequestBehavior.AllowGet);
+            return Json(result, JsonRequestBehavior.AllowGet);
         }
 
         [HttpPost, ValidateAntiForgeryToken]

@@ -13,6 +13,7 @@ using System.Linq.Dynamic;
 using SLK.Web.Filters;
 using SLK.Web.Infrastructure.Alerts;
 using SLK.Domain.Core;
+using SLK.Services;
 
 namespace SLK.Web.Controllers
 {
@@ -35,78 +36,12 @@ namespace SLK.Web.Controllers
 
         public ActionResult List(jQueryDataTableParamModel param)
         {
-            var shops = _context.Shops
-                    .ProjectTo<ShopListViewModel>();
+            var result = PopulateService.PopulateByFilters<ShopListViewModel>(
+                _context.Shops.ProjectTo<ShopListViewModel>(),
+                Request.Params,
+                typeof(ShopListViewModel).GetProperties().Where(p => !p.GetCustomAttributes(false).Any(a => a is HiddenInputAttribute)).ToArray());
 
-            int displayOrderFilterInteger;
-
-            var nameFilter = Convert.ToString(Request["Store name"]);
-            var phoneFilter = Convert.ToString(Request["Phone"]);
-            var cellularFilter = Convert.ToString(Request["Cellular"]);
-            var emailFilter = Convert.ToString(Request["Orders delivery email"]);
-            var kosherFilter = Convert.ToString(Request["Kosher"]);
-            var activeFilter = Convert.ToString(Request["Active"]);
-            var displayOrderFilter = (Int32.TryParse(Request["Store importance"], out displayOrderFilterInteger)) ? "y" : "";
-            var domainFilter = Convert.ToString(Request["Domain address extension"]);
-
-            shops = shops
-                .WhereIfText(nameFilter, p => p.Name.Contains(nameFilter))
-                .WhereIfText(phoneFilter, p => p.Phone.Contains(phoneFilter))
-                .WhereIfText(cellularFilter, p => p.Phone2.Contains(cellularFilter))
-                .WhereIfText(emailFilter, p => p.Email.Contains(emailFilter))
-                .WhereIf(!string.IsNullOrEmpty(kosherFilter) && kosherFilter != "any", p => p.IsKosher == (kosherFilter == "true" ? true : false))
-                .WhereIf(!string.IsNullOrEmpty(activeFilter) && activeFilter != "any", p => p.Active == (activeFilter == "true" ? true : false))
-                .WhereIfText(displayOrderFilter, p => p.DisplayOrder == displayOrderFilterInteger)
-                .WhereIfText(domainFilter, p => p.SeoUrl.Contains(domainFilter));
-           
-
-            string ordering = "";
-            int ind = 0;
-
-            while (Request[$"order[{ind}][column]"] != null)
-            {
-                int sortColumnIndex = Convert.ToInt32(Request[$"order[{ind}][column]"]);
-                var sortDirection = Request[$"order[{ind}][dir]"];
-
-                ordering += sortColumnIndex == 0 ? "Name" :
-                            sortColumnIndex == 1 ? "DisplayOrder" :
-                            sortColumnIndex == 2 ? "Phone" :
-                            sortColumnIndex == 3 ? "Phone2" :
-                            sortColumnIndex == 4 ? "Email" :
-                            sortColumnIndex == 5 ? "IsKosher" :
-                            sortColumnIndex == 6 ? "Active" :
-                            sortColumnIndex == 8 ? "SeoUrl" : "";
-
-
-                // asc or desc
-                ordering += " " + sortDirection.ToUpper() + ", ";
-
-                ++ind;
-            }
-
-            if (!string.IsNullOrEmpty(ordering))
-            {
-                ordering = ordering.Substring(0, ordering.Length - 2);
-
-                shops = shops.OrderBy(ordering).AsQueryable();
-            }
-
-            var count = shops.Count();
-
-            shops = shops
-                .Skip(param.start)
-                .Take(param.length);
-
-            var totalCount = _context.Products.Where(p => !p.Deleted).Count();
-
-            return Json(new
-            {
-                draw = param.draw,
-                recordsTotal = totalCount,
-                recordsFiltered = count,
-                data = shops.ToArray()
-            },
-             JsonRequestBehavior.AllowGet);
+            return Json(result, JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult New()
@@ -125,7 +60,7 @@ namespace SLK.Web.Controllers
             }
 
             var shop = new Shop();
-            //TODO - может быть это можно сделать автомаппером
+            //TODO - это нужно сделать automapper'ом
             shop.Name = model.Name;
             shop.ShortDescription = model.ShortDescription;
             shop.FullDescription = model.FullDescription;

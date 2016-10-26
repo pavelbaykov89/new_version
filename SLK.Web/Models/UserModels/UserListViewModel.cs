@@ -28,6 +28,7 @@ namespace SLK.Web.Models.UserModels
         [HiddenInput]
         public DateTime CreationDate { get; set; }
 
-        public string RegistrationDate { get; set; }
+        [Display(Name = "Creation Date")]
+        public string StringCreationDate { get; set; }
     }
 }

@@ -261,7 +261,6 @@
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\ProductModels\NewProductForm.cs" />
     <Compile Include="Models\PageInfo.cs" />
-    <Compile Include="Models\ProductModels\PaginationProductList.cs" />
     <Compile Include="Models\ProductModels\ProductExportModel.cs" />
     <Compile Include="Models\ProductModels\ProductsListViewModel.cs" />
     <Compile Include="Models\ShopModels\AddEditShopForm.cs" />

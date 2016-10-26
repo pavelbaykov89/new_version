@@ -42,119 +42,15 @@ namespace SLK.Web.Controllers
 
         public ActionResult List(jQueryDataTableParamModel param)
         {   
-            var products = _context.Products
-                    .Where(p => !p.Deleted)
-                    .ProjectTo<ProductsListViewModel>();
+            var result = PopulateService.PopulateByFilters<ProductsListViewModel>(
+                _context.Products.Where(p => !p.Deleted).ProjectTo<ProductsListViewModel>(),
+                Request.Params,
+                typeof(ProductsListViewModel).GetProperties().Where(p => !p.GetCustomAttributes(false).Any(a => a is HiddenInputAttribute)).ToArray());
 
-            int displayOrderFilterInteger;
+            return Json(result, JsonRequestBehavior.AllowGet);
 
-            var nameFilter = Convert.ToString(Request["Name"]);
-            var categoryFilter = Convert.ToString(Request["Category"]);
-            var shortDescFilter = Convert.ToString(Request["ShortDescription"]);
-            var fullDescFilter = Convert.ToString(Request["FullDescription"]);
-            var skuFilter = Convert.ToString(Request["SKU"]);
-            var manufacturerFilter = Convert.ToString(Request["Manufacturer"]);
-            var brandFilter = Convert.ToString(Request["Brand"]);            
-            var displayOrderFilter = (Int32.TryParse(Request["DisplayOrder"], out displayOrderFilterInteger)) ? "y" : "";
-
-
-            if (!string.IsNullOrEmpty(nameFilter))
-            {
-                products = products.Where(p => p.Name.Contains(nameFilter));
-            }
-
-            if (!string.IsNullOrEmpty(categoryFilter))
-            {
-                products = products.Where(p => p.CategoryName.Contains(categoryFilter));
-            }
-
-            if (!string.IsNullOrEmpty(shortDescFilter))
-            {
-                products = products.Where(p => p.ShortDescription.Contains(shortDescFilter));
-            }
-
-            if (!string.IsNullOrEmpty(fullDescFilter))
-            {
-                products = products.Where(p => p.FullDescription.Contains(fullDescFilter));
-            }
-
-            if (!string.IsNullOrEmpty(skuFilter))
-            {
-                products = products.Where(p => p.SKU.Contains(skuFilter));
-            }
-
-            if (!string.IsNullOrEmpty(manufacturerFilter))
-            {
-                products = products.Where(p => p.ManufacturerName.Contains(manufacturerFilter));
-            }
-
-            if (!string.IsNullOrEmpty(brandFilter))
-            {
-                products = products.Where(p => p.Brand.Contains(brandFilter));
-            }
-            
-            if (!string.IsNullOrEmpty(displayOrderFilter))
-            {                
-                products = products.Where(p => p.DisplayOrder == displayOrderFilterInteger);
-            }
-
-            string ordering = "";
-            int ind = 0;
-
-            while (Request[$"order[{ind}][column]"] != null)
-            {
-                int sortColumnIndex = Convert.ToInt32(Request[$"order[{ind}][column]"]);
-                var sortDirection = Request[$"order[{ind}][dir]"];
-
-                ordering += sortColumnIndex == 0 ? "Name" :
-                            sortColumnIndex == 1 ? "CategoryName" :
-                            sortColumnIndex == 2 ? "ShortDescription" :
-                            sortColumnIndex == 3 ? "FullDescription" :
-                            sortColumnIndex == 4 ? "SKU" :
-                            sortColumnIndex == 5 ? "ManufacturerName" :
-                            sortColumnIndex == 6 ? "Brand" :
-                            sortColumnIndex == 8 ? "DisplayOrder" : "";
-                            
-
-                // asc or desc
-                ordering += " "  + sortDirection.ToUpper() + ", ";
-
-                ++ind;
-            }
-
-            if (!string.IsNullOrEmpty(ordering))
-            {
-                ordering = ordering.Substring(0, ordering.Length - 2);
-
-                products = products.OrderBy(ordering).AsQueryable();
-            }
-
-            var count = products.Count();
-
-            products = products
-                .Skip(param.start)
-                .Take(param.length);
-
-            var totalCount = _context.Products.Where(p => !p.Deleted).Count();
-
-           return Json(new
-            {
-                draw = param.draw,
-                recordsTotal = totalCount,
-                recordsFiltered = count,
-                data = products.ToArray()       
-            },
-            JsonRequestBehavior.AllowGet);
+           
         }
-
-        //public ActionResult Table()
-        //{
-        //    var model = _context.Products
-        //        .ProjectTo<ProductsListViewModel>()               
-        //        .FirstOrDefault();
-
-        //    return View(model);
-        //}
 
         public ActionResult New()
         {
