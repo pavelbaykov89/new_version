@@ -252,7 +252,6 @@
     <Compile Include="Infrastructure\TransactionPerRequest.cs" />
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
-    <Compile Include="Models\AddEditForm.cs" />
     <Compile Include="Models\CategoryModels\CategoryListViewModel.cs" />
     <Compile Include="Models\ManufacturerModels\ManufacturerListViewModel.cs" />
     <Compile Include="Models\ProductModels\AddEditProductForm.cs" />
@@ -6064,26 +6063,26 @@
     <Content Include="Views\Product\Table.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Account\Login2.cshtml" />
-    <Content Include="Views\Category\Table.cshtml" />
-    <Content Include="Views\Manufacturer\Table.cshtml" />
     <Content Include="Views\Account\Popup\LoginPopup.cshtml" />
     <Content Include="Views\Account\Popup\RegisterPopup1.cshtml" />
     <Content Include="Views\Shared\ModalLoading.cshtml" />
     <Content Include="Views\Shared\_LoginLayout.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\ShopTypeID.cshtml" />
-    <Content Include="Views\ShopType\Table.cshtml" />
     <Content Include="Views\Image\Index.cshtml" />
     <Content Include="Views\Shared\AddNewPopup.cshtml" />
     <Content Include="Views\Shared\EditPopup.cshtml" />
-    <Content Include="Views\User\Table.cshtml" />
     <Content Include="Views\Account\Popup\RegisterPopup.cshtml" />
-    <Content Include="Views\Shop\Table.cshtml" />
     <Content Include="Views\Shop\New.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\File.cshtml" />
     <Content Include="Views\Shared\Table.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="assets\apps\img\" />
     <Folder Include="assets\global\plugins\angularjs\plugins\angular-file-upload\uploads\" />
+    <Folder Include="Views\Category\" />
+    <Folder Include="Views\Manufacturer\" />
+    <Folder Include="Views\ShopType\" />
+    <Folder Include="Views\User\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
