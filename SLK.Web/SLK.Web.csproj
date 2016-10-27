@@ -252,13 +252,13 @@
     <Compile Include="Infrastructure\TransactionPerRequest.cs" />
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\AddEditForm.cs" />
     <Compile Include="Models\CategoryModels\CategoryListViewModel.cs" />
     <Compile Include="Models\ManufacturerModels\ManufacturerListViewModel.cs" />
-    <Compile Include="Models\ProductModels\EditProductForm.cs" />
+    <Compile Include="Models\ProductModels\AddEditProductForm.cs" />
     <Compile Include="Models\jQueryDataTableParamModel.cs" />
     <Compile Include="Models\ListModel.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
-    <Compile Include="Models\ProductModels\NewProductForm.cs" />
     <Compile Include="Models\PageInfo.cs" />
     <Compile Include="Models\ProductModels\ProductExportModel.cs" />
     <Compile Include="Models\ProductModels\ProductsListViewModel.cs" />
@@ -266,7 +266,7 @@
     <Compile Include="Models\ShopModels\ShopListViewModel.cs" />
     <Compile Include="Models\ShopTypeModels\AddEditShopTypeForm.cs" />
     <Compile Include="Models\ShopTypeModels\ShopTypeListViewModel.cs" />
-    <Compile Include="Models\UserModels\NewUserModel.cs" />
+    <Compile Include="Models\UserModels\AddNewUserModel.cs" />
     <Compile Include="Models\UserModels\RegisterUserModel.cs" />
     <Compile Include="Models\UserModels\UserListViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -7,23 +7,35 @@
         <div class="caption">
             <i class="icon-settings font-dark"></i>
             <span class="caption-subject font-dark sbold uppercase">@ViewBag.Title</span>
-        </div>
+        </div>       
         <div class="actions">
-            <div class="btn-group">
-                <a class="btn red btn-outline btn-circle" href="javascript:;" data-toggle="dropdown">
-                    <i class="fa fa-share"></i>
-                    <span class="hidden-xs"> Import/Export </span>
-                    <i class="fa fa-angle-down"></i>
-                </a>
-                <ul class="dropdown-menu pull-right">
-                    <li>
-                        <a href="#Upload" data-toggle="modal"> Import from Excel </a>
-                    </li>
-                    <li class="divider"> </li>
-                    <li>
-                        <a href="#Download" data-toggle="modal"> Export to Excel </a>
-                    </li>                    
-                </ul>
+            <div class="row">
+                @if (Model.AddNewForm != null)
+                {
+                    <div class="btn-group">
+                        <button id="sample_editable_1_new" class="btn sbold green add-popup" data-toggle="modal-extended" href="#add_new">
+                            @R("Add New")
+                            <i class="fa fa-plus"></i>
+                        </button>
+                    </div>                 
+                    @Html.Partial("~/Views/Shared/AddNewPopup.cshtml", Model.AddNewForm)
+                }
+                <div class="btn-group">
+                    <a class="btn red btn-outline btn-circle" href="javascript:;" data-toggle="dropdown">
+                        <i class="fa fa-share"></i>
+                        <span class="hidden-xs"> Import/Export </span>
+                        <i class="fa fa-angle-down"></i>
+                    </a>
+                    <ul class="dropdown-menu pull-right">
+                        <li>
+                            <a href="#Upload" data-toggle="modal"> Import from Excel </a>
+                        </li>
+                        <li class="divider"> </li>
+                        <li>
+                            <a href="#Download" data-toggle="modal"> Export to Excel </a>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </div>
     </div>
@@ -66,7 +78,7 @@
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
                     <h4 class="modal-title">Select Export Filters</h4>
-                </div>
+                </div>                
                 <form enctype="multipart/form-data" action="Download" method="post">
                     <div class="modal-body">                        
                         <div class="row margin-top-10">
@@ -130,7 +142,7 @@
             <!-- /.modal-content -->
         </div>
         <!-- /.modal-dialog -->
-    </div>
+    </div>    
     @Html.EditorForModel()
 </div>
 
@@ -144,7 +156,7 @@
         $(setTasksCount());
 
 
-        $(TableDatatablesAjax.init("/@ViewBag.Controller/List", @Html.CreateColumnsInfo(ViewData.ModelMetadata.Properties, Model.Editable, (string)ViewBag.Controller, Model.Popup)));
+        $(TableDatatablesAjax.init("/@Model.ControllerName/List", @Html.CreateColumnsInfo(ViewData.ModelMetadata.Properties, Model.Editable, Model.ControllerName, Model.Popup)));
 
         function setDropDownEvents()
         {

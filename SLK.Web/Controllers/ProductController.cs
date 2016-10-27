@@ -29,7 +29,9 @@ namespace SLK.Web.Controllers
             _context = context;
         }
 
-        // GET: Product
+        #region Product Table Functionality
+        
+        // GET: Product List
         public ActionResult Table()        
         {
             ViewBag.ProductMenuActive = "active open";
@@ -38,37 +40,35 @@ namespace SLK.Web.Controllers
             ViewBag.Shops = new List<string>{ "supertlv", "nehama", "superyuda" };
 
             var model = new ProductsListViewModel();
+            model.AddNewForm = new AddEditProductForm();
+            model.AddNewForm.AddOrEditUrl = Url.Action("New");
+            model.ControllerName = "Product";
+            model.Editable = true;
+            model.Popup = true;
 
-            ViewBag.Title = "Products";
+            ViewBag.Title = "Products";            
 
             return View(model);
         }
 
-        public ActionResult List(jQueryDataTableParamModel param)
+        // Ajax: Products by filters
+        public ActionResult List()
         {   
-            var result = PopulateService.PopulateByFilters<ProductsListViewModel>(
+            var result = PopulateService.PopulateByFilters(
                 _context.Products.Where(p => !p.Deleted).ProjectTo<ProductsListViewModel>(),
                 Request.Params,
                 typeof(ProductsListViewModel).GetProperties().Where(p => !p.GetCustomAttributes(false).Any(a => a is HiddenInputAttribute)).ToArray());
 
             return Json(result, JsonRequestBehavior.AllowGet);
-
-           
         }
 
-        public ActionResult New()
-        {
-            var model = new NewProductForm();
-
-            return View(model);
-        }
-
+        // POST: Add Product
         [HttpPost, ValidateAntiForgeryToken, Log("Created product")]
-        public ActionResult New(NewProductForm model)
+        public ActionResult New(AddEditProductForm model)
         {
             if (!ModelState.IsValid)
             {
-                return View(model).WithWarning("Some fields are invalid!");
+                return PartialView("~/Views/Shared/AddNewPopup.cshtml", model).WithWarning("Some fields are invalid!");
             }
 
             var catID = Convert.ToInt32(model.CategoryID);
@@ -77,7 +77,7 @@ namespace SLK.Web.Controllers
 
             var product = new Product(model.Name, _context.Categories.FirstOrDefault(c => c.ID == catID),
                 _context.Manufacturers.FirstOrDefault(m => m.ID == manID), 
-                model.ShortDescription, model.FullDescription, model.SKU, model.ImagePath);
+                model.ShortDescription, model.FullDescription, model.SKU, model.Image);
 
             product.Components = model.Components;
             product.ProductMeasure = _context.Measuries.FirstOrDefault(m=> m.Name == model.ContentUnitMeasureName);
@@ -95,31 +95,26 @@ namespace SLK.Web.Controllers
                 .WithSuccess("Product created!");
         }
 
+        // GET: Edit Product Form
         [Log("Editing product {id}")]
         [HttpGet]
         public ActionResult Edit(int id)
         {
             var model = _context.Products
-                .ProjectTo<EditProductForm>()
-                //.First();
+                .ProjectTo<AddEditProductForm>()
                 .SingleOrDefault(p => p.ID == id);
+            model.AddOrEditUrl = Url.Action("Edit");
             
-            if (model == null)
-            {
-                return RedirectToAction<ProductController>(c => c.Table())
-                    .WithError("Unable to find the issue.  Maybe it was deleted?");
-            }
-
-            //return Json(model, JsonRequestBehavior.AllowGet);
-            return View(model);
+            return PartialView("~/Views/Shared/EditPopup.cshtml", model);
         }
 
+        // POST: Update Product
         [HttpPost, Log("Product changed")]
-        public ActionResult Edit(EditProductForm model)
+        public ActionResult Edit(AddEditProductForm model)
         {
             if (!ModelState.IsValid)
             {
-                return JsonValidationError();
+                return PartialView("~/Views/Shared/EditPopup.cshtml", model);
             }
 
             var product = _context.Products.SingleOrDefault(i => i.ID == model.ID);
@@ -140,7 +135,29 @@ namespace SLK.Web.Controllers
 
             return RedirectToAction<ProductController>(c => c.Table()).WithSuccess("Product updated!");
         }
-   
+
+        // GET: Delete Product
+        [Log("Deleted product {id}")]
+        public ActionResult Delete(long id)
+        {
+            var product = _context.Products.Find(id);
+
+            if (product == null)
+            {
+                return RedirectToAction<ProductController>(c => c.Table())
+                    .WithError("Unable to find the product.  Maybe it was deleted?");
+            }
+
+            product.Delete();
+
+            _context.SaveChanges();
+
+            return RedirectToAction<ProductController>(c => c.Table())
+                .WithSuccess("Product deleted!");
+        }
+        #endregion
+
+        #region Import/Export Functionality
         [HttpPost]
         public ActionResult Upload(HttpPostedFileBase attachment)
         {
@@ -198,26 +215,9 @@ namespace SLK.Web.Controllers
                         "application/xlsx",
                         fileName);
         }
+        #endregion
 
-        [Log("Deleted product {id}")]
-        public ActionResult Delete(long id)
-        {
-            var product = _context.Products.Find(id);
-
-            if (product == null)
-            {
-                return RedirectToAction<ProductController>(c => c.Table())
-                    .WithError("Unable to find the product.  Maybe it was deleted?");
-            }
-
-            product.Delete();
-
-            _context.SaveChanges();
-
-            return RedirectToAction<ProductController>(c => c.Table())
-                .WithSuccess("Product deleted!");
-        }
-        
+        #region Tasks Functionality
         [HttpGet]
         public ActionResult FilesCount()
         {
@@ -253,5 +253,6 @@ namespace SLK.Web.Controllers
             },
             JsonRequestBehavior.AllowGet);
         }
+        #endregion
     }
 }

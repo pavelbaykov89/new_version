@@ -32,8 +32,16 @@ namespace SLK.Web.Controllers
             ViewBag.ManufacturerMenuActive = "active open";
             ViewBag.ManufacturerActive = "active open";
             ViewBag.Title = "Manufacturers";
-
+            
             var model = new ManufacturerListViewModel();
+            model.AddNewForm = null;
+            //model.AddNewForm.AddOrEditUrl = Url.Action("New");
+            model.ControllerName = "Manufacturer";
+            model.Editable = true;
+            model.Popup = true;
+
+            ViewBag.Title = "Manufacturers";
+
 
             return View("~/Views/Shared/Table.cshtml", model);
         }

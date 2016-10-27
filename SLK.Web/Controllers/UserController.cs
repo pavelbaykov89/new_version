@@ -20,21 +20,24 @@ namespace SLK.Web.Controllers
             _context = context;
         }
 
-        // GET: User
+        // GET: Users List
         public ActionResult Table()
         {
             ViewBag.UserMenuActive = "active open";
             ViewBag.UserActive = "active open";
             ViewBag.Title = "Users";
 
-            var model = new UserListViewModel();
-
+            var model = new UserListViewModel();            
+            model.AddNewForm = null;
+            //model.AddNewForm.AddOrEditUrl = Url.Action("New");
+            model.ControllerName = "User";
+            model.Editable = true;
+            model.Popup = true;
 
             return View("~/Views/Shared/Table.cshtml", model);
-
-            //return View(new UserListViewModel());
         }
 
+        // Ajax: Users by filters
         public ActionResult List(jQueryDataTableParamModel param)
         {
             var result = PopulateService.PopulateByFilters<UserListViewModel>(
