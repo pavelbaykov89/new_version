@@ -34,8 +34,11 @@ namespace SLK.Web.Controllers
             model.AddNewForm = new AddEditShopTypeForm(Url.Action("AddNew"));
             model.EditUrl = Url.Action("Edit");
             model.DeleteUrl = Url.Action("Delete");
+            
+            ViewBag.Title = "Shop Types";
+            ViewBag.Controller = "ShopType";
 
-            return View(model);
+            return View("~/Views/Shared/Table.cshtml", model);
         }
 
         public ActionResult List(jQueryDataTableParamModel param)

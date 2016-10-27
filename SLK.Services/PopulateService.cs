@@ -89,8 +89,7 @@ namespace SLK.Services
                 {
                     ordering += properties[sortColumnIndex].Name;
                 }
-
-                // asc or desc
+                                
                 ordering += " " + sortDirection.ToUpper() + ", ";
 
                 ++ind;

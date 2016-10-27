@@ -6081,6 +6081,7 @@
     <Content Include="Views\Shop\Table.cshtml" />
     <Content Include="Views\Shop\New.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\File.cshtml" />
+    <Content Include="Views\Shared\Table.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="assets\apps\img\" />
