@@ -2,14 +2,14 @@
 
 namespace SLK.Web.Models
 {
-    public abstract class AddEditForm
+    public class AddEditForm
     {
         [HiddenInput]
         public string AddOrEditUrl { get; set; }
 
-        public AddEditForm(string addOrEditUrl)
-        {
-            AddOrEditUrl = addOrEditUrl;
-        }
+        //public AddEditForm(string addOrEditUrl)
+        //{
+        //    AddOrEditUrl = addOrEditUrl;
+        //}
     }
 }

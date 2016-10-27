@@ -9,6 +9,7 @@ using System.Linq.Dynamic;
 using SLK.Domain.Core;
 using SLK.Web.Infrastructure;
 using SLK.Services;
+using SLK.Web.Infrastructure.Alerts;
 
 namespace SLK.Web.Controllers
 {
@@ -21,17 +22,17 @@ namespace SLK.Web.Controllers
             _context = context;
         }
 
+        #region ShopTypes Table Functionality
+        
+        // GET: ShopTypes List
         public ActionResult Table()
         {
             ViewBag.ShopTypeMenuActive = "active open";
             ViewBag.ShopTypeActive = "active open";
-
-            var model = _context.ShopTypes
-               .ProjectTo<ShopTypeListViewModel>()
-               .FirstOrDefault();
-
-            model = model ?? new ShopTypeListViewModel();
-            model.AddNewForm = new AddEditShopTypeForm(Url.Action("AddNew"));
+            
+            var model = new ShopTypeListViewModel();
+            model.AddNewForm = new AddEditShopTypeForm();
+            model.AddNewForm.AddOrEditUrl = Url.Action("New");
             model.EditUrl = Url.Action("Edit");
             model.DeleteUrl = Url.Action("Delete");
             
@@ -41,6 +42,7 @@ namespace SLK.Web.Controllers
             return View("~/Views/Shared/Table.cshtml", model);
         }
 
+        // Ajax: ShopTypes by filters
         public ActionResult List(jQueryDataTableParamModel param)
         {
             var result = PopulateService.PopulateByFilters<ShopTypeListViewModel>(
@@ -50,13 +52,14 @@ namespace SLK.Web.Controllers
 
             return Json(result, JsonRequestBehavior.AllowGet);
         }
-
+        
+        // POST: Add ShopType
         [HttpPost, ValidateAntiForgeryToken]
-        public ActionResult AddNew(AddEditShopTypeForm model)
+        public ActionResult New(AddEditShopTypeForm model)
         {
             if (!ModelState.IsValid)
             {
-                return PartialView("~/Views/Shared/AddNewPopup.cshtml", model);
+                return PartialView("~/Views/Shared/AddNewPopup.cshtml", model).WithWarning("Some fields are invalid!");
             }
 
             var newType = new ShopType();
@@ -68,16 +71,18 @@ namespace SLK.Web.Controllers
             return Json(new { success = true });
         }
 
+        // GET: Edit ShopType Form
         public ActionResult Edit(int id)
         {
-            var shopType = _context.ShopTypes.Find(id);
-            var model = new AddEditShopTypeForm(Url.Action("Edit"), id);
-            model.Name = shopType.Name;
-            model.DisplayOrder = shopType.DisplayOrder;
+            var model = _context.ShopTypes
+                .ProjectTo<AddEditShopTypeForm>()
+                .SingleOrDefault(p => p.ID == id);
+            model.AddOrEditUrl = Url.Action("Edit");
 
             return PartialView("~/Views/Shared/EditPopup.cshtml", model);
         }
 
+        // POST: Update ShopType
         [HttpPost, ValidateAntiForgeryToken]
         public ActionResult Edit(AddEditShopTypeForm model)
         {
@@ -95,6 +100,7 @@ namespace SLK.Web.Controllers
             return Json(new { success = true });
         }
 
+        // GET: Delete ShopType
         public ActionResult Delete(int id)
         {
             var shopType = _context.ShopTypes.Find(id);
@@ -103,5 +109,6 @@ namespace SLK.Web.Controllers
 
             return Json(new { success = true }, JsonRequestBehavior.AllowGet);
         }
+        #endregion
     }
 }

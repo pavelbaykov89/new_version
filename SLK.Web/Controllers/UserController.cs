@@ -19,7 +19,7 @@ namespace SLK.Web.Controllers
             _context = context;
         }
 
-        // GET: User
+        // GET: Users List
         public ActionResult Table()
         {
             ViewBag.UserMenuActive = "active open";
@@ -34,10 +34,9 @@ namespace SLK.Web.Controllers
             ViewBag.Controller = "User";
 
             return View("~/Views/Shared/Table.cshtml", model);
-
-            //return View(new UserListViewModel());
         }
 
+        // Ajax: Users by filters
         public ActionResult List(jQueryDataTableParamModel param)
         {
             var result = PopulateService.PopulateByFilters<UserListViewModel>(

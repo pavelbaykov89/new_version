@@ -1,8 +1,10 @@
-﻿using System.Web.Mvc;
+﻿using SLK.Domain.Core;
+using SLK.Web.Infrastructure.Mapping;
+using System.Web.Mvc;
 
 namespace SLK.Web.Models.UserModels
 {
-    public class NewUserModel
+    public class AddNewUserModel : AddEditForm, IMapFrom<User>
     {
         [HiddenInput]
         public int ID { get; set; }

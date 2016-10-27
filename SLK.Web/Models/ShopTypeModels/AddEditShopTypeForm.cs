@@ -1,19 +1,12 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using SLK.Domain.Core;
+using SLK.Web.Infrastructure.Mapping;
+using System.ComponentModel.DataAnnotations;
 using System.Web.Mvc;
 
 namespace SLK.Web.Models.ShopTypeModels
 {
-    public class AddEditShopTypeForm : AddEditForm
+    public class AddEditShopTypeForm : AddEditForm, IMapFrom<ShopType>
     {
-        public AddEditShopTypeForm() : base(null) { }
-
-        public AddEditShopTypeForm(string addOrEditUrl) : base(addOrEditUrl) { }
-
-        public AddEditShopTypeForm(string addOrEditUrl, int id) : base(addOrEditUrl)
-        {
-            ID = id;
-        }
-
         [HiddenInput]
         public int? ID { get; set; }
 
