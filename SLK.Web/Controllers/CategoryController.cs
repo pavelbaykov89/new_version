@@ -34,7 +34,12 @@ namespace SLK.Web.Controllers
             ViewBag.CategoryActive = "active open";
             ViewBag.Title = "Categories";
 
-            var model = new CategoryListViewModel();
+            var model = new CategoryListViewModel();         
+            model.AddNewForm = null;
+            //model.AddNewForm.AddOrEditUrl = Url.Action("New");
+            model.ControllerName = "Category";
+            model.Editable = true;
+            model.Popup = true;
 
             return View("~/Views/Shared/Table.cshtml", model);
         }

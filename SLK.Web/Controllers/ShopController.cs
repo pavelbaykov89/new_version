@@ -32,7 +32,12 @@ namespace SLK.Web.Controllers
             ViewBag.ShopActive = "active open";
             ViewBag.Title = "Shops";
 
-            var model = new ShopListViewModel();
+            var model = new ShopListViewModel();            
+            model.AddNewForm = null;
+            //model.AddNewForm.AddOrEditUrl = Url.Action("New");
+            model.ControllerName = "Shop";
+            model.Editable = true;
+            model.Popup = true;
 
             return View("~/Views/Shared/Table.cshtml", model);
         }

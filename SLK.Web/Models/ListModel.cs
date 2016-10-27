@@ -9,7 +9,7 @@ namespace SLK.Web.Models
     public abstract class ListModel
     {
         [HiddenInput]
-        public object AddNewForm { get; set; }
+        public AddEditForm AddNewForm { get; set; }
 
         //[HiddenInput]
         //public string EditUrl { get; set; }
@@ -17,8 +17,8 @@ namespace SLK.Web.Models
         //[HiddenInput]
         //public string DeleteUrl { get; set; }
 
-        //[HiddenInput]
-        //public string ControllerName { get; set; }
+        [HiddenInput]
+        public string ControllerName { get; set; }
 
         [HiddenInput]
         public bool Editable { get; set; } = true;

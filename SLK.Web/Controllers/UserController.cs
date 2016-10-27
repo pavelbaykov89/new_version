@@ -27,8 +27,12 @@ namespace SLK.Web.Controllers
             ViewBag.UserActive = "active open";
             ViewBag.Title = "Users";
 
-            var model = new UserListViewModel();
-
+            var model = new UserListViewModel();            
+            model.AddNewForm = null;
+            //model.AddNewForm.AddOrEditUrl = Url.Action("New");
+            model.ControllerName = "User";
+            model.Editable = true;
+            model.Popup = true;
 
             return View("~/Views/Shared/Table.cshtml", model);
         }

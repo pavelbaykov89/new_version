@@ -252,6 +252,7 @@
     <Compile Include="Infrastructure\TransactionPerRequest.cs" />
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\AddEditForm.cs" />
     <Compile Include="Models\CategoryModels\CategoryListViewModel.cs" />
     <Compile Include="Models\ManufacturerModels\ManufacturerListViewModel.cs" />
     <Compile Include="Models\ProductModels\AddEditProductForm.cs" />

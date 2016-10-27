@@ -33,11 +33,11 @@ namespace SLK.Web.Controllers
             var model = new ShopTypeListViewModel();
             model.AddNewForm = new AddEditShopTypeForm();
             model.AddNewForm.AddOrEditUrl = Url.Action("New");
-            model.EditUrl = Url.Action("Edit");
-            model.DeleteUrl = Url.Action("Delete");
-            
-            ViewBag.Title = "Shop Types";
-            ViewBag.Controller = "ShopType";
+            model.ControllerName = "ShopType";
+            model.Editable = true;
+            model.Popup = true;
+
+            ViewBag.Title = "Shop Types";            
 
             return View("~/Views/Shared/Table.cshtml", model);
         }

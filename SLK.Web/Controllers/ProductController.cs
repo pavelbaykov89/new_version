@@ -42,11 +42,11 @@ namespace SLK.Web.Controllers
             var model = new ProductsListViewModel();
             model.AddNewForm = new AddEditProductForm();
             model.AddNewForm.AddOrEditUrl = Url.Action("New");
-            model.EditUrl = Url.Action("Edit");
-            model.DeleteUrl = Url.Action("Delete");
+            model.ControllerName = "Product";
+            model.Editable = true;
+            model.Popup = true;
 
-            ViewBag.Title = "Products";
-            ViewBag.Controller = "Product";
+            ViewBag.Title = "Products";            
 
             return View(model);
         }
