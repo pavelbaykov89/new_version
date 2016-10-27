@@ -32,14 +32,9 @@ namespace SLK.Web.Controllers
         {
             ViewBag.CategoryMenuActive = "active open";
             ViewBag.CategoryActive = "active open";
+            ViewBag.Title = "Categories";
 
             var model = new CategoryListViewModel();
-            model.AddNewForm = null;
-            model.EditUrl = Url.Action("Edit");
-            model.DeleteUrl = Url.Action("Delete");
-
-            ViewBag.Title = "Categories";
-            ViewBag.Controller = "Category";
 
             return View("~/Views/Shared/Table.cshtml", model);
         }

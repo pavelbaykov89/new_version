@@ -143,8 +143,8 @@
 
         $(setTasksCount());
 
-        
-        $(TableDatatablesAjax.init("/@ViewBag.Controller/List", @Html.CreateColumnsInfo(ViewData.ModelMetadata.Properties, Model.EditUrl, Model.DeleteUrl)));
+
+        $(TableDatatablesAjax.init("/@ViewBag.Controller/List", @Html.CreateColumnsInfo(ViewData.ModelMetadata.Properties, Model.Editable, (string)ViewBag.Controller, Model.Popup)));
 
         function setDropDownEvents()
         {

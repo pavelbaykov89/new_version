@@ -38,12 +38,8 @@ namespace SLK.Web.Controllers
             ViewBag.Shops = new List<string>{ "supertlv", "nehama", "superyuda" };
 
             var model = new ProductsListViewModel();
-            model.AddNewForm = null;
-            model.EditUrl = Url.Action("Edit");
-            model.DeleteUrl = Url.Action("Delete");
 
             ViewBag.Title = "Products";
-            ViewBag.Controller = "Product";
 
             return View(model);
         }

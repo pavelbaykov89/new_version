@@ -3,16 +3,16 @@ using System.Web.Mvc;
 
 namespace SLK.Web.Models.ShopTypeModels
 {
-    public class AddEditShopTypeForm : AddEditForm
+    public class AddEditShopTypeForm //: AddEditForm
     {
-        public AddEditShopTypeForm() : base(null) { }
+        //public AddEditShopTypeForm() : base(null) { }
 
-        public AddEditShopTypeForm(string addOrEditUrl) : base(addOrEditUrl) { }
+        //public AddEditShopTypeForm(string addOrEditUrl) : base(addOrEditUrl) { }
 
-        public AddEditShopTypeForm(string addOrEditUrl, int id) : base(addOrEditUrl)
-        {
-            ID = id;
-        }
+        //public AddEditShopTypeForm(string addOrEditUrl, int id) : base(addOrEditUrl)
+        //{
+        //    ID = id;
+        //}
 
         [HiddenInput]
         public int? ID { get; set; }

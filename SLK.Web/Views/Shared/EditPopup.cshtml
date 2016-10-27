@@ -1,8 +1,8 @@
-﻿@model SLK.Web.Models.AddEditForm
+﻿@model object
 
     @using (Ajax.BeginForm(null, null, null,
             new AjaxOptions { HttpMethod = "post", OnSuccess = "TableDatatablesAjax.onAddEdit(data, status, xhr, 'edit-form');" },
-            new { id = "edit-form", action = Model.AddOrEditUrl }))
+            new { id = "edit-form", action = "/" + (string)ViewBag.Controller + "/Edit" }))
     {
 
         <div class="modal-header">

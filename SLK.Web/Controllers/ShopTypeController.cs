@@ -31,12 +31,10 @@ namespace SLK.Web.Controllers
                .FirstOrDefault();
 
             model = model ?? new ShopTypeListViewModel();
-            model.AddNewForm = new AddEditShopTypeForm(Url.Action("AddNew"));
-            model.EditUrl = Url.Action("Edit");
-            model.DeleteUrl = Url.Action("Delete");
+            model.Popup = true;
+            model.AddNewForm = new AddEditShopTypeForm();
             
             ViewBag.Title = "Shop Types";
-            ViewBag.Controller = "ShopType";
 
             return View("~/Views/Shared/Table.cshtml", model);
         }
@@ -52,7 +50,7 @@ namespace SLK.Web.Controllers
         }
 
         [HttpPost, ValidateAntiForgeryToken]
-        public ActionResult AddNew(AddEditShopTypeForm model)
+        public ActionResult New(AddEditShopTypeForm model)
         {
             if (!ModelState.IsValid)
             {
@@ -71,7 +69,8 @@ namespace SLK.Web.Controllers
         public ActionResult Edit(int id)
         {
             var shopType = _context.ShopTypes.Find(id);
-            var model = new AddEditShopTypeForm(Url.Action("Edit"), id);
+            var model = new AddEditShopTypeForm();
+            model.ID = id;
             model.Name = shopType.Name;
             model.DisplayOrder = shopType.DisplayOrder;
 

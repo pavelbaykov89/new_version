@@ -30,14 +30,9 @@ namespace SLK.Web.Controllers
         {
             ViewBag.ShopMenuActive = "active open";
             ViewBag.ShopActive = "active open";
+            ViewBag.Title = "Shops";
 
             var model = new ShopListViewModel();
-            model.AddNewForm = null;
-            model.EditUrl = Url.Action("Edit");
-            model.DeleteUrl = Url.Action("Delete");
-
-            ViewBag.Title = "Shops";
-            ViewBag.Controller = "Shop";
 
             return View("~/Views/Shared/Table.cshtml", model);
         }

@@ -1,6 +1,7 @@
 ﻿using AutoMapper.QueryableExtensions;
 using SLK.DataLayer;
 using SLK.Services;
+using SLK.Web.Infrastructure;
 using SLK.Web.Models;
 using SLK.Web.Models.ManufacturerModels;
 using System;
@@ -10,7 +11,7 @@ using System.Web.Mvc;
 
 namespace SLK.Web.Controllers
 {
-    public class ManufacturerController : Controller
+    public class ManufacturerController : SLKController
     {
         private readonly ApplicationDbContext _context;
 
@@ -30,14 +31,9 @@ namespace SLK.Web.Controllers
         {
             ViewBag.ManufacturerMenuActive = "active open";
             ViewBag.ManufacturerActive = "active open";
+            ViewBag.Title = "Manufacturers";
 
             var model = new ManufacturerListViewModel();
-            model.AddNewForm = null;
-            model.EditUrl = Url.Action("Edit");
-            model.DeleteUrl = Url.Action("Delete");
-
-            ViewBag.Title = "Manufacturers";
-            ViewBag.Controller = "Manufacturer";
 
             return View("~/Views/Shared/Table.cshtml", model);
         }

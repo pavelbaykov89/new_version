@@ -12,6 +12,11 @@ namespace SLK.Web.Infrastructure
     ManufacturerSelectListPopulator]
     public abstract class SLKController : Controller
     {
+        protected override void OnActionExecuting(ActionExecutingContext filterContext)
+        {
+            ViewBag.Controller = ControllerContext.RouteData.Values["controller"].ToString();
+        }
+
         protected ActionResult RedirectToAction<TController>(
             Expression<Action<TController>> action)
             where TController : Controller

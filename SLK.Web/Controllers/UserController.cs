@@ -1,6 +1,7 @@
 ﻿using AutoMapper.QueryableExtensions;
 using SLK.DataLayer;
 using SLK.Services;
+using SLK.Web.Infrastructure;
 using SLK.Web.Models;
 using SLK.Web.Models.UserModels;
 using System;
@@ -10,7 +11,7 @@ using System.Web.Mvc;
 
 namespace SLK.Web.Controllers
 {
-    public class UserController : Controller
+    public class UserController : SLKController
     {
         private readonly ApplicationDbContext _context;
 
@@ -24,14 +25,10 @@ namespace SLK.Web.Controllers
         {
             ViewBag.UserMenuActive = "active open";
             ViewBag.UserActive = "active open";
+            ViewBag.Title = "Users";
 
             var model = new UserListViewModel();
-            model.AddNewForm = null;
-            model.EditUrl = Url.Action("Edit");
-            model.DeleteUrl = Url.Action("Delete");
 
-            ViewBag.Title = "Users";
-            ViewBag.Controller = "User";
 
             return View("~/Views/Shared/Table.cshtml", model);
 

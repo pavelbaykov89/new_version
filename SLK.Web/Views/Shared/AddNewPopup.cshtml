@@ -1,9 +1,9 @@
-﻿@model SLK.Web.Models.AddEditForm 
+﻿@model object
 
 <div id="add_new" class="modal modal-extended fade" tabindex="-1" data-width="590">
 @using (Ajax.BeginForm(null, null, null,
     new AjaxOptions { HttpMethod = "post", /*InsertionMode = InsertionMode.Replace, UpdateTargetId = "add-form",*/ OnSuccess = "TableDatatablesAjax.onAddEdit(data, status, xhr, 'add-form');" },
-    new { id = "add-form", action = Model.AddOrEditUrl }))
+    new { id = "add-form", action = "/" + (string)ViewBag.Controller + "/New" }))
 {
 
 @*@using (Html.BeginForm(null, null, FormMethod.Post, new { action = Model.AddOrEditUrl }))
