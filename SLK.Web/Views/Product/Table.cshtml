@@ -1,15 +1,12 @@
 ﻿@using SLK.Web.Helpers
 @model SLK.Web.Models.ListModel
-@{
-    ViewBag.Title = "ProductTable";
-}
 
 <div class="portlet light portlet-fit portlet-datatable bordered">
 
     <div class="portlet-title">
         <div class="caption">
             <i class="icon-settings font-dark"></i>
-            <span class="caption-subject font-dark sbold uppercase">Products</span>
+            <span class="caption-subject font-dark sbold uppercase">@ViewBag.Title</span>
         </div>
         <div class="actions">
             <div class="btn-group">
@@ -146,12 +143,13 @@
 
         $(setTasksCount());
 
-        $(TableDatatablesAjax.init("/Product/List", @Html.CreateColumnsInfo(ViewData.ModelMetadata.Properties, true, "Product")));
+        
+        $(TableDatatablesAjax.init("/@ViewBag.Controller/List", @Html.CreateColumnsInfo(ViewData.ModelMetadata.Properties, Model.EditUrl, Model.DeleteUrl)));
 
-        function setDropDownEvents()         
+        function setDropDownEvents()
         {
             $('#Download div.modal-footer input').on('click', function(){
-                $('#Download').modal('hide');            
+                $('#Download').modal('hide');
             });
 
             $('.multiselect-container input').on('change', function () {
@@ -163,7 +161,7 @@
                     $('.multiselect-selected-text')[0].innerText = numberOfChecked + ' Shops Selected';
             });
         }
-        
+
         function setTasksCount() {
             $.get('/Product/TasksCount', {}, function callback(data) {
                 $('#header_task_bar span.badge')[0].innerText = data.count;
@@ -238,6 +236,6 @@
                 if (taskdata.count) setTimeout(drawTasks, 1000);
             }
         }
-           
+
     </script>
 }
