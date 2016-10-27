@@ -2,6 +2,7 @@
 @{
     ViewBag.Title = "New Shop";
 }
+<link href="/assets/global/plugins/bootstrap-fileinput/bootstrap-fileinput.css" rel="stylesheet" type="text/css" />
 <h2>Add New Shop</h2>
 @using (Html.BeginForm())
 {
@@ -20,3 +21,7 @@
 <div>
     @Html.ActionLink("Back to List", "Table")
 </div>
+@section scripts
+{
+    <script type="text/javascript" src="/assets/global/plugins/bootstrap-fileinput/bootstrap-fileinput.js"></script>
+}

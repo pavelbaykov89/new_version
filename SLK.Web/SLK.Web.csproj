@@ -6080,6 +6080,7 @@
     <Content Include="Views\Account\Popup\RegisterPopup.cshtml" />
     <Content Include="Views\Shop\Table.cshtml" />
     <Content Include="Views\Shop\New.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\File.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="assets\apps\img\" />

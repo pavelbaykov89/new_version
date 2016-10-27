@@ -19,6 +19,7 @@ namespace SLK.Web.Models.ShopModels
         [DisplayName("Store name")]
         public string Name { get; set; }
     
+        [DataType("MultilineText")]
         public string ShortDescription { get; set; }
 
         public string FullDescription { get; set; }
@@ -26,8 +27,7 @@ namespace SLK.Web.Models.ShopModels
         [DisplayName("Store importance")]
         public int DisplayOrder { get; set; }
 
-        public bool HasImage { get; set; }
-
+        [DataType("File")]
         public string ImagePath { get; set; }
 
         public string LogoPath { get; set; }
