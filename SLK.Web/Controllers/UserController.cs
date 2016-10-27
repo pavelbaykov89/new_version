@@ -25,7 +25,12 @@ namespace SLK.Web.Controllers
             ViewBag.UserMenuActive = "active open";
             ViewBag.UserActive = "active open";
 
-            return View(new UserListViewModel());
+            ViewBag.Title = "Users";
+            ViewBag.Controller = "User";
+
+            return View("~/Views/Shared/Table.cshtml", new UserListViewModel());
+
+            //return View(new UserListViewModel());
         }
 
         public ActionResult List(jQueryDataTableParamModel param)

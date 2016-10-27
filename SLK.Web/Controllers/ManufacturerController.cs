@@ -30,8 +30,11 @@ namespace SLK.Web.Controllers
         {
             ViewBag.ManufacturerMenuActive = "active open";
             ViewBag.ManufacturerActive = "active open";
-            
-            return View(new ManufacturerListViewModel());
+
+            ViewBag.Title = "Manufacturers";
+            ViewBag.Controller = "Manufacturer";
+
+            return View("~/Views/Shared/Table.cshtml", new ManufacturerListViewModel());
         }
 
         public ActionResult List(jQueryDataTableParamModel param)

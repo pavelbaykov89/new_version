@@ -16,5 +16,11 @@ namespace SLK.Web.Models
 
         [HiddenInput]
         public string DeleteUrl { get; set; }
+
+        //[HiddenInput]
+        //public string ControllerName { get; set; }
+
+        //[HiddenInput]
+        //public bool Editable { get; set;  }
     }
 }
