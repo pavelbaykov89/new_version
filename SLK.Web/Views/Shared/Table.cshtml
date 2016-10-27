@@ -37,8 +37,7 @@
     <script src="~/Scripts/app/data-tables.js" type="text/javascript"></script>
     <script>
 
-        $(TableDatatablesAjax.init("/@ViewBag.Controller/List", @Html.CreateColumnsInfo(ViewData.ModelMetadata.Properties, true, (string)ViewBag.Controller)));
-        //$(TableDatatablesAjax.init("/ShopType/List", @Html.CreateColumnsInfo(ViewData.ModelMetadata.Properties, Model.EditUrl, Model.DeleteUrl)));
+        $(TableDatatablesAjax.init("/@ViewBag.Controller/List", @Html.CreateColumnsInfo(ViewData.ModelMetadata.Properties, Model.EditUrl, Model.DeleteUrl)));
     </script>
 }
 

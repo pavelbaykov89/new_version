@@ -4,6 +4,7 @@ using SLK.Services;
 using SLK.Web.Infrastructure;
 using SLK.Web.Models;
 using SLK.Web.Models.CategoryModels;
+using SLK.Web.Models.ShopTypeModels;
 using System;
 using System.Linq;
 using System.Linq.Dynamic;
@@ -32,10 +33,15 @@ namespace SLK.Web.Controllers
             ViewBag.CategoryMenuActive = "active open";
             ViewBag.CategoryActive = "active open";
 
+            var model = new CategoryListViewModel();
+            model.AddNewForm = null;
+            model.EditUrl = Url.Action("Edit");
+            model.DeleteUrl = Url.Action("Delete");
+
             ViewBag.Title = "Categories";
             ViewBag.Controller = "Category";
 
-            return View("~/Views/Shared/Table.cshtml", new CategoryListViewModel());
+            return View("~/Views/Shared/Table.cshtml", model);
         }
 
         public ActionResult List(jQueryDataTableParamModel param)

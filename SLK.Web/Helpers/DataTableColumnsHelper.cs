@@ -9,44 +9,44 @@ namespace SLK.Web.Helpers
 {
     public static class DataTableColumnsHelper
     {
-        public static IHtmlString CreateColumnsInfo(this HtmlHelper helper, IEnumerable<ModelMetadata> properties, bool manage_section, string controllerName)
-        {
-            StringBuilder result = new StringBuilder();
+        //public static IHtmlString CreateColumnsInfo(this HtmlHelper helper, IEnumerable<ModelMetadata> properties, bool manage_section, string controllerName)
+        //{
+        //    StringBuilder result = new StringBuilder();
 
-            result.Append("[");
+        //    result.Append("[");
 
-            foreach (var prop in properties.Where(p => p.ShowForEdit))
-            {
-                if (prop.TemplateHint != "HiddenInput")
-                {
-                    result.Append("{ data: '");
-                    result.Append(prop.PropertyName);
-                    result.Append("', bSortable: ");                  
-                    if (prop.ModelType == typeof(bool))
-                    {                        
-                        result.Append("false,render: function(data, type, row) { return '<label class=\"mt-checkbox mt-checkbox-single mt-checkbox-outline\"><input type = \"checkbox\" class=\"checkboxes\" '+(data?'checked':'')+' value='+data+'><span></span></label>';}");
-                    }
-                    else
-                    {
-                        result.Append("true");
-                    }
-                    result.Append("},");
-                }
-            }
+        //    foreach (var prop in properties.Where(p => p.ShowForEdit))
+        //    {
+        //        if (prop.TemplateHint != "HiddenInput")
+        //        {
+        //            result.Append("{ data: '");
+        //            result.Append(prop.PropertyName);
+        //            result.Append("', bSortable: ");                  
+        //            if (prop.ModelType == typeof(bool))
+        //            {                        
+        //                result.Append("false,render: function(data, type, row) { return '<label class=\"mt-checkbox mt-checkbox-single mt-checkbox-outline\"><input type = \"checkbox\" class=\"checkboxes\" '+(data?'checked':'')+' value='+data+'><span></span></label>';}");
+        //            }
+        //            else
+        //            {
+        //                result.Append("true");
+        //            }
+        //            result.Append("},");
+        //        }
+        //    }
 
-            if (manage_section)
-            {
-                result.Append( "{data: 'EditDelete', bSortable: false, render: function(data, type, row) {");
-                result.Append($"return '<a class=\"btn btn-sm btn-outline grey-salsa edit-delete\" href=/{controllerName}/Edit/' + row['ID'] + '>");
-                result.Append("<i class=\"glyphicon glyphicon-edit\"></i> Edit</a><a class=\"btn btn-sm btn-outline red-mint\" ");
-                result.Append($"href =/{controllerName}/Delete/'");
-                result.Append(" + row['ID'] + '><i class=\"fa fa-close\"></i> Delete</a>';}}");
-            }
+        //    if (manage_section)
+        //    {
+        //        result.Append( "{data: 'EditDelete', bSortable: false, render: function(data, type, row) {");
+        //        result.Append($"return '<a class=\"btn btn-sm btn-outline grey-salsa edit-delete\" href=/{controllerName}/Edit/' + row['ID'] + '>");
+        //        result.Append("<i class=\"glyphicon glyphicon-edit\"></i> Edit</a><a class=\"btn btn-sm btn-outline red-mint\" ");
+        //        result.Append($"href =/{controllerName}/Delete/'");
+        //        result.Append(" + row['ID'] + '><i class=\"fa fa-close\"></i> Delete</a>';}}");
+        //    }
 
-            result.Append("]");
+        //    result.Append("]");
 
-            return MvcHtmlString.Create(result.ToString());
-        }
+        //    return MvcHtmlString.Create(result.ToString());
+        //}
 
         public static IHtmlString CreateColumnsInfo(this HtmlHelper helper, IEnumerable<ModelMetadata> properties, string editUrl, string deleteUrl)
         {
