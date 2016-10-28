@@ -72,7 +72,7 @@ namespace SLK.Services.FileStorage
             if (name.Contains(" "))
                 name = name.Replace(" ", "-");
 
-            if (!Regex.IsMatch(name, @"^[a-z0-9\-_\.]+$", RegexOptions.IgnoreCase))
+            if (!Regex.IsMatch(name, @"^[\p{L}0-9\-_\.]+$", RegexOptions.IgnoreCase))
                 throw new ArgumentException("File name contains disallowed symbols", name);
 
             var extension = Path.GetExtension(name);

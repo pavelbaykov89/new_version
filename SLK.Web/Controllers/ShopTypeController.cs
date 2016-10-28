@@ -34,7 +34,6 @@ namespace SLK.Web.Controllers
             model.AddNewForm = new AddEditShopTypeForm();
             model.AddNewForm.AddOrEditUrl = Url.Action("New");
             model.ControllerName = "ShopType";
-            model.Editable = true;
             model.Popup = true;
 
             ViewBag.Title = "Shop Types";            

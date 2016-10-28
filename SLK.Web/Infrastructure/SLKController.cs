@@ -8,8 +8,9 @@ using System.Web.Mvc;
 
 namespace SLK.Web.Infrastructure
 {
-    [CategorySelectListPopulator,
-    ManufacturerSelectListPopulator]
+    [CategorySelectListPopulator]
+    [ManufacturerSelectListPopulator]
+    [UserListPopulator]
     public abstract class SLKController : Controller
     {
         protected override void OnActionExecuting(ActionExecutingContext filterContext)

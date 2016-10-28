@@ -1,3 +1,11 @@
 ﻿@model string
+
+@{ var watermark = ViewData.ModelMetadata.AdditionalValues.ContainsKey("watermark") ? ViewData.ModelMetadata.AdditionalValues["watermark"] : null; }
+
 @Html.TextBox("", ViewData.TemplateInfo.FormattedModelValue,
-    new { @class = "form-control"/*, placeholder = ViewData.ModelMetadata.Watermark*/ })
+    new
+    {
+        @class = "form-control",
+        placeholder = watermark
+
+    })

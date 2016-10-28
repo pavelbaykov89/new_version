@@ -14,15 +14,18 @@ using SLK.Web.Filters;
 using SLK.Web.Infrastructure.Alerts;
 using SLK.Domain.Core;
 using SLK.Services;
+using SLK.Services.FileStorage;
 
 namespace SLK.Web.Controllers
 {
     public class ShopController : SLKController
     {
         private readonly ApplicationDbContext _context;
+        private readonly IFilesRepository _filesRepo;
 
-        public ShopController(ApplicationDbContext context)
+        public ShopController(ApplicationDbContext context, IFilesRepository filesRepo)
         {
+            _filesRepo = filesRepo;
             _context = context;
         }
 
@@ -33,11 +36,8 @@ namespace SLK.Web.Controllers
             ViewBag.Title = "Shops";
 
             var model = new ShopListViewModel();            
-            model.AddNewForm = null;
-            //model.AddNewForm.AddOrEditUrl = Url.Action("New");
             model.ControllerName = "Shop";
             model.Editable = true;
-            model.Popup = true;
 
             return View("~/Views/Shared/Table.cshtml", model);
         }
@@ -55,16 +55,19 @@ namespace SLK.Web.Controllers
         public ActionResult New()
         {
             var model = new AddEditShopForm();
-
+            _filesRepo.BuildUrl("dasdadas");
             return View(model);
         }
 
         [HttpPost, ValidateAntiForgeryToken, Log("Created shop")]
         public ActionResult New(AddEditShopForm model)
-        {
+        {            
             if (!ModelState.IsValid)
             {
-                return View(model).WithWarning("Some fields are invalid!");
+                return View(model)
+                    //this extension breaks default MVC validation 
+                   //.WithWarning("Some fields are invalid!")
+                   ;
             }
 
             var shop = new Shop();
@@ -72,22 +75,31 @@ namespace SLK.Web.Controllers
             shop.Name = model.Name;
             shop.ShortDescription = model.ShortDescription;
             shop.FullDescription = model.FullDescription;
-            shop.DisplayOrder = model.DisplayOrder;
-            shop.HasImage = !string.IsNullOrEmpty(model.ImagePath);
-            shop.ImagePath = model.ImagePath;
-            shop.LogoPath = model.LogoPath;
             shop.Address = model.Address;
             shop.Phone = model.Phone;
-            shop.Phone2 = model.Phone2;
             shop.Email = model.Email;
             shop.IsKosher = model.IsKosher;
-            shop.IsShipEnabled = model.IsShipEnabled;
-            shop.Active = model.Active;
             shop.SeoUrl = model.SeoUrl;
-            shop.Owner = _context.DomainUsers.First();
+            shop.OwnerID = model.OwnerID.Value;
+
+            if(model.Image != null)
+            {
+                var imageId = _filesRepo.Create(model.Image.InputStream, model.Image.FileName, new[] { "jpg", "png", "jpeg", "bmp" });
+                shop.ImagePath = _filesRepo.BuildUrl(imageId);
+                shop.HasImage = true;
+            }
+            if (model.Logo != null)
+            {
+                var logoId = _filesRepo.Create(model.Logo.InputStream, model.Logo.FileName, new[] { "jpg", "png", "jpeg", "bmp" });
+                shop.LogoPath = _filesRepo.BuildUrl(logoId);
+            }
+            if (model.Favicon != null)
+            {
+                var favId = _filesRepo.Create(model.Favicon.InputStream, model.Favicon.FileName, new[] { "jpg", "png", "jpeg", "ico" });
+                shop.FaviconPath = _filesRepo.BuildUrl(favId);
+            }
 
             _context.Shops.Add(shop);
-
             _context.SaveChanges();
 
             return RedirectToAction<ShopController>(c => c.Table())

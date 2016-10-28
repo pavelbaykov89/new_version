@@ -54,3 +54,7 @@ td:nth-last-child(1) {
     white-space: nowrap;
     overflow: hidden;
 }
+
+.field-validation-error {
+    color: red;
+}

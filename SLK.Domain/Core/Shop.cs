@@ -10,7 +10,6 @@ namespace SLK.Domain.Core
         public Shop()
         {
             Active = true;
-            IsKosher = true;
             IsShipEnabled = true;
             CreationDate = DateTime.Now;
         }
@@ -40,6 +39,8 @@ namespace SLK.Domain.Core
         public string ImagePath { get; set; }
 
         public string LogoPath { get; set; }
+
+        public string FaviconPath { get; set; }
 
         public string Address { get; set; }
 

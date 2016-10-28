@@ -209,6 +209,8 @@
     <Compile Include="Filters\CategorySelectListPopulatorAttribute.cs" />
     <Compile Include="Filters\LogAttribute.cs" />
     <Compile Include="Filters\ManufacturerSelectListPopulatorAttribute.cs" />
+    <Compile Include="Filters\WatermarkAttribute.cs" />
+    <Compile Include="Filters\UserListPopulatorAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -242,6 +244,7 @@
     <Compile Include="Infrastructure\StructureMapRegistry\ControllerRegistry.cs" />
     <Compile Include="Infrastructure\StructureMapRegistry\ModelMetadataRegistry.cs" />
     <Compile Include="Infrastructure\StructureMapRegistry\MvcRegistry.cs" />
+    <Compile Include="Infrastructure\StructureMapRegistry\ExternalRegistries.cs" />
     <Compile Include="Infrastructure\StructureMapRegistry\StandardRegistry.cs" />
     <Compile Include="Infrastructure\StructureMapRegistry\TaskRegistry.cs" />
     <Compile Include="Infrastructure\Tasks\IRunAfterEachRequest.cs" />
@@ -6013,6 +6016,7 @@
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <None Include="Scripts\_references.js" />
+    <Content Include="Scripts\shop.new.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -6074,8 +6078,10 @@
     <Content Include="Views\Shared\EditPopup.cshtml" />
     <Content Include="Views\Account\Popup\RegisterPopup.cshtml" />
     <Content Include="Views\Shop\New.cshtml" />
-    <Content Include="Views\Shared\EditorTemplates\File.cshtml" />
     <Content Include="Views\Shared\Table.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\HttpPostedFileBase.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\UserID.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Phone.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="assets\apps\img\" />

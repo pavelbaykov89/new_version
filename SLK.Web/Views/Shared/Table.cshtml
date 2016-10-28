@@ -9,15 +9,27 @@
         </div>
         <div class="actions">
             <div class="row">
-                @if (Model.AddNewForm != null)
+                @if (Model.Editable)
                 {
-                    <div class="btn-group">
-                        <button id="sample_editable_1_new" class="btn sbold green add-popup" data-toggle="modal-extended" href="#add_new">
-                            @R("Add New")
-                            <i class="fa fa-plus"></i>
-                        </button>
-                    </div>
-                    @Html.Partial("~/Views/Shared/AddNewPopup.cshtml", Model.AddNewForm)
+                    if (Model.Popup)
+                    {
+                        <div class="btn-group">
+                            <button id="sample_editable_1_new" class="btn sbold green add-popup" data-toggle="modal-extended" href="#add_new">
+                                @R("Add New")
+                                <i class="fa fa-plus"></i>
+                            </button>
+                        </div>
+                        @Html.Partial("~/Views/Shared/AddNewPopup.cshtml", Model.AddNewForm)
+                    }
+                    else
+                    {
+                        <div class="btn-group">
+                            <a id="sample_editable_1_new" class="btn sbold green add-popup" href="@Url.Action("New")">
+                                @R("Add New")
+                                <i class="fa fa-plus"></i>
+                            </a>
+                        </div>
+                    }
                 }
             </div>
         </div>  
