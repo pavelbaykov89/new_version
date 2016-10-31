@@ -12,11 +12,14 @@
     overflow: hidden;
 }
 .add-edit-portlet {
-    max-width: 800px;
+    max-width: 1200px;
 }
 .add-edit-form input[type="number"] {
     max-width: 100px;
 }
 .add-edit-form input[type="tel"] {
-    max-width: 325px;
+    max-width: 600px;
+}
+.add-edit-form input[type="text"], .add-edit-form .select2-holder {
+    max-width: 600px;
 }

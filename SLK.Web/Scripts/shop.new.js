@@ -4,4 +4,8 @@
         placeholder: "Select shop owner",
         width: null
     });
+
+    $("#FullDescription").summernote({
+        height: 300
+    });
 });
