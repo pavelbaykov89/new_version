@@ -1,10 +1,8 @@
 ﻿using SLK.Domain.Core;
+using SLK.Web.Filters;
 using SLK.Web.Infrastructure.Mapping;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
@@ -16,43 +14,44 @@ namespace SLK.Web.Models.ShopModels
         public int? ID { get; set; }
 
         [Required]
+        [UIHint("UserID")]
+        [DisplayName("Owner")]
+        [PopulateUsersList]
+        public int? OwnerID { get; set; }
+
+        [Required]
         [DisplayName("Store name")]
         public string Name { get; set; }
-    
+
+        [DisplayName("Domain address extension")]
+        public string SeoUrl { get; set; }
+
+        //public string Theme { get; set; }
+
+        [Required]
+        [DisplayName("Orders delivery emails")]
+        [Watermark("You can enter multiple values separated by a comma")]
+        public string Email { get; set; }
+
+        [Required]
+        [Phone]
+        [UIHint("Phone")]
+        public string Phone { get; set; }
+
+        public string Address { get; set; }
+
+        [DisplayName("Kosher")]
+        public bool IsKosher { get; set; } = true;
+
+        public HttpPostedFileBase Image { get; set; }
+
+        public HttpPostedFileBase Logo { get; set; }
+
+        public HttpPostedFileBase Favicon { get; set; }
+
         [DataType("MultilineText")]
         public string ShortDescription { get; set; }
 
         public string FullDescription { get; set; }
-
-        [DisplayName("Store importance")]
-        public int DisplayOrder { get; set; }
-
-        [DataType("File")]
-        public string ImagePath { get; set; }
-
-        public string LogoPath { get; set; }
-
-        public string Address { get; set; }
-
-        [Required]
-        public string Phone { get; set; }
-
-        [DisplayName("Cellular")]
-        public string Phone2 { get; set; }
-
-        [Required]
-        [DisplayName("Orders delivery email")]
-        public string Email { get; set; }
-
-        [DisplayName("Kosher")]
-        public bool IsKosher { get; set; }
-
-        [DisplayName("ShipEnabled")]
-        public bool IsShipEnabled { get; set; }
-
-        public bool Active { get; set; }
-
-        [DisplayName("Domain address extension")]
-        public string SeoUrl { get; set; }
     }
 }

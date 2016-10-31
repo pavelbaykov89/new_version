@@ -51,6 +51,7 @@ namespace SLK.Web
 
             IoC.Container.Configure(cfg =>
             {
+                cfg.AddRegistry(new ExternalRegistries());
                 cfg.AddRegistry(new StandardRegistry());
                 cfg.AddRegistry(new ControllerRegistry());
                 cfg.AddRegistry(new ActionFilterRegistry(

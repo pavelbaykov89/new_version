@@ -4,6 +4,19 @@
 .modal .form-horizontal input[type="text"]{
     max-width: 330px;
 }
-.modal .field-validation-error {
-    color: red;
+.fileinput {
+    max-width: 325px;
+}
+.fileinput .form-control {
+    max-width: 238px; 
+    overflow: hidden;
+}
+.add-edit-portlet {
+    max-width: 800px;
+}
+.add-edit-form input[type="number"] {
+    max-width: 100px;
+}
+.add-edit-form input[type="tel"] {
+    max-width: 325px;
 }

@@ -2,25 +2,48 @@
 @{
     ViewBag.Title = "New Shop";
 }
-<h2>Add New Shop</h2>
-@using (Html.BeginForm())
+
+@section css_plugins
 {
-    @Html.AntiForgeryToken()
-    <div class="form-horizontal">
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.EditorForModel()
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
-            </div>
+    <link href="/assets/global/plugins/bootstrap-fileinput/bootstrap-fileinput.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/global/plugins/select2/css/select2.min.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/global/plugins/select2/css/select2-bootstrap.min.css" rel="stylesheet" type="text/css" />
+}
+
+<div class="portlet light bordered add-edit-portlet">
+    <div class="portlet-title">
+        <div class="caption">
+            <i class="icon-settings font-dark"></i>
+            <span class="caption-subject font-dark sbold uppercase">Add New Shop</span>
         </div>
     </div>
-}
-<div>
-    @Html.ActionLink("Back to List", "Table")
+
+    <div class="portlet-body form">
+        @*<h2>Add New Shop</h2>*@
+        @using (Html.BeginForm("New", "Shop", FormMethod.Post, new { enctype = "multipart/form-data", id = "user_new_form", @class = "add-edit-form" }))
+        {
+            @Html.AntiForgeryToken()
+            <div class="form-horizontal">
+                <div class="form-body">
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    @Html.EditorForModel()
+                </div>
+                <div class="form-actions">
+                    <div class="row">
+                        <div class="col-md-offset-3 col-md-9">
+                            <button type="submit" class="btn green">Create</button>
+                            <a href="@Url.Action("Table")" type="button" class="btn default">Cancel</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
 </div>
+
 @section scripts
 {
     <script type="text/javascript" src="/assets/global/plugins/bootstrap-fileinput/bootstrap-fileinput.js"></script>
-}
+    <script type="text/javascript" src="/assets/global/plugins/select2/js/select2.full.min.js"></script>
+    <script type="text/javascript" src="~/Scripts/shop.new.js"></script>
+ }

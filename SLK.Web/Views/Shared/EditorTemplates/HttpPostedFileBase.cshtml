@@ -1,0 +1,17 @@
+﻿@model HttpPostedFileBase
+
+<div class="fileinput fileinput-new" data-provides="fileinput">
+    <div class="input-group">
+        <div class="form-control" data-trigger="fileinput"> 
+            <i class="fa fa-file fileinput-exists" style=""></i>&nbsp;
+            <span class="fileinput-filename"></span>
+        </div>
+        <span class="input-group-addon btn btn-default btn-file">
+            <span class="fileinput-new">Select file</span>
+            <span class="fileinput-exists">Change</span>
+            <input type="file" name="@ViewData.TemplateInfo.HtmlFieldPrefix" value="@(Model != null ? Model.FileName : "")">
+        </span>
+        <a href="#" class="input-group-addon btn btn-default fileinput-exists" data-dismiss="fileinput">Remove</a>
+    </div>
+</div>
+
