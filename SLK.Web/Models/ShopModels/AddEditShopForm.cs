@@ -8,7 +8,7 @@ using System.Web.Mvc;
 
 namespace SLK.Web.Models.ShopModels
 {
-    public class AddEditShopForm : IMapFrom<Shop>
+    public class AddEditShopForm : AddEditForm, IMapFrom<Shop>
     {
         [HiddenInput]
         public int? ID { get; set; }

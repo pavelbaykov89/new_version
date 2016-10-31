@@ -91,8 +91,7 @@ namespace SLK.Web.Controllers
 
             _context.SaveChanges();
 
-            return RedirectToAction<ProductController>(c => c.Table())
-                .WithSuccess("Product created!");
+            return Json(new { success = true });
         }
 
         // GET: Edit Product Form
@@ -133,7 +132,7 @@ namespace SLK.Web.Controllers
 
             _context.SaveChanges();
 
-            return RedirectToAction<ProductController>(c => c.Table()).WithSuccess("Product updated!");
+            return Json(new { success = true });
         }
 
         // GET: Delete Product
@@ -152,8 +151,7 @@ namespace SLK.Web.Controllers
 
             _context.SaveChanges();
 
-            return RedirectToAction<ProductController>(c => c.Table())
-                .WithSuccess("Product deleted!");
+            return Json(new { success = true }, JsonRequestBehavior.AllowGet);
         }
         #endregion
 
