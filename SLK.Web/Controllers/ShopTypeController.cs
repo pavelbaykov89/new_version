@@ -36,7 +36,8 @@ namespace SLK.Web.Controllers
             model.ControllerName = "ShopType";
             model.Popup = true;
 
-            ViewBag.Title = "Shop Types";            
+            ViewBag.Title = "Shop Types";
+            ViewBag.TableMaxWidth = 1000;
 
             return View("~/Views/Shared/Table.cshtml", model);
         }

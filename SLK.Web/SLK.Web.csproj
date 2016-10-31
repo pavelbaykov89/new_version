@@ -209,6 +209,7 @@
     <Compile Include="Filters\CategorySelectListPopulatorAttribute.cs" />
     <Compile Include="Filters\LogAttribute.cs" />
     <Compile Include="Filters\ManufacturerSelectListPopulatorAttribute.cs" />
+    <Compile Include="Filters\ShopThemesPopulatorAttribute.cs" />
     <Compile Include="Filters\WatermarkAttribute.cs" />
     <Compile Include="Filters\UserListPopulatorAttribute.cs" />
     <Compile Include="Global.asax.cs">
@@ -6081,6 +6082,8 @@
     <Content Include="Views\Shared\EditorTemplates\HttpPostedFileBase.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\UserID.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\Phone.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Boolean.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\SImpleDropdown.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="assets\apps\img\" />
@@ -6088,7 +6091,6 @@
     <Folder Include="Views\Category\" />
     <Folder Include="Views\Manufacturer\" />
     <Folder Include="Views\ShopType\" />
-    <Folder Include="Views\Shop\" />
     <Folder Include="Views\User\" />
   </ItemGroup>
   <ItemGroup>

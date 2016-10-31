@@ -36,10 +36,7 @@
                 //},
                 lengthMenu: [[10, 20, 50, 100, 150, -1], [10, 20, 50, 100, 150, "All"]],
                 //"paging": false,
-                drawCallback: function (settings) {
-                    $("#datatable_ajax_info").hide();
-                    $("#datatable_ajax_paginate").hide();
-                    $("#datatable_ajax_length").hide();
+                initComplete: function (settings) {
                     var api = new $.fn.dataTable.Api(settings);
                     var pagination = $(this)
                         .closest('.dataTables_wrapper')

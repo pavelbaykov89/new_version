@@ -11,9 +11,6 @@ namespace SLK.Web.Models.ShopModels
         [DisplayName("Store name")]
         public string Name { get; protected set; }
 
-        [DisplayName("Store importance")]
-        public int DisplayOrder { get; protected set; }
-
         public string Phone { get; protected set; }
 
         [DisplayName("Cellular")]

@@ -19,8 +19,7 @@
         </div>
     </div>
 
-    <div class="portlet-body form">
-        @*<h2>Add New Shop</h2>*@
+    <div class="portlet-body form">        
         @using (Html.BeginForm("New", "Shop", FormMethod.Post, new { enctype = "multipart/form-data", id = "user_new_form", @class = "add-edit-form" }))
         {
             @Html.AntiForgeryToken()

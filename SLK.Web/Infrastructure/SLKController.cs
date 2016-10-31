@@ -11,6 +11,7 @@ namespace SLK.Web.Infrastructure
     [CategorySelectListPopulator]
     [ManufacturerSelectListPopulator]
     [UserListPopulator]
+    [ShopThemesPopulator]
     public abstract class SLKController : Controller
     {
         protected override void OnActionExecuting(ActionExecutingContext filterContext)

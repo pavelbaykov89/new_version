@@ -56,6 +56,9 @@ namespace SLK.Web.Controllers
 
         public ActionResult New()
         {
+            ViewBag.ShopMenuActive = "active open";
+            ViewBag.ShopActive = "active open";
+
             var model = new AddEditShopForm();
             _filesRepo.BuildUrl("dasdadas");
             return View(model);
@@ -63,7 +66,10 @@ namespace SLK.Web.Controllers
 
         [HttpPost, ValidateAntiForgeryToken, Log("Created shop")]
         public ActionResult New(AddEditShopForm model)
-        {            
+        {
+            ViewBag.ShopMenuActive = "active open";
+            ViewBag.ShopActive = "active open";
+
             if (!ModelState.IsValid)
             {
                 return View(model)
@@ -82,6 +88,7 @@ namespace SLK.Web.Controllers
             shop.Email = model.Email;
             shop.IsKosher = model.IsKosher;
             shop.SeoUrl = model.SeoUrl;
+            shop.Theme = model.Theme;
             shop.OwnerID = model.OwnerID.Value;
 
             if(model.Image != null)

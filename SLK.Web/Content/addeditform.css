@@ -26,6 +26,11 @@
 .add-edit-form input[type="tel"] {
     max-width: 600px;
 }
-.add-edit-form input[type="text"], .add-edit-form .select2-holder {
+.add-edit-form input[type="text"], 
+.add-edit-form .select2-holder{
     max-width: 600px;
+}
+.add-edit-form .modal .form-group {
+    margin: 0;
+    border-bottom: 1px solid #efefef;
 }

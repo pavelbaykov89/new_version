@@ -26,7 +26,9 @@ namespace SLK.Web.Models.ShopModels
         [DisplayName("Domain address extension")]
         public string SeoUrl { get; set; }
 
-        //public string Theme { get; set; }
+        [PopulateShopThemes]
+        [UIHint("SimpleDropdown")]
+        public string Theme { get; set; }
 
         [Required]
         [DisplayName("Orders delivery emails")]

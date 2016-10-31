@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Data.Entity.Spatial;
 using System.Device.Location;
 
@@ -60,6 +61,9 @@ namespace SLK.Domain.Core
         public bool Active { get; set; }
 
         public string SeoUrl { get; set; }
+
+        [Required]        
+        public string Theme { get; set; }
 
         public virtual ICollection<UserAddressSearch> UserAddressSearchs { get; set; } = new List<UserAddressSearch>();
 

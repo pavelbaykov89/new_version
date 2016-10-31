@@ -1,7 +1,7 @@
 ﻿@using SLK.Web.Helpers
 @model SLK.Web.Models.ListModel
 
-<div class="portlet light portlet-fit portlet-datatable bordered">
+<div class="portlet light portlet-fit portlet-datatable bordered" style="@(ViewBag.TableMaxWidth != null ? string.Format("max-width:{0}px", ViewBag.TableMaxWidth) : "" )">
     <div class="portlet-title">
         <div class="caption">
             <i class="icon-settings font-dark"></i>
