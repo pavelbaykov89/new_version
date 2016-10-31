@@ -2,6 +2,7 @@
 using SLK.DataLayer;
 using SLK.Services;
 using SLK.Web.Infrastructure;
+using SLK.Web.Infrastructure.Alerts;
 using SLK.Web.Models;
 using SLK.Web.Models.UserModels;
 using System;
@@ -28,8 +29,8 @@ namespace SLK.Web.Controllers
             ViewBag.Title = "Users";
 
             var model = new UserListViewModel();            
-            model.AddNewForm = null;
-            //model.AddNewForm.AddOrEditUrl = Url.Action("New");
+            model.AddNewForm = new AddNewUserModel();
+            model.AddNewForm.AddOrEditUrl = Url.Action("New");
             model.ControllerName = "User";
             model.Editable = true;
             model.Popup = true;
@@ -51,6 +52,55 @@ namespace SLK.Web.Controllers
             }
 
             return Json(result, JsonRequestBehavior.AllowGet);            
+        }
+
+        // POST: Add ShopType
+        [HttpPost, ValidateAntiForgeryToken]
+        public ActionResult New(AddNewUserModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return PartialView("~/Views/Shared/AddNewPopup.cshtml", model).WithWarning("Some fields are invalid!");
+            }
+
+            // ToDo Add adding user
+
+            return Json(new { success = true });
+        }
+
+        // GET: Edit ShopType Form
+        public ActionResult Edit(int id)
+        {
+            var model = _context.DomainUsers
+                .ProjectTo<AddNewUserModel>()
+                .SingleOrDefault(p => p.ID == id);
+            model.AddOrEditUrl = Url.Action("Edit");
+
+            return PartialView("~/Views/Shared/EditPopup.cshtml", model);
+        }
+
+        // POST: Update ShopType
+        [HttpPost, ValidateAntiForgeryToken]
+        public ActionResult Edit(AddNewUserModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return PartialView("~/Views/Shared/EditPopup.cshtml", model);
+            }
+
+            // ToDo Updating user
+
+            return Json(new { success = true });
+        }
+
+        // GET: Delete ShopType
+        public ActionResult Delete(int id)
+        {
+            var user = _context.DomainUsers.Find(id);
+            _context.DomainUsers.Remove(user);
+            _context.SaveChanges();
+
+            return Json(new { success = true }, JsonRequestBehavior.AllowGet);
         }
     }
 }

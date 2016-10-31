@@ -33,8 +33,8 @@ namespace SLK.Web.Controllers
             ViewBag.Title = "Shops";
 
             var model = new ShopListViewModel();            
-            model.AddNewForm = null;
-            //model.AddNewForm.AddOrEditUrl = Url.Action("New");
+            model.AddNewForm = new AddEditShopForm();
+            model.AddNewForm.AddOrEditUrl = Url.Action("New");
             model.ControllerName = "Shop";
             model.Editable = true;
             model.Popup = true;
@@ -51,14 +51,7 @@ namespace SLK.Web.Controllers
 
             return Json(result, JsonRequestBehavior.AllowGet);
         }
-
-        public ActionResult New()
-        {
-            var model = new AddEditShopForm();
-
-            return View(model);
-        }
-
+        
         [HttpPost, ValidateAntiForgeryToken, Log("Created shop")]
         public ActionResult New(AddEditShopForm model)
         {
@@ -90,116 +83,51 @@ namespace SLK.Web.Controllers
 
             _context.SaveChanges();
 
-            return RedirectToAction<ShopController>(c => c.Table())
-                .WithSuccess("Product created!");
+            return Json(new { success = true });
         }
 
-        //[Log("Editing product {id}")]
-        //[HttpGet]
-        //public ActionResult Edit(int id)
-        //{
-        //    var model = _context.Products
-        //        .ProjectTo<EditProductForm>()
-        //        //.First();
-        //        .SingleOrDefault(p => p.ID == id);
+        [Log("Editing product {id}")]
+        [HttpGet]
+        public ActionResult Edit(int id)
+        {
+            var model = _context.Shops
+                .ProjectTo<AddEditShopForm>()
+                .SingleOrDefault(p => p.ID == id);
+            model.AddOrEditUrl = Url.Action("Edit");
 
-        //    if (model == null)
-        //    {
-        //        return RedirectToAction<ProductController>(c => c.Table())
-        //            .WithError("Unable to find the issue.  Maybe it was deleted?");
-        //    }
+            return PartialView("~/Views/Shared/EditPopup.cshtml", model);
+        }
 
-        //    //return Json(model, JsonRequestBehavior.AllowGet);
-        //    return View(model);
-        //}
+        [HttpPost, Log("Product changed")]
+        public ActionResult Edit(AddEditShopForm model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return JsonValidationError();
+            }
 
-        //[HttpPost, Log("Product changed")]
-        //public ActionResult Edit(EditProductForm model)
-        //{
-        //    if (!ModelState.IsValid)
-        //    {
-        //        return JsonValidationError();
-        //    }
+            var shop = _context.Shops.SingleOrDefault(i => i.ID == model.ID);
 
-        //    var product = _context.Products.SingleOrDefault(i => i.ID == model.ID);
+            if (shop == null)
+            {
+                return JsonError("Cannot find the product specified.");
+            }
 
-        //    if (product == null)
-        //    {
-        //        return JsonError("Cannot find the product specified.");
-        //    }
+            // ToDo Update Shop
 
-        //    product.Components = model.Components;
-        //    product.ProductMeasure = _context.Measuries.FirstOrDefault(m => m.Name == model.ContentUnitMeasureName);
-        //    product.DisplayOrder = model.DisplayOrder;
-        //    product.IsKosher = model.IsKosher;
-        //    product.KosherType = model.KosherType;
-        //    product.MeasureUnitStep = model.MeasureUnitStep;
-        //    product.UnitsPerPackage = model.UnitsPerPackage;
+            _context.SaveChanges();
 
-        //    _context.SaveChanges();
+            return Json(new { success = true });
+        }
 
-        //    return RedirectToAction<ProductController>(c => c.Table()).WithSuccess("Product updated!");
-        //}
+        // GET: Delete Shop
+        public ActionResult Delete(int id)
+        {
+            var shop = _context.Shops.Find(id);
+            _context.Shops.Remove(shop);
+            _context.SaveChanges();
 
-        //[HttpPost]
-        //public ActionResult Upload(HttpPostedFileBase attachment)
-        //{
-        //    if (!ModelState.IsValid)
-        //    {
-        //        return JsonValidationError();
-        //    }
-
-        //    if (attachment == null)
-        //    {
-        //        return JsonError("Cannot find the product specified.");
-        //    }
-
-        //    var fullname = Server.MapPath("~/App_Data/Temp/") + attachment.FileName;
-
-        //    attachment.SaveAs(fullname);
-
-        //    var task = new TaskDescription("Products importing from", attachment.FileName);
-
-        //    TaskManager.AddTask(task);
-
-        //    Task.Factory.StartNew(() =>
-        //    {
-        //        ProductsImportService.ImportProductsFromExcelFile(fullname, new ApplicationDbContext(), task);
-        //    });
-
-        //    return RedirectToAction<ProductController>(c => c.Table()).WithSuccess("Products file uploaded!");
-        //}
-
-        //public ActionResult Download()
-        //{
-        //    var fileName = "Products_" + DateTime.Now.ToString("dd-MM-yyyy_HH-mm") + ".xlsx";
-
-        //    var context = new ApplicationDbContext();
-
-        //    return File(ProductsExportService.ExportProductsToExcelFile(
-        //                typeof(ProductExportModel).GetProperties(),
-        //                context.Products.ProjectTo<ProductExportModel>()),
-        //                "application/xlsx",
-        //                fileName);
-        //}
-
-        //[Log("Deleted product {id}")]
-        //public ActionResult Delete(long id)
-        //{
-        //    var product = _context.Products.Find(id);
-
-        //    if (product == null)
-        //    {
-        //        return RedirectToAction<ProductController>(c => c.Table())
-        //            .WithError("Unable to find the product.  Maybe it was deleted?");
-        //    }
-
-        //    product.Delete();
-
-        //    _context.SaveChanges();
-
-        //    return RedirectToAction<ProductController>(c => c.Table())
-        //        .WithSuccess("Product deleted!");
-        //}
+            return Json(new { success = true }, JsonRequestBehavior.AllowGet);
+        }
     }
 }

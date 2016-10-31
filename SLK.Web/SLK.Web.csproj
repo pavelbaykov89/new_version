@@ -6049,8 +6049,6 @@
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Shared\_Alerts.cshtml" />
-    <Content Include="Views\Product\New.cshtml" />
-    <Content Include="Views\Product\Edit.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\String.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\MultilineText.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\CategoryID.cshtml" />
@@ -6073,7 +6071,6 @@
     <Content Include="Views\Shared\AddNewPopup.cshtml" />
     <Content Include="Views\Shared\EditPopup.cshtml" />
     <Content Include="Views\Account\Popup\RegisterPopup.cshtml" />
-    <Content Include="Views\Shop\New.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\File.cshtml" />
     <Content Include="Views\Shared\Table.cshtml" />
   </ItemGroup>
@@ -6083,6 +6080,7 @@
     <Folder Include="Views\Category\" />
     <Folder Include="Views\Manufacturer\" />
     <Folder Include="Views\ShopType\" />
+    <Folder Include="Views\Shop\" />
     <Folder Include="Views\User\" />
   </ItemGroup>
   <ItemGroup>
