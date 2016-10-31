@@ -11,8 +11,8 @@
     else
     {
         <div class="form-group">
-            @Html.BootstrapLabelFor(prop.PropertyName)            
-                <div class="col-md-9">
+            @Html.BootstrapLabelFor(prop.PropertyName, ViewData["Popup"] != null ? "4" : "3")            
+                <div class="col-md-@(ViewData["Popup"] != null ? "8" : "9")">
                     @Html.Editor(prop.PropertyName)
                     @Html.ValidationMessage(prop.PropertyName)
                 </div>

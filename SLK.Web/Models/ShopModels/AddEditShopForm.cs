@@ -52,6 +52,7 @@ namespace SLK.Web.Models.ShopModels
         [DataType("MultilineText")]
         public string ShortDescription { get; set; }
 
+        [AllowHtml]
         public string FullDescription { get; set; }
     }
 }

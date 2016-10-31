@@ -1,6 +1,6 @@
 ﻿@model object
 
-<div id="add_new" class="modal modal-extended fade" tabindex="-1" data-width="590">
+<div id="add_new" class="modal modal-extended fade" tabindex="-1">
 @using (Ajax.BeginForm(null, null, null,
     new AjaxOptions { HttpMethod = "post", /*InsertionMode = InsertionMode.Replace, UpdateTargetId = "add-form",*/ OnSuccess = "TableDatatablesAjax.onAddEdit(data, status, xhr, 'add-form');" },
     new { id = "add-form", action = "/" + (string)ViewBag.Controller + "/New" }))
@@ -19,7 +19,7 @@
                 @Html.AntiForgeryToken()
 
                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                @Html.EditorForModel()
+                @Html.EditorForModel(new { Popup = true })
                 </div>
             </div>
         </div>

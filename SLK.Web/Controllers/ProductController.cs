@@ -46,7 +46,8 @@ namespace SLK.Web.Controllers
             model.Editable = true;
             model.Popup = true;
 
-            ViewBag.Title = "Products";            
+            ViewBag.Title = "Products";
+            //ViewBag.PopupWidth             
 
             return View(model);
         }

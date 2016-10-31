@@ -12,10 +12,11 @@ namespace SLK.Web.Helpers
     {
         public static IHtmlString BootstrapLabelFor<TModel, TProp>(
             this HtmlHelper<TModel> helper,
-            Expression<Func<TModel,TProp>> property)
+            Expression<Func<TModel,TProp>> property,
+            string colMd)
         {
-            return LabelHelper(helper, ModelMetadata.FromLambdaExpression(property, helper.ViewData), ExpressionHelper.GetExpressionText(property), 
-                "col-md-3 control-label");
+            return LabelHelper(helper, ModelMetadata.FromLambdaExpression(property, helper.ViewData), ExpressionHelper.GetExpressionText(property),
+                "col-md-" + colMd + "  control-label");
             //return helper.LabelFor(property, new
             //{
             //    @class = "col-md-3 control-label"
@@ -24,10 +25,11 @@ namespace SLK.Web.Helpers
 
         public static IHtmlString BootstrapLabelFor(
             this HtmlHelper helper,
-            string propertyName)
+            string propertyName,
+            string colMd)
         {
             return LabelHelper(helper, ModelMetadata.FromStringExpression(propertyName, helper.ViewData), ExpressionHelper.GetExpressionText(propertyName),
-                "col-md-3 control-label");
+                "col-md-" + colMd + " control-label");
             //return helper.Label(propertyName, new
             //{
             //    @class = "col-md-3 control-label"
@@ -43,7 +45,7 @@ namespace SLK.Web.Helpers
             label.Attributes["class"] = cssClass;
             label.InnerHtml = string.Format(
                 "{0}{1}",
-                propertyName,
+                metadata.DisplayName,
                 isNullable && metadata.IsRequired ? "*" : "&nbsp;"
             );
             return MvcHtmlString.Create(label.ToString());

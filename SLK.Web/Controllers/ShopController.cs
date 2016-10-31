@@ -104,7 +104,7 @@ namespace SLK.Web.Controllers
             _context.Shops.Add(shop);
             _context.SaveChanges();
 
-            return Json(new { success = true });
+            return RedirectToAction<ShopController>(c => c.Table());
         }
 
         [Log("Editing product {id}")]
