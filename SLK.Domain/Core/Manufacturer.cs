@@ -13,13 +13,13 @@ namespace SLK.Domain.Core
 
         public int ID { get; protected set; }
 
-        public string Name { get; protected set; }
+        public string Name { get; set; }
 
-        public string ImagePath { get; protected set; }
+        public string ImagePath { get; set; }
 
-        public int DisplayOrder { get; protected set; }
+        public int DisplayOrder { get; set; }
 
-        public bool Published { get; protected set; }
+        public bool Published { get; set; }
 
         public virtual ICollection<Product> Products { get; set; } = new List<Product>();
     }
