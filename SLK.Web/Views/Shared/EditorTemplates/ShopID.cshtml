@@ -1,0 +1,12 @@
+﻿@model int
+
+<div class="input-group select2-bootstrap-prepend">
+    <span class="input-group-btn">
+        <button class="btn btn-default" type="button" data-select2-open="select-user">
+            <span class="glyphicon glyphicon-search"></span>
+        </button>
+    </span>
+    @Html.DropDownListFor(m => m, (SelectListItem[])ViewBag.Shops, string.Empty, new { @class = "form-control select2", id = "select-user" })
+</div>
+
+

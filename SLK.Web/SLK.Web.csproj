@@ -203,6 +203,7 @@
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ManufacturerController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
+    <Compile Include="Controllers\ProductInShopController.cs" />
     <Compile Include="Controllers\ShopController.cs" />
     <Compile Include="Controllers\ShopTypeController.cs" />
     <Compile Include="Controllers\UserController.cs" />
@@ -210,6 +211,8 @@
     <Compile Include="Filters\LogAttribute.cs" />
     <Compile Include="Filters\ManufacturerSelectListPopulatorAttribute.cs" />
     <Compile Include="Filters\ShopThemesPopulatorAttribute.cs" />
+    <Compile Include="Filters\ProductListPopulatorAttribute.cs" />
+    <Compile Include="Filters\ShopListPopulatorAttribute.cs" />
     <Compile Include="Filters\WatermarkAttribute.cs" />
     <Compile Include="Filters\UserListPopulatorAttribute.cs" />
     <Compile Include="Global.asax.cs">
@@ -259,8 +262,12 @@
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AddEditForm.cs" />
+    <Compile Include="Models\CategoryModels\AddEditCategoryForm.cs" />
     <Compile Include="Models\CategoryModels\CategoryListViewModel.cs" />
+    <Compile Include="Models\ManufacturerModels\AddEditManufacturerForm.cs" />
     <Compile Include="Models\ManufacturerModels\ManufacturerListViewModel.cs" />
+    <Compile Include="Models\ProductInShopModels\AddEditProductInShopForm.cs" />
+    <Compile Include="Models\ProductInShopModels\ProductInShopListViewModel.cs" />
     <Compile Include="Models\ProductModels\AddEditProductForm.cs" />
     <Compile Include="Models\jQueryDataTableParamModel.cs" />
     <Compile Include="Models\ListModel.cs" />
@@ -6085,12 +6092,15 @@
     <Content Include="Views\Shared\EditorTemplates\Phone.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\Boolean.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\SimpleDropdown.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\ShopID.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\ProductID.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="assets\apps\img\" />
     <Folder Include="assets\global\plugins\angularjs\plugins\angular-file-upload\uploads\" />
     <Folder Include="Views\Category\" />
     <Folder Include="Views\Manufacturer\" />
+    <Folder Include="Views\ProductInShop\" />
     <Folder Include="Views\ShopType\" />
     <Folder Include="Views\User\" />
   </ItemGroup>

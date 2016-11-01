@@ -21,6 +21,8 @@ namespace SLK.Web.Controllers
             _context = context;
         }
 
+        #region Users Table Functionality
+
         // GET: Users List
         public ActionResult Table()
         {
@@ -102,5 +104,7 @@ namespace SLK.Web.Controllers
 
             return Json(new { success = true }, JsonRequestBehavior.AllowGet);
         }
+        #endregion
+
     }
 }

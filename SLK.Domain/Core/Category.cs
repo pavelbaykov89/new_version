@@ -15,17 +15,15 @@ namespace SLK.Domain.Core
 
         public string Name { get; protected set; }
 
-        public int? ParentCategoryID { get; protected set; }
+        public int? ParentCategoryID { get; set; }
 
-        public virtual Category ParentCategory { get; protected set; }
+        public virtual Category ParentCategory { get; set; }
+        
+        public string ImagePath { get; set; }
 
-        public bool HasImage { get; protected set; }
+        public int DisplayOrder { get; set; }
 
-        public string ImagePath { get; protected set; }
-
-        public int DisplayOrder { get; protected set; }
-
-        public bool Published { get; protected set; }
+        public bool Published { get; set; }
 
         public virtual ICollection<Product> Products { get; set; } = new List<Product>();
 

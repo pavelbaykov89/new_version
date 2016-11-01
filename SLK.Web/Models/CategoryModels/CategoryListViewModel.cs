@@ -12,9 +12,7 @@ namespace SLK.Web.Models.CategoryModels
         public string Name { get; protected set; }
 
         public string ParentCategoryName { get; protected set; }
-                
-        public bool HasImage { get; protected set; }
-
+       
         public string ImagePath { get; protected set; }
 
         public int DisplayOrder { get; protected set; }
