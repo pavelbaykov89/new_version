@@ -1,40 +1,36 @@
 ﻿using SLK.DataLayer;
+using SLK.Web.Infrastructure.ModelMetadata.Filters;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace SLK.Web.Filters
 {
-    public class CategorySelectListPopulatorAttribute : ActionFilterAttribute
+    /// <summary>
+    /// Marker attribute name should starts with "Populate"(for Editor templates engine)
+    /// </summary>
+    [AttributeUsage(AttributeTargets.Property, AllowMultiple = false, Inherited = true)]
+    public class PopulateCategoriesAttribute : Attribute
     {
-        public ApplicationDbContext Context { get; set; }
 
-        private SelectListItem[] GetAvailableCategories()
-        {
-            return Context.Categories.Select(c => 
-                new SelectListItem
-                {
-                    Text = c.Name,
-                    Value = c.ID.ToString()
-                }).ToArray();
-        }
-
-        public override void OnActionExecuted(ActionExecutedContext filterContext)
-        {
-            var viewResult = filterContext.Result as ViewResult;
-
-            if (viewResult != null && viewResult.Model is IHaveCategorySelectList)
-            {
-                ((IHaveCategorySelectList)viewResult.Model).AvailableCategories
-                    = GetAvailableCategories();
-            }
-        }
     }
 
-    public interface IHaveCategorySelectList
+
+    public class CategorySelectListPopulatorAttribute : DropdownPopulatorAttribute
     {
-        SelectListItem[] AvailableCategories { get; set; }
+        public CategorySelectListPopulatorAttribute() : base(typeof(PopulateCategoriesAttribute))
+        { }
+
+        public ApplicationDbContext Context { get; set; }
+
+        protected override SelectListItem[] Populate()
+        {
+            return Context.Categories.Select(c =>
+                 new SelectListItem
+                 {
+                     Text = c.Name,
+                     Value = c.ID.ToString()
+                 }).ToArray();
+        }       
     }
 }

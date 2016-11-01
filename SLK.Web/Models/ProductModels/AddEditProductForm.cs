@@ -1,4 +1,5 @@
 ﻿using SLK.Domain.Core;
+using SLK.Web.Filters;
 using SLK.Web.Infrastructure.Mapping;
 using SLK.Web.Models;
 using System.ComponentModel.DataAnnotations;
@@ -24,9 +25,13 @@ namespace SLK.Web.ProductModels
         public int DisplayOrder { get; set; }
 
         [Required, Display(Name = "Category")]
+        [PopulateCategories]
+        [UIHint("SimpleDropdown")]
         public string CategoryID { get; set; }
 
         [Required, Display(Name = "Manufacturer")]
+        [PopulateManufacturers]
+        [UIHint("SimpleDropdown")]
         public string ManufacturerID { get; set; }
 
         public string Brand { get; set; }

@@ -222,6 +222,7 @@
     <Compile Include="Helpers\DataTableColumnsHelper.cs" />
     <Compile Include="Helpers\JsonHtmlHelpers.cs" />
     <Compile Include="Helpers\PagingHelpers.cs" />
+    <Compile Include="Helpers\ReflectionHelper.cs" />
     <Compile Include="Infrastructure\Alerts\Alert.cs" />
     <Compile Include="Infrastructure\Alerts\AlertDecoratorResult.cs" />
     <Compile Include="Infrastructure\Alerts\AlertExtentions.cs" />
@@ -237,6 +238,7 @@
     <Compile Include="Infrastructure\ModelMetadata\Filters\CategoryDropDownByNameFilter.cs" />
     <Compile Include="Infrastructure\ModelMetadata\Filters\LabelConventionFilter.cs" />
     <Compile Include="Infrastructure\ModelMetadata\Filters\ManufacturerDropDownByNameFilter.cs" />
+    <Compile Include="Infrastructure\ModelMetadata\Filters\DropdownPopulatorAttribute.cs" />
     <Compile Include="Infrastructure\ModelMetadata\Filters\ReadOnlyTemplateSelectorFilter.cs" />
     <Compile Include="Infrastructure\ModelMetadata\Filters\TextAreaByNameFilter.cs" />
     <Compile Include="Infrastructure\ModelMetadata\Filters\WatermarkConventionFilter.cs" />
@@ -6006,6 +6008,7 @@
     <Content Include="assets\global\plugins\wysihtml\minified\wysihtml.min.map" />
     <Content Include="assets\global\plugins\wysihtml\minified\wysihtml.table_editing.min.map" />
     <Content Include="assets\global\plugins\wysihtml\minified\wysihtml.toolbar.min.map" />
+    <Content Include="App_Code\Functions.cshtml" />
     <None Include="Properties\PublishProfiles\SlkDevelop - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\datatables.js" />
@@ -6063,8 +6066,6 @@
     <Content Include="Views\Shared\_Alerts.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\String.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\MultilineText.cshtml" />
-    <Content Include="Views\Shared\EditorTemplates\CategoryID.cshtml" />
-    <Content Include="Views\Shared\EditorTemplates\ManufacturerID.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\Decimal.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\Integer.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\ReadOnly.cshtml" />
@@ -6084,13 +6085,12 @@
     <Content Include="Views\Shared\EditPopup.cshtml" />
     <Content Include="Views\Account\Popup\RegisterPopup.cshtml" />
     <Content Include="Views\Shop\New.cshtml" />
-    <Content Include="Views\Shared\EditorTemplates\File.cshtml" />
     <Content Include="Views\Shared\Table.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\HttpPostedFileBase.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\UserID.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\Phone.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\Boolean.cshtml" />
-    <Content Include="Views\Shared\EditorTemplates\SImpleDropdown.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\SimpleDropdown.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\ShopID.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\ProductID.cshtml" />
     <Content Include="Views\ProductInShop\Table.cshtml" />

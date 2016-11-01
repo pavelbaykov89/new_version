@@ -6,6 +6,6 @@
             <span class="glyphicon glyphicon-search"></span>
         </button>
     </span>
-    @Html.DropDownListFor(m => m, (SelectListItem[])ViewBag.Users, string.Empty,  new { @class = "form-control", id = "select-user" })
+    @Html.DropDownListFor(m => m, (SelectListItem[])ViewData[Functions.GetPopulateAttributeName(ViewData)], string.Empty,  new { @class = "form-control", id = "select-user" })
 </div>
 

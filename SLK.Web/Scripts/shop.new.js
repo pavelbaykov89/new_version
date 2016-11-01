@@ -9,7 +9,7 @@
         minimumResultsForSearch: -1
     });
 
-    $("#FullDescription").summernote({
+    $("#MainTab_FullDescription").summernote({
         minHeight: 300
     });
 });

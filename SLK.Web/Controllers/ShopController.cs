@@ -36,10 +36,10 @@ namespace SLK.Web.Controllers
             ViewBag.Title = "Shops";
 
             var model = new ShopListViewModel();            
-            model.AddNewForm = new AddEditShopForm();
-            model.AddNewForm.AddOrEditUrl = Url.Action("New");
+            //model.AddNewForm = new AddEditShopForm();
+            //model.AddNewForm.AddOrEditUrl = Url.Action("New");
             model.ControllerName = "Shop";
-            model.Editable = true;
+            //model.Editable = true;
 
             return View("~/Views/Shared/Table.cshtml", model);
         }
@@ -80,31 +80,31 @@ namespace SLK.Web.Controllers
 
             var shop = new Shop();
             //TODO - это нужно сделать automapper'ом
-            shop.Name = model.Name;
-            shop.ShortDescription = model.ShortDescription;
-            shop.FullDescription = model.FullDescription;
-            shop.Address = model.Address;
-            shop.Phone = model.Phone;
-            shop.Email = model.Email;
-            shop.IsKosher = model.IsKosher;
-            shop.SeoUrl = model.SeoUrl;
-            shop.Theme = model.Theme;
-            shop.OwnerID = model.OwnerID.Value;
+            shop.Name = model.MainTab.Name;
+            shop.ShortDescription = model.MainTab.ShortDescription;
+            shop.FullDescription = model.MainTab.FullDescription;
+            shop.Address = model.MainTab.Address;
+            shop.Phone = model.MainTab.Phone;
+            shop.Email = model.MainTab.Email;
+            shop.IsKosher = model.MainTab.IsKosher;
+            shop.SeoUrl = model.MainTab.SeoUrl;
+            shop.Theme = model.MainTab.Theme;
+            shop.OwnerID = model.MainTab.OwnerID.Value;
 
-            if(model.Image != null)
+            if (model.MainTab.Image != null)
             {
-                var imageId = _filesRepo.Create(model.Image.InputStream, model.Image.FileName, new[] { "jpg", "png", "jpeg", "bmp" });
+                var imageId = _filesRepo.Create(model.MainTab.Image.InputStream, model.MainTab.Image.FileName, new[] { "jpg", "png", "jpeg", "bmp" });
                 shop.ImagePath = _filesRepo.BuildUrl(imageId);
                 shop.HasImage = true;
             }
-            if (model.Logo != null)
+            if (model.MainTab.Logo != null)
             {
-                var logoId = _filesRepo.Create(model.Logo.InputStream, model.Logo.FileName, new[] { "jpg", "png", "jpeg", "bmp" });
+                var logoId = _filesRepo.Create(model.MainTab.Logo.InputStream, model.MainTab.Logo.FileName, new[] { "jpg", "png", "jpeg", "bmp" });
                 shop.LogoPath = _filesRepo.BuildUrl(logoId);
             }
-            if (model.Favicon != null)
+            if (model.MainTab.Favicon != null)
             {
-                var favId = _filesRepo.Create(model.Favicon.InputStream, model.Favicon.FileName, new[] { "jpg", "png", "jpeg", "ico" });
+                var favId = _filesRepo.Create(model.MainTab.Favicon.InputStream, model.MainTab.Favicon.FileName, new[] { "jpg", "png", "jpeg", "ico" });
                 shop.FaviconPath = _filesRepo.BuildUrl(favId);
             }
 
@@ -121,7 +121,7 @@ namespace SLK.Web.Controllers
             var model = _context.Shops
                 .ProjectTo<AddEditShopForm>()
                 .SingleOrDefault(p => p.ID == id);
-            model.AddOrEditUrl = Url.Action("Edit");
+            //model.AddOrEditUrl = Url.Action("Edit");
 
             return PartialView("~/Views/Shared/EditPopup.cshtml", model);
         }

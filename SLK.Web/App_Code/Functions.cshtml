@@ -1,0 +1,10 @@
+﻿@using System.Web.Mvc;
+@functions
+{
+    public static string GetPopulateAttributeName(ViewDataDictionary viewData)
+    {
+        var containerType = viewData.ModelMetadata.ContainerType;
+        var propertyName = viewData.ModelMetadata.PropertyName;
+        return containerType.GetProperty(propertyName).GetCustomAttributes(false).Select(a => a.GetType().Name).First(n => n.StartsWith("Populate"));
+    }
+}
