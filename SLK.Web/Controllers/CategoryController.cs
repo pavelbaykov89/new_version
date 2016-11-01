@@ -36,7 +36,7 @@ namespace SLK.Web.Controllers
             model.AddNewForm = new AddEditCategoryForm();
             model.AddNewForm.AddOrEditUrl = Url.Action("New");
             model.ControllerName = "Category";
-            model.Editable = true;
+            model.Editable = false;
             model.Popup = true;
 
             return View("~/Views/Shared/Table.cshtml", model);

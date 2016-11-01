@@ -1,7 +1,13 @@
-﻿.modal .form-horizontal input[type="number"]{
+﻿.modal .form-horizontal {
+    padding-left: 30px;
+    padding-right: 30px;
+}
+ input[type="number"]{
     max-width: 55px;
 }
-.modal .form-horizontal input[type="text"]{
+.modal .form-horizontal input[type="text"],
+.modal .form-horizontal textarea,
+.modal .form-horizontal select{
     max-width: 330px;
 }
 .fileinput {
@@ -12,11 +18,19 @@
     overflow: hidden;
 }
 .add-edit-portlet {
-    max-width: 800px;
+    max-width: 1200px;
 }
 .add-edit-form input[type="number"] {
     max-width: 100px;
 }
 .add-edit-form input[type="tel"] {
-    max-width: 325px;
+    max-width: 600px;
+}
+.add-edit-form input[type="text"], 
+.add-edit-form .select2-holder{
+    max-width: 600px;
+}
+.add-edit-form .modal .form-group {
+    margin: 0;
+    border-bottom: 1px solid #efefef;
 }

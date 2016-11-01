@@ -11,6 +11,7 @@ namespace SLK.Web.Infrastructure
     [CategorySelectListPopulator]
     [ManufacturerSelectListPopulator]
     [UserListPopulator]
+    [ShopThemesPopulator]
     [ProductListPopulator]
     [ShopListPopulator]
     public abstract class SLKController : Controller

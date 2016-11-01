@@ -1,11 +1,11 @@
 ﻿@model int?
 
-<div class="input-group select2-bootstrap-prepend">
+<div class="input-group select2-bootstrap-prepend select2-holder">
     <span class="input-group-btn">
         <button class="btn btn-default" type="button" data-select2-open="select-user">
             <span class="glyphicon glyphicon-search"></span>
         </button>
     </span>
-    @Html.DropDownListFor(m => m, (SelectListItem[])ViewBag.Users, string.Empty,  new { @class = "form-control select2", id = "select-user" })
+    @Html.DropDownListFor(m => m, (SelectListItem[])ViewBag.Users, string.Empty,  new { @class = "form-control", id = "select-user" })
 </div>
 

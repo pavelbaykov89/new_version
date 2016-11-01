@@ -210,6 +210,7 @@
     <Compile Include="Filters\CategorySelectListPopulatorAttribute.cs" />
     <Compile Include="Filters\LogAttribute.cs" />
     <Compile Include="Filters\ManufacturerSelectListPopulatorAttribute.cs" />
+    <Compile Include="Filters\ShopThemesPopulatorAttribute.cs" />
     <Compile Include="Filters\ProductListPopulatorAttribute.cs" />
     <Compile Include="Filters\ShopListPopulatorAttribute.cs" />
     <Compile Include="Filters\WatermarkAttribute.cs" />
@@ -6088,6 +6089,8 @@
     <Content Include="Views\Shared\EditorTemplates\HttpPostedFileBase.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\UserID.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\Phone.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Boolean.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\SImpleDropdown.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\ShopID.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\ProductID.cshtml" />
   </ItemGroup>

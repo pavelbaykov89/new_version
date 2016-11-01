@@ -58,3 +58,9 @@ td:nth-last-child(1) {
 .field-validation-error {
     color: red;
 }
+
+#datatable_ajax_info,
+#datatable_ajax_paginate,
+#datatable_ajax_length {
+    display: none !important;
+}

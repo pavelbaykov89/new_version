@@ -8,6 +8,7 @@
     <link href="/assets/global/plugins/bootstrap-fileinput/bootstrap-fileinput.css" rel="stylesheet" type="text/css" />
     <link href="/assets/global/plugins/select2/css/select2.min.css" rel="stylesheet" type="text/css" />
     <link href="/assets/global/plugins/select2/css/select2-bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/global/plugins/bootstrap-summernote/summernote.css" rel="stylesheet" type="text/css" />
 }
 
 <div class="portlet light bordered add-edit-portlet">
@@ -18,8 +19,7 @@
         </div>
     </div>
 
-    <div class="portlet-body form">
-        @*<h2>Add New Shop</h2>*@
+    <div class="portlet-body form">        
         @using (Html.BeginForm("New", "Shop", FormMethod.Post, new { enctype = "multipart/form-data", id = "user_new_form", @class = "add-edit-form" }))
         {
             @Html.AntiForgeryToken()
@@ -45,5 +45,6 @@
 {
     <script type="text/javascript" src="/assets/global/plugins/bootstrap-fileinput/bootstrap-fileinput.js"></script>
     <script type="text/javascript" src="/assets/global/plugins/select2/js/select2.full.min.js"></script>
+    <script type="text/javascript" src="/assets/global/plugins/bootstrap-summernote/summernote.min.js"></script>
     <script type="text/javascript" src="~/Scripts/shop.new.js"></script>
  }
