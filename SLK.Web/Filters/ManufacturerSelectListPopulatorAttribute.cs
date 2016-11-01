@@ -1,17 +1,28 @@
 ﻿using SLK.DataLayer;
+using SLK.Web.Infrastructure.ModelMetadata.Filters;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace SLK.Web.Filters
 {
-    public class ManufacturerSelectListPopulatorAttribute : ActionFilterAttribute
+    /// <summary>
+    /// Marker attribute name should starts with "Populate"(for Editor templates engine)
+    /// </summary>
+    [AttributeUsage(AttributeTargets.Property, AllowMultiple = false, Inherited = true)]
+    public class PopulateManufacturersAttribute : Attribute
     {
+
+    }
+
+    public class ManufacturerSelectListPopulatorAttribute : DropdownPopulatorAttribute
+    {
+        public ManufacturerSelectListPopulatorAttribute() : base(typeof(PopulateManufacturersAttribute))
+        { }
+
         public ApplicationDbContext Context { get; set; }
 
-        private SelectListItem[] GetAvailableManufacturers()
+        protected override SelectListItem[] Populate()
         {
             return Context.Manufacturers.Select(m =>
                 new SelectListItem
@@ -20,21 +31,5 @@ namespace SLK.Web.Filters
                     Value = m.ID.ToString()
                 }).ToArray();
         }
-
-        public override void OnActionExecuted(ActionExecutedContext filterContext)
-        {
-            var viewResult = filterContext.Result as ViewResult;
-
-            if (viewResult != null && viewResult.Model is IHaveManufacturerSelectList)
-            {
-                ((IHaveManufacturerSelectList)viewResult.Model).AvailableManufacturers
-                    = GetAvailableManufacturers();
-            }
-        }
-    }
-
-    public interface IHaveManufacturerSelectList
-    {
-        SelectListItem[] AvailableManufacturers { get; set; }
     }
 }

@@ -8,11 +8,16 @@ using System.Web.Mvc;
 
 namespace SLK.Web.Models.ShopModels
 {
-    public class AddEditShopForm : AddEditForm, IMapFrom<Shop>
+    public class AddEditShopForm //: AddEditForm, IMapFrom<Shop>
     {
         [HiddenInput]
         public int? ID { get; set; }
 
+        public ShopMainTabForm MainTab { get; set; } = new ShopMainTabForm();
+    }
+
+    public class ShopMainTabForm : IMapFrom<Shop>
+    {
         [Required]
         [UIHint("UserID")]
         [DisplayName("Owner")]

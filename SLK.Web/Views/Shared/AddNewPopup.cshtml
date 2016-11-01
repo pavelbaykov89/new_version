@@ -2,12 +2,9 @@
 
 <div id="add_new" class="modal modal-extended fade" tabindex="-1">
 @using (Ajax.BeginForm(null, null, null,
-    new AjaxOptions { HttpMethod = "post", /*InsertionMode = InsertionMode.Replace, UpdateTargetId = "add-form",*/ OnSuccess = "TableDatatablesAjax.onAddEdit(data, status, xhr, 'add-form');" },
+    new AjaxOptions { HttpMethod = "post", OnSuccess = "TableDatatablesAjax.onAddEdit(data, status, xhr, 'add-form');" },
     new { id = "add-form", action = "/" + (string)ViewBag.Controller + "/New" }))
 {
-
-@*@using (Html.BeginForm(null, null, FormMethod.Post, new { action = Model.AddOrEditUrl }))
-{*@
     <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
         <h4 class="modal-title">@R("Add New")</h4>

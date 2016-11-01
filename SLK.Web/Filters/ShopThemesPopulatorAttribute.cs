@@ -1,44 +1,38 @@
-﻿using SLK.DataLayer;
+﻿using SLK.Web.Infrastructure.ModelMetadata.Filters;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace SLK.Web.Filters
 {
+    /// <summary>
+    /// Marker attribute name should starts with "Populate"(for Editor templates engine)
+    /// </summary>
     [AttributeUsage(AttributeTargets.Property, AllowMultiple = false, Inherited = true)]
     public class PopulateShopThemesAttribute : Attribute
     {
 
     }
 
-    public class ShopThemesPopulatorAttribute : ActionFilterAttribute
+    public class ShopThemesPopulatorAttribute : DropdownPopulatorAttribute
     {
-        public override void OnActionExecuted(ActionExecutedContext filterContext)
+        public ShopThemesPopulatorAttribute() : base(typeof(PopulateShopThemesAttribute))
+        { }
+        
+        protected override SelectListItem[] Populate()
         {
-            var viewResult = filterContext.Result as ViewResult;
-            if (viewResult != null && viewResult.Model != null)
-            {
-                var property = viewResult.Model.GetType().GetProperties().FirstOrDefault(
-                    prop => IsDefined(prop, typeof(PopulateShopThemesAttribute)));
-                if (property != null)
+            return new SelectListItem[]
                 {
-                    viewResult.ViewData["SimpleDropdownList_" + property.Name] = new SelectListItem[]
+                    new SelectListItem()
                     {
-                        new SelectListItem()
-                        {
-                            Value = "SlkOrigin",
-                            Text = "SlkOrigin"
-                        },
-                        new SelectListItem()
-                        {
-                            Value = "Supertlv",
-                            Text = "Supertlv"
-                        },
-                    };
-                }
-            }
+                        Value = "SlkOrigin",
+                        Text = "SlkOrigin"
+                    },
+                    new SelectListItem()
+                    {
+                        Value = "Supertlv",
+                        Text = "Supertlv"
+                    },
+                };
         }
     }
 }
