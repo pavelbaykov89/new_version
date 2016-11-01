@@ -6085,7 +6085,6 @@
     <Content Include="Views\Shared\EditPopup.cshtml" />
     <Content Include="Views\Account\Popup\RegisterPopup.cshtml" />
     <Content Include="Views\Shop\New.cshtml" />
-    <Content Include="Views\Shared\EditorTemplates\File.cshtml" />
     <Content Include="Views\Shared\Table.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\HttpPostedFileBase.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\UserID.cshtml" />
