@@ -1,10 +1,15 @@
 ﻿using AutoMapper.QueryableExtensions;
 using SLK.DataLayer;
 using SLK.Services;
+using SLK.Services.Task;
 using SLK.Web.Infrastructure;
 using SLK.Web.Infrastructure.Alerts;
 using SLK.Web.Models.ProductInShopModels;
+using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
+using System.Web;
 using System.Web.Mvc;
 
 namespace SLK.Web.Controllers
@@ -34,7 +39,8 @@ namespace SLK.Web.Controllers
             model.Editable = true;
             model.Popup = true;
 
-            return View("~/Views/Shared/Table.cshtml", model);
+            //return View("~/Views/Shared/Table.cshtml", model);
+            return View(model);
         }
 
         // Ajax: Users by filters
@@ -108,6 +114,37 @@ namespace SLK.Web.Controllers
 
             return Json(new { success = true }, JsonRequestBehavior.AllowGet);
         }
+        #endregion
+
+        #region Import/Export Functionality
+        [HttpPost]
+        public ActionResult Upload(HttpPostedFileBase attachment)
+        {
+            if (!ModelState.IsValid)
+            {
+                return JsonValidationError();
+            }
+
+            if (attachment == null)
+            {
+                return JsonError("Cannot find the product specified.");
+            }
+
+            var fullname = Server.MapPath("~/App_Data/Temp/") + attachment.FileName;
+
+            attachment.SaveAs(fullname);
+
+            var task = new TaskDescription("ProductsInShop importing from", attachment.FileName);
+
+            TaskManager.AddTask(task);
+
+            Task.Factory.StartNew(() =>
+            {
+                ProductsInShopImportService.ImportProductsFromExcelFile(fullname, new ApplicationDbContext(), task);
+            });
+
+            return RedirectToAction<ProductInShopController>(c => c.Table()).WithSuccess("Products file uploaded!");
+        }        
         #endregion
     }
 }

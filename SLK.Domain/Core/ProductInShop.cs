@@ -5,29 +5,33 @@ namespace SLK.Domain.Core
 {
     public class ProductInShop
     {
-        protected ProductInShop() { }
+        public ProductInShop() { }
 
         public int ID { get; protected set; }
 
-        public int ProductID { get; protected set; }
+        public int ProductID { get; set; }
 
-        public virtual Product Product { get; protected set; }
+        public virtual Product Product { get; set; }
 
-        public int ShopID { get; protected set; }
+        public int ShopID { get; set; }
 
-        public virtual Shop Shop { get; protected set; }
+        public virtual Shop Shop { get; set; }
 
-        public decimal Price { get; protected set; }
+        public decimal Price { get; set; }
 
-        public decimal Quantity { get; protected set; }
+        public decimal Quantity { get; set; }
 
-        public DateTime CreationDate { get; protected set; }
+        public DateTime CreationDate { get; set; }
 
-        public decimal PricebyUnit { get; protected set; }
+        public bool IncludeVAT { get; set; }
 
-        public decimal MaxCartQuantity { get; protected set; }
+        public bool IncludeInShippingPrice { get; set; }
 
-        public int QuantityType { get; protected set; }
+        public decimal PricebyUnit { get; set; }
+
+        public decimal MaxCartQuantity { get; set; }
+
+        public int QuantityType { get; set; }
 
         public virtual ICollection<OrderItem> Items { get; set; } = new List<OrderItem>();
 

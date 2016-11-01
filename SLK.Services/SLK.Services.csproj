@@ -75,6 +75,7 @@
     <Compile Include="PopulateService.cs" />
     <Compile Include="ProductsExportService.cs" />
     <Compile Include="ProductsImportService.cs" />
+    <Compile Include="ProductsInShopImportService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ServicesRegistry.cs" />
     <Compile Include="Task\TaskDescription.cs" />

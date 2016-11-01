@@ -6093,13 +6093,13 @@
     <Content Include="Views\Shared\EditorTemplates\SImpleDropdown.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\ShopID.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\ProductID.cshtml" />
+    <Content Include="Views\ProductInShop\Table.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="assets\apps\img\" />
     <Folder Include="assets\global\plugins\angularjs\plugins\angular-file-upload\uploads\" />
     <Folder Include="Views\Category\" />
     <Folder Include="Views\Manufacturer\" />
-    <Folder Include="Views\ProductInShop\" />
     <Folder Include="Views\ShopType\" />
     <Folder Include="Views\User\" />
   </ItemGroup>

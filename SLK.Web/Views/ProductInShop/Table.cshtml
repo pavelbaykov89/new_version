@@ -1,0 +1,233 @@
+﻿@using SLK.Web.Helpers
+@model SLK.Web.Models.ListModel
+
+<div class="portlet light portlet-fit portlet-datatable bordered">
+
+    <div class="portlet-title">
+        <div class="caption">
+            <i class="icon-settings font-dark"></i>
+            <span class="caption-subject font-dark sbold uppercase">@ViewBag.Title</span>
+        </div>
+        <div class="actions">
+            <div class="row">
+                @if (Model.AddNewForm != null)
+                {
+                    <div class="btn-group">
+                        <button id="sample_editable_1_new" class="btn sbold green add-popup" data-toggle="modal-extended" href="#add_new">
+                            @R("Add New")
+                            <i class="fa fa-plus"></i>
+                        </button>
+                    </div>
+                    @Html.Partial("~/Views/Shared/AddNewPopup.cshtml", Model.AddNewForm)
+                }
+                <div class="btn-group">
+                    <a class="btn red btn-outline btn-circle" href="javascript:;" data-toggle="dropdown">
+                        <i class="fa fa-share"></i>
+                        <span class="hidden-xs"> Import/Export </span>
+                        <i class="fa fa-angle-down"></i>
+                    </a>
+                    <ul class="dropdown-menu pull-right">
+                        <li>
+                            <a href="#Upload" data-toggle="modal"> Import from Excel </a>
+                        </li>
+                        <li class="divider"> </li>
+                        <li>
+                            <a href="#Download" data-toggle="modal"> Export to Excel </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="Upload" tabindex="-1" role="Upload" aria-hidden="true">
+        <div class="modal-dialog" on>
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                    <h4 class="modal-title">Select File for Uploading</h4>
+                </div>
+                <form enctype="multipart/form-data" action="Upload" method="post">
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="fileinput fileinput-new" data-provides="fileinput">
+                                    <span class="btn green btn-file">
+                                        <span class="fileinput-new"> Select file </span>
+                                        <span class="fileinput-exists"> Change </span>
+                                        <input type="hidden" value="" name="..."><input type="file" name="attachment">
+                                    </span>
+                                    <span class="fileinput-filename"></span> &nbsp;
+                                    <a href="javascript:;" class="close fileinput-exists" data-dismiss="fileinput"> </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn dark btn-outline" data-dismiss="modal">Close</button>
+                        <input type="submit" value="Upload" class="btn green" />
+                    </div>
+                </form>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+    <div class="modal fade" id="Download" tabindex="-1" role="Upload" aria-hidden="true">
+        <div class="modal-dialog" on>
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                    <h4 class="modal-title">Select Export Filters</h4>
+                </div>
+                <form enctype="multipart/form-data" action="Download" method="post">
+                    <div class="modal-body">
+                        <div class="row margin-top-10">
+                            <div class="col-lg-12">
+                                <label class="col-md-3 control-label">Has Picture?</label>
+                                <div class="col-md-9">
+                                    <select class="form-control" name="picture">
+                                        <option>Any</option>
+                                        <option>With Picture</option>
+                                        <option>Without Picture</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row margin-top-10">
+                            <div class="col-lg-12">
+                                <label class="col-md-3 control-label">Has Category?</label>
+                                <div class="col-md-9">
+                                    <select class="form-control" name="category">
+                                        <option>Any</option>
+                                        <option>With Category</option>
+                                        <option>Without Category</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn dark btn-outline" data-dismiss="modal">Close</button>
+                        <input type="submit" value="Export" class="btn green" />
+                    </div>
+                </form>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+    @Html.EditorForModel()
+</div>
+
+@section scripts
+{
+
+    <script src="/assets/global/plugins/select2/js/select2.full.min.js"></script>
+    <script src="/assets/global/plugins/bootstrap-summernote/summernote.min.js"></script>
+
+    <script src="~/Scripts/shop.new.js"></script>
+
+    <script src="~/Scripts/app/data-tables.js" type="text/javascript"></script>
+    <script>
+
+        $(setDropDownEvents());
+
+        $(setTasksCount());
+
+
+        $(TableDatatablesAjax.init("/@Model.ControllerName/List", @Html.CreateColumnsInfo(ViewData.ModelMetadata.Properties, Model.Editable, Model.ControllerName, Model.Popup)));
+
+        function setDropDownEvents()
+        {
+            $('#Download div.modal-footer input').on('click', function(){
+                $('#Download').modal('hide');
+            });
+
+            $('.multiselect-container input').on('change', function () {
+                var numberOfChecked = $('.multiselect-container input:checkbox:checked').length;
+                var totalCheckboxes = $('.multiselect-container input:checkbox').length;
+                if (numberOfChecked == 0 || numberOfChecked == totalCheckboxes)
+                    $('.multiselect-selected-text')[0].innerText = 'Any Shop';
+                else
+                    $('.multiselect-selected-text')[0].innerText = numberOfChecked + ' Shops Selected';
+            });
+        }
+
+        function setTasksCount() {
+            $.get('/Product/TasksCount', {}, function callback(data) {
+                $('#header_task_bar span.badge')[0].innerText = data.count;
+                if (data.count == 1)
+                    $('#header_task_bar h3')[0].innerText = '1 task is active';
+                else
+                    $('#header_task_bar h3')[0].innerText = data.count + ' tasks are active';
+            });
+        }
+
+        function drawTasks(anyway) {
+
+            var taskdata;
+
+            if (anyway || $.inArray('open', $('#header_task_bar')[0].classList) !== -1) {
+
+                $.ajax({
+                    async: false,
+                    type: 'GET',
+                    url: '/Product/ActiveTasks',
+                    success: function (data) {
+                        taskdata = data;
+                    }
+                });
+
+                var list = $('#header_task_bar .dropdown-menu-list')[0];
+                list.innerHTML = "";
+
+                for (var i = 0; i < taskdata.count; ++i) {
+                    list.innerHTML +=
+                        "<li>\
+                    <a href='javascript:;'>\
+                        <span class='task'>\
+                            <span class='desc'>" + taskdata.tasks[i].Caption + "</span><br>\
+                            <span class='desc font-blue-soft'>" + taskdata.tasks[i].FileName + "</span><br>\
+                            <span class='desc'>" + taskdata.tasks[i].Elapsed + " / " + taskdata.tasks[i].Estimated + "</span>\
+                            <span class='percent'>" + taskdata.tasks[i].Progress + "%</span>\
+                        </span>\
+                        <span class='progress'>\
+                            <span style='width: " + taskdata.tasks[i].Progress + "%;' class='progress-bar progress-bar-success' aria-valuenow='98' aria-valuemin='0' aria-valuemax='100'>\
+                                <span class='sr-only'>" + taskdata.tasks[i].Progress + "% Complete</span>\
+                            </span>\
+                        </span>\
+                    </a>\
+                </li>";
+                }
+            }
+
+            if (!taskdata) {
+                $.ajax({
+                    async: false,
+                    type: 'GET',
+                    url: '/Product/TasksCount',
+                    success: function (data) {
+                        $('#header_task_bar span.badge')[0].innerText = data.count;
+                        if (data.count == 1)
+                            $('#header_task_bar h3')[0].innerText = '1 task is active';
+                        else
+                            $('#header_task_bar h3')[0].innerText = data.count + ' tasks are active';
+
+                        if (data.count) setTimeout(drawTasks, 1000);
+                    }
+                });
+            }
+            else {
+                $('#header_task_bar span.badge')[0].innerText = taskdata.count;
+                if (taskdata.count == 1)
+                    $('#header_task_bar h3')[0].innerText = '1 task is active';
+                else
+                    $('#header_task_bar h3')[0].innerText = taskdata.count + ' tasks are active';
+
+                if (taskdata.count) setTimeout(drawTasks, 1000);
+            }
+        }
+
+    </script>
+}

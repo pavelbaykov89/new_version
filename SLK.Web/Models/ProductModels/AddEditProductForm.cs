@@ -13,11 +13,7 @@ namespace SLK.Web.ProductModels
 
         [Required]
         public string Name { get; set; }
-                
-        public string ShortDescription { get; set; }
-              
-        public string FullDescription { get; set; }
-
+        
         [Required]
         public string SKU { get; set; }
         
@@ -44,5 +40,10 @@ namespace SLK.Web.ProductModels
         public decimal UnitsPerPackage { get; set; }
 
         public string ContentUnitMeasureName { get; set; }
+        
+        public string ShortDescription { get; set; }
+
+        [AllowHtml]
+        public string FullDescription { get; set; }
     }
 }
