@@ -13,10 +13,12 @@ namespace SLK.Web.Models.ShopModels
         [HiddenInput]
         public int? ID { get; set; }
 
-        public ShopMainTabForm MainTab { get; set; } = new ShopMainTabForm();
+        public ShopMainTab MainTab { get; set; } = new ShopMainTab();
+
+        public ShopDeliveryTab DeliveryTab { get; set; } = new ShopDeliveryTab();
     }
 
-    public class ShopMainTabForm : IMapFrom<Shop>
+    public class ShopMainTab : IMapFrom<Shop>
     {
         [Required]
         [UIHint("UserID")]
@@ -61,5 +63,10 @@ namespace SLK.Web.Models.ShopModels
 
         [AllowHtml]
         public string FullDescription { get; set; }
+    }
+
+    public class ShopDeliveryTab : IMapFrom<Shop>
+    {
+        public bool PickUp { get; set; }
     }
 }

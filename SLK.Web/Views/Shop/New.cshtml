@@ -21,12 +21,29 @@
         @using (Html.BeginForm("New", "Shop", FormMethod.Post, new { enctype = "multipart/form-data", id = "user_new_form", @class = "add-edit-form" }))
         {
             @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
             @*@Html.EditorFor(m => m.ID)*@
             <div class="form-horizontal">
                 <div class="form-body">
-                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                    @Html.EditorFor(m => m.MainTab)
-                </div>
+                    <div class="tabbable-line">
+                        <ul class="nav nav-tabs">
+                            <li class="@(ViewBag.Tab == "main_tab" ? "active" : "")">
+                                <a href="#main_tab" data-toggle="tab"> Main </a>
+                            </li>
+                            <li class="@(ViewBag.Tab == "delivery_tab" ? "active" : "")">
+                                <a href="#delivery_tab" data-toggle="tab"> Delivery </a>
+                            </li>
+                        </ul>
+                        <div class="tab-content">
+                            <div class="tab-pane @(ViewBag.Tab == "main_tab" ? "active" : "")" id="main_tab">
+                                @Html.EditorFor(m => m.MainTab)
+                            </div>
+                            <div class="tab-pane @(ViewBag.Tab == "delivery_tab" ? "active" : "")" id="delivery_tab">
+                                @Html.EditorFor(m => m.DeliveryTab)
+                            </div>                            
+                        </div>
+                        </div>
+                    </div>
                 <div class="form-actions">
                     <div class="row">
                         <div class="col-md-offset-3 col-md-9">
