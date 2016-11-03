@@ -54,10 +54,11 @@ namespace SLK.Web.Controllers
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 
-        public ActionResult New()
+        public ActionResult New(string tab = "main_tab")
         {
             ViewBag.ShopMenuActive = "active open";
             ViewBag.ShopActive = "active open";
+            ViewBag.Tab = tab;
 
             var model = new AddEditShopForm();
             _filesRepo.BuildUrl("dasdadas");
@@ -65,10 +66,11 @@ namespace SLK.Web.Controllers
         }
 
         [HttpPost, ValidateAntiForgeryToken, Log("Created shop")]
-        public ActionResult New(AddEditShopForm model)
+        public ActionResult New(AddEditShopForm model, string tab = "main_tab")
         {
             ViewBag.ShopMenuActive = "active open";
             ViewBag.ShopActive = "active open";
+            ViewBag.Tab = tab;
 
             if (!ModelState.IsValid)
             {

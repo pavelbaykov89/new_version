@@ -30,6 +30,12 @@
 .add-edit-form .select2-holder{
     max-width: 600px;
 }
+.add-edit-form .mt-checkbox>span, .mt-radio>span {
+    top: 9px;
+}
+.add-edit-form .tabbable-line>.tab-content {
+    padding-top: 50px;
+}
 .add-edit-form .modal .form-group {
     margin: 0;
     border-bottom: 1px solid #efefef;
