@@ -14,6 +14,19 @@ namespace SLK.Services
 {
     public static class ProductsInShopImportService
     {
+        private static Dictionary<string, string> propOrder = new Dictionary<string, string>
+        {
+            { "A", "SKU" },
+            { "B", "Name" },
+            { "C", "Price" },
+            { "D", "Quantity"},
+            { "E", "IncludeVAT" },
+            { "F", "ProductOptions" },
+            { "G", "MaxCartQuantity" },
+            { "H", "IncludeInShippingPrice" },
+            { "I", "QuantityType" },            
+        };
+
         public static long GetRowsCountToImport(string filename)
         {
             long count = 0;
@@ -46,7 +59,7 @@ namespace SLK.Services
             return count;
         }
 
-        public static void ImportProductsFromExcelFile(string filename, ApplicationDbContext context, TaskDescription task)
+        public static void ImportProductsFromExcelFile(string filename, ApplicationDbContext context, TaskDescription task, int shopID)
         {
             long total = GetRowsCountToImport(filename);
 
@@ -72,13 +85,13 @@ namespace SLK.Services
 
                     while (worksheet.Cells[$"{col}1"].Value != null && worksheet.Cells[$"{col}1"].Value.ToString() != "")
                     {
-                        var prop = properties.FirstOrDefault(p => p.Name == worksheet.Cells[$"{col}1"].Value.ToString());
+                        var prop = properties.FirstOrDefault(p => p.Name == propOrder[col]);
 
                         if (prop != null)
                         {
                             propToCol[col] = prop;
                         }
-                        else if ("SKU" == worksheet.Cells[$"{col}1"].Value.ToString())
+                        else if ("SKU" == worksheet.Cells[$"{col}1"].Value.ToString() || "Name" == worksheet.Cells[$"{col}1"].Value.ToString())
                         {
                             propToCol[col] = null;
                         }
@@ -92,7 +105,7 @@ namespace SLK.Services
                         }
                     }
                                         
-                    int row = 2;
+                    int row = 3;
                     while (worksheet.Cells[$"A{row}"].Value != null && worksheet.Cells[$"A{row}"].Value.ToString().Length != 0)
                     {
                         string SKU = "";
@@ -107,24 +120,30 @@ namespace SLK.Services
 
                             if (prop == null)
                             {
-                                SKU = value;
+                                if (propOrder[col] == "SKU")
+                                {
+                                    SKU = value;
+                                }
                                 continue;
                             }
-
-                            if (prop.PropertyType == typeof(Boolean))
+                            
+                            if (prop.PropertyType == typeof(Boolean) && value != null)
                             {
                                 prop.SetValue(productInShop, value != "0");
                             }
-                            else if (value != "")
+                            else if (value != null && value != "")
                             {
                                 prop.SetValue(productInShop, Convert.ChangeType(value, prop.PropertyType));
                             }
                            
                         }
 
+                        productInShop.ShopID = shopID;
+                        productInShop.CreationDate = DateTime.Now;
+
                         var product = products.Where(p => p.SKU.EndsWith(SKU));
 
-                        if (product != null && product.Count() == 1 && SKU.Length > 4)
+                        if (product != null && product.Count() >= 1 && SKU.Length > 4)
                         {
                             productInShop.ProductID = product.First().ID;
                             productsInShop.Add(productInShop);
@@ -133,8 +152,10 @@ namespace SLK.Services
                         ++row;
                         if (row % 100 == 0)
                         {
-                            context.Products.AddRange(products);
-                            context.SaveChanges();                            
+                            context.ProductInShops.AddRange(productsInShop);
+                            context.SaveChanges();
+
+                            productsInShop.Clear();
 
                             task.Progress = row * 100 / total;
                         }
@@ -144,7 +165,7 @@ namespace SLK.Services
                 }
             }
 
-            context.Products.AddRange(products);
+            context.ProductInShops.AddRange(productsInShop);
             context.SaveChanges();
 
             task.Progress = 100;

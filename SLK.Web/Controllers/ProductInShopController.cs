@@ -140,7 +140,7 @@ namespace SLK.Web.Controllers
 
             Task.Factory.StartNew(() =>
             {
-                ProductsInShopImportService.ImportProductsFromExcelFile(fullname, new ApplicationDbContext(), task);
+                ProductsInShopImportService.ImportProductsFromExcelFile(fullname, new ApplicationDbContext(), task, _context.Shops.First().ID);
             });
 
             return RedirectToAction<ProductInShopController>(c => c.Table()).WithSuccess("Products file uploaded!");

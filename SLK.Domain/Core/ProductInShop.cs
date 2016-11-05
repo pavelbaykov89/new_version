@@ -33,6 +33,8 @@ namespace SLK.Domain.Core
 
         public int QuantityType { get; set; }
 
+        public string ProductOptions { get; set; }
+
         public virtual ICollection<OrderItem> Items { get; set; } = new List<OrderItem>();
 
         public virtual ICollection<ProductRate> ProductRates { get; set; } = new List<ProductRate>();
