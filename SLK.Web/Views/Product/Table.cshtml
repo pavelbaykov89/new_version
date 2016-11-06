@@ -11,7 +11,7 @@
     <div class="portlet-title">
         <div class="caption">
             <i class="icon-settings font-dark"></i>
-            <span class="caption-subject font-dark sbold uppercase">@ViewBag.Title</span>
+            <span class="caption-subject font-dark sbold uppercase">@R(ViewBag.Title)</span>
         </div>       
         <div class="actions">
             <div class="row">
@@ -28,16 +28,16 @@
                 <div class="btn-group">
                     <a class="btn red btn-outline btn-circle" href="javascript:;" data-toggle="dropdown">
                         <i class="fa fa-share"></i>
-                        <span class="hidden-xs"> Import/Export </span>
+                        <span class="hidden-xs"> @R("Import/Export") </span>
                         <i class="fa fa-angle-down"></i>
                     </a>
                     <ul class="dropdown-menu pull-right">
                         <li>
-                            <a href="#Upload" data-toggle="modal"> Import from Excel </a>
+                            <a href="#Upload" data-toggle="modal"> @R("Import from Excel") </a>
                         </li>
                         <li class="divider"> </li>
                         <li>
-                            <a href="#Download" data-toggle="modal"> Export to Excel </a>
+                            <a href="#Download" data-toggle="modal"> @R("Export to Excel") </a>
                         </li>
                     </ul>
                 </div>
@@ -49,7 +49,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-                    <h4 class="modal-title">Select File for Uploading</h4>
+                    <h4 class="modal-title">@R("Select File for Uploading")</h4>
                 </div>
                 <form enctype="multipart/form-data" action="Upload" method="post">
                     <div class="modal-body">
@@ -57,8 +57,8 @@
                             <div class="col-lg-12">
                                 <div class="fileinput fileinput-new" data-provides="fileinput">
                                     <span class="btn green btn-file">
-                                        <span class="fileinput-new"> Select file </span>
-                                        <span class="fileinput-exists"> Change </span>
+                                        <span class="fileinput-new"> @R("Select file") </span>
+                                        <span class="fileinput-exists"> @R("Change") </span>
                                         <input type="hidden" value="" name="..."><input type="file" name="attachment">
                                     </span>
                                     <span class="fileinput-filename"></span> &nbsp;
@@ -68,8 +68,8 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn dark btn-outline" data-dismiss="modal">Close</button>
-                        <input type="submit" value="Upload" class="btn green" />
+                        <button type="button" class="btn dark btn-outline" data-dismiss="modal">@R("Close")</button>
+                        <input type="submit" value=@R("Upload") class="btn green" />
                     </div>
                 </form>
             </div>
@@ -82,30 +82,30 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-                    <h4 class="modal-title">Select Export Filters</h4>
+                    <h4 class="modal-title">@R("Select Export Filters")</h4>
                 </div>                
                 <form enctype="multipart/form-data" action="Download" method="post">
                     <div class="modal-body">                        
                         <div class="row margin-top-10">
                             <div class="col-lg-12">
-                                <label class="col-md-3 control-label">Has Picture?</label>
+                                <label class="col-md-3 control-label">@R("Has Picture?")</label>
                                 <div class="col-md-9">
                                     <select class="form-control" name="picture">
-                                        <option>Any</option>
-                                        <option>With Picture</option>
-                                        <option>Without Picture</option>
+                                        <option>@R("Any")</option>
+                                        <option>@R("With Picture")</option>
+                                        <option>@R("Without Picture")</option>
                                     </select>
                                 </div>
                             </div>
                         </div>
                         <div class="row margin-top-10">
                             <div class="col-lg-12">
-                                <label class="col-md-3 control-label">Has Category?</label>
+                                <label class="col-md-3 control-label">@R("Has Category?")</label>
                                 <div class="col-md-9">
                                     <select class="form-control" name="category">
-                                        <option>Any</option>
-                                        <option>With Category</option>
-                                        <option>Without Category</option>
+                                        <option>@R("Any")</option>
+                                        <option>@R("With Category")</option>
+                                        <option>@R("Without Category")</option>
                                     </select>
                                 </div>
                             </div>                 
@@ -113,7 +113,7 @@
 
                         <div class="row margin-top-10">
                             <div class="col-lg-12">
-                                <label class="col-md-3 control-label">Select Shops</label>
+                                <label class="col-md-3 control-label">@R("Select Shops")</label>
                                 <div class="col-md-9">
                                     <span class="multiselect-native-select">
                                         <select class="mt-multiselect btn btn-default" multiple="multiple" data-width="100%">
@@ -124,7 +124,7 @@
                                         </select>
                                         <div class="btn-group" style="width: 100%;">
                                             <button type="button" class="multiselect dropdown-toggle mt-multiselect btn btn-default" data-toggle="dropdown" title="None selected" aria-expanded="false" style="width: 100%; overflow: hidden; text-overflow: ellipsis;">
-                                                <span class="multiselect-selected-text">Any Shops</span> <b class="caret"></b>
+                                                <span class="multiselect-selected-text">@R("Any Shops")</span> <b class="caret"></b>
                                             </button>
                                             <ul class="multiselect-container dropdown-menu">
                                                 @foreach (var shop in ViewBag.Shops)
@@ -139,8 +139,8 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn dark btn-outline" data-dismiss="modal">Close</button>
-                        <input type="submit" value="Export" class="btn green"/>
+                        <button type="button" class="btn dark btn-outline" data-dismiss="modal">@R("Close")</button>
+                        <input type="submit" value=@R("Export") class="btn green"/>
                     </div>
                 </form>
             </div>

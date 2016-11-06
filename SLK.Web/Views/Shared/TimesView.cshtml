@@ -1,0 +1,100 @@
+﻿@model SLK.Web.Models.TimesModel.AddEditTimesModel[]
+@{    
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section css_plugins
+{
+    <link href="/assets/global/plugins/bootstrap-timepicker/css/bootstrap-timepicker.min.css" rel="stylesheet" type="text/css">
+}
+
+<div class="portlet box red col-md-5">
+    <div class="portlet-title">
+        <div class="caption">
+            <i class="fa fa-gift"></i>@ViewBag.Title
+        </div>
+        <div class="tools">
+            <a href="javascript:;" class="collapse" data-original-title="" title=""> </a>
+            @*<a href="#portlet-config" data-toggle="modal" class="config" data-original-title="" title=""> </a>
+    <a href="javascript:;" class="reload" data-original-title="" title=""> </a>
+    <a href="javascript:;" class="remove" data-original-title="" title=""> </a>*@
+        </div>
+    </div>
+    <div class="portlet-body form">
+        <!-- BEGIN FORM-->
+        <form action="#" class="form-horizontal form-bordered">
+            <div class="form-body form"> 
+                @foreach (DayOfWeek day in Enum.GetValues(typeof(DayOfWeek)))
+                {
+                    var times = Model[(int)day];
+                    var enabled = times.Enabled;
+                    var from = enabled ? times.From.ToString("HH:mm") : null;
+                    var to = enabled ? times.To.ToString("HH:mm") : null;
+
+                    <div class="form-group">
+                        <label class='control-label col-md-3 @(enabled ? "font-blue-steel" : "font-red-thunderbird")' id="@day">@day</label>
+                        <div class="col-md-4">
+                            <div class="input-group">
+                                <input type="text" id="@day" @(enabled ? "" : "disabled") class="form-control timepicker timepicker-24" value=@(enabled ? @from : "10:00")>
+                                <span class="input-group-btn">
+                                    <button class="btn default" type="button">
+                                        <i class="fa fa-clock-o"></i>
+                                    </button>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="input-group">
+                                <input type="text" id="@day" @(enabled ? "" : "disabled") class="form-control timepicker timepicker-24" value=@(enabled ? @to : "18:00")>
+                                <span class="input-group-btn">
+                                    <button class="btn default" type="button">
+                                        <i class="fa fa-clock-o"></i>
+                                    </button>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-md-1">
+                            <label class="mt-checkbox">                                
+                                <input id="@day" type="checkbox" value="@enabled" name="test">
+                                <span></span>
+                            </label>
+                        </div>
+                    </div>                
+                }
+            </div>
+            <div class="form-actions">
+                <div class="row">
+                    <div class="col-md-offset-3 col-md-9">
+                        <button type="submit" class="btn red">
+                            <i class="fa fa-check"></i> Submit
+                        </button>
+                        <button type="button" class="btn default">Cancel</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <!-- END FORM-->
+    </div>
+</div>
+
+@section scripts
+{
+    <script src="/assets/global/plugins/bootstrap-timepicker/js/bootstrap-timepicker.min.js" type="text/javascript"></script>
+    <script src="/assets/pages/scripts/components-date-time-pickers.min.js" type="text/javascript"></script>
+    
+    <script>
+        $('.mt-checkbox input').on('change', function () {            
+            if (this.checked) {
+                $('label#' + this.id).addClass('font-blue-steel');
+                $('label#' + this.id).removeClass('font-red-thunderbird');
+                $('.timepicker#' + this.id).removeAttr('disabled');
+            }
+            else {
+                $('label#' + this.id).addClass('font-red-thunderbird');
+                $('label#' + this.id).removeClass('font-blue-steel');
+                $('.timepicker#' + this.id).attr('disabled', 'disabled');
+            }
+        });
+    </script>
+}
+

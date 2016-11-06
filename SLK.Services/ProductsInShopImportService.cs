@@ -74,6 +74,8 @@ namespace SLK.Services
 
             var propToCol = new Dictionary<string, PropertyInfo>();
 
+            var logsWriter = new StreamWriter(File.Create(Path.ChangeExtension(filename, ".log")));
+
             task.Start();
 
             using (var package = new ExcelPackage(new FileInfo(filename)))
@@ -143,11 +145,23 @@ namespace SLK.Services
 
                         var product = products.Where(p => p.SKU.EndsWith(SKU));
 
-                        if (product != null && product.Count() >= 1 && SKU.Length > 4)
+                        if (product != null && product.Count() == 1 && SKU.Length > 4)
                         {
                             productInShop.ProductID = product.First().ID;
                             productsInShop.Add(productInShop);
-                        }                        
+                        }
+                        else if (product != null)
+                        {
+                            logsWriter.WriteLine($"Error: Line {row} - Product with SKU = {SKU} is absent in global product table.");
+                        }
+                        else if (product.Count() != 1)
+                        {
+                            logsWriter.WriteLine($"Error: Line {row} - There are more than one product acoording to SKU = {SKU} in global product table.");
+                        }
+                        else if (SKU.Length < 5)
+                        {
+                            logsWriter.WriteLine($"Error: Line {row} - Product SKU = {SKU} in short.");
+                        }
 
                         ++row;
                         if (row % 100 == 0)
@@ -169,6 +183,8 @@ namespace SLK.Services
             context.SaveChanges();
 
             task.Progress = 100;
+
+            logsWriter.Close();
 
             return;
         }

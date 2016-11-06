@@ -14,13 +14,13 @@
                             if (prop.ModelType == typeof(bool))
                             {
                                 <th class="sorting_disabled @prop.PropertyName" width="6%">
-                                    @prop.DisplayName
+                                    @R(prop.DisplayName)
                                 </th>
                             }                            
                             else
                             {
                                 <th class="sorting @prop.PropertyName" style="@(prop.ModelType == typeof(int) ? "width:140px;" : "")">
-                                    @prop.DisplayName
+                                    @R(prop.DisplayName)
                                 </th>
                             }
                         }
@@ -36,9 +36,9 @@
                             {
                                 <td>                                    
                                     <select name="@prop.PropertyName" class="form-control form-filter input-sm">                                        
-                                        <option value="any">Any</option>
-                                        <option value="true">True</option>
-                                        <option value="false">False</option>                                        
+                                        <option value="any">@R("Any")</option>
+                                        <option value="true">@R("True")</option>
+                                        <option value="false">@R("False")</option>
                                     </select>
                                 </td>
                             }

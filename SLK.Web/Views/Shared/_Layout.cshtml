@@ -20,7 +20,7 @@ License: You must have a valid license purchased only from themeforest(the above
 <!-- BEGIN HEAD -->
 <head>
     <meta charset="utf-8" />
-    <title>Metronic Admin Theme #1 | Blank Page Layout</title>
+    <title>@R("SLK Admin 2.0")</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta content="width=device-width, initial-scale=1" name="viewport" />
     <meta content="Preview page of Metronic Admin Theme #1 for blank page layout" name="description" />
@@ -147,12 +147,12 @@ License: You must have a valid license purchased only from themeforest(the above
                                 <ul class="dropdown-menu dropdown-menu-default">
                                     <li>
                                         <a href="page_user_profile_1.html">
-                                            <i class="icon-user"></i> My Profile
+                                            <i class="icon-user"></i> @R("My Profile")
                                         </a>
                                     </li>                                    
                                     <li>
                                         <a href="javascript: document.log_off_header_form.submit();" onclick="">
-                                            <i class="icon-key"></i> Log Out
+                                            <i class="icon-key"></i> @R("Log Out")
                                         </a>
                                         <form action="@Url.Action("Logoff", "Account")" method="post" name="log_off_header_form" style="display:none">
                                             @Html.AntiForgeryToken()                                           
@@ -174,7 +174,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                         data-target="#login"
                                         @*href="@Url.Action("Login", "Account")"*@
                                         style="margin-top: 11px; margin-bottom: 11px;">
-                                    Sign In
+                                    @R("Sign In")
                                 </button>
                             </li>                              
                         }

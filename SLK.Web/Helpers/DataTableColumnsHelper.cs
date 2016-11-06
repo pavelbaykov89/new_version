@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Knoema.Localization;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -42,9 +43,9 @@ namespace SLK.Web.Helpers
                     result.Append($" edit-popup\" data-toggle=\"modal-extended\" data-url=/{controllerName}/Edit/' + row['ID'] + '>");
                 else
                     result.Append($"\" href=/{controllerName}/Edit/' + row['ID'] + '>");
-                result.Append("<i class=\"glyphicon glyphicon-edit\"></i> Edit</a><a class=\"btn btn-sm btn-outline red-mint delete-entity\" ");
+                result.Append("<i class=\"glyphicon glyphicon-edit\"></i> " + "Edit".Resource(typeof(DataTableColumnsHelper)) + "</a><a class=\"btn btn-sm btn-outline red-mint delete-entity\" ");
                 result.Append($"href =/{controllerName}/Delete/'");
-                result.Append(" + row['ID'] + '><i class=\"fa fa-close\"></i> Delete</a>';}}");
+                result.Append(" + row['ID'] + '><i class=\"fa fa-close\"></i> " + "Delete".Resource(typeof(DataTableColumnsHelper)) + "</a>';}}");
             }
 
             result.Append("]");

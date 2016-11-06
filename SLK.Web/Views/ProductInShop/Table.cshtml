@@ -11,7 +11,7 @@
     <div class="portlet-title">
         <div class="caption">
             <i class="icon-settings font-dark"></i>
-            <span class="caption-subject font-dark sbold uppercase">@ViewBag.Title</span>
+            <span class="caption-subject font-dark sbold uppercase">@R(ViewBag.Title)</span>
         </div>
         <div class="actions">
             <div class="row">
@@ -28,16 +28,16 @@
                 <div class="btn-group">
                     <a class="btn red btn-outline btn-circle" href="javascript:;" data-toggle="dropdown">
                         <i class="fa fa-share"></i>
-                        <span class="hidden-xs"> Import/Export </span>
+                        <span class="hidden-xs"> @R("Import/Export") </span>
                         <i class="fa fa-angle-down"></i>
                     </a>
                     <ul class="dropdown-menu pull-right">
                         <li>
-                            <a href="#Upload" data-toggle="modal"> Import from Excel </a>
+                            <a href="#Upload" data-toggle="modal"> @R("Import from Excel") </a>
                         </li>
                         <li class="divider"> </li>
                         <li>
-                            <a href="#Download" data-toggle="modal"> Export to Excel </a>
+                            <a href="#Download" data-toggle="modal"> @R("Export to Excel") </a>
                         </li>
                     </ul>
                 </div>
@@ -49,7 +49,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-                    <h4 class="modal-title">Select File for Uploading</h4>
+                    <h4 class="modal-title">@R("Select File for Uploading")</h4>
                 </div>
                 <form enctype="multipart/form-data" action="Upload" method="post">
                     <div class="modal-body">
@@ -57,8 +57,8 @@
                             <div class="col-lg-12">
                                 <div class="fileinput fileinput-new" data-provides="fileinput">
                                     <span class="btn green btn-file">
-                                        <span class="fileinput-new"> Select file </span>
-                                        <span class="fileinput-exists"> Change </span>
+                                        <span class="fileinput-new"> @R("Select file") </span>
+                                        <span class="fileinput-exists"> @R("Change") </span>
                                         <input type="hidden" value="" name="..."><input type="file" name="attachment">
                                     </span>
                                     <span class="fileinput-filename"></span> &nbsp;
@@ -68,8 +68,8 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn dark btn-outline" data-dismiss="modal">Close</button>
-                        <input type="submit" value="Upload" class="btn green" />
+                        <button type="button" class="btn dark btn-outline" data-dismiss="modal">@R("Close")</button>
+                        <input type="submit" value=@R("Upload") class="btn green" />
                     </div>
                 </form>
             </div>
@@ -82,7 +82,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-                    <h4 class="modal-title">Select Export Filters</h4>
+                    <h4 class="modal-title">@R("Select Export Filters")</h4>
                 </div>
                 <form enctype="multipart/form-data" action="Download" method="post">
                     <div class="modal-body">

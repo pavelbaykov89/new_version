@@ -206,6 +206,7 @@
     <Compile Include="Controllers\ProductInShopController.cs" />
     <Compile Include="Controllers\ShopController.cs" />
     <Compile Include="Controllers\ShopTypeController.cs" />
+    <Compile Include="Controllers\ShopWorkTimeController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Filters\CategorySelectListPopulatorAttribute.cs" />
     <Compile Include="Filters\LogAttribute.cs" />
@@ -279,6 +280,7 @@
     <Compile Include="Models\ShopModels\ShopListViewModel.cs" />
     <Compile Include="Models\ShopTypeModels\AddEditShopTypeForm.cs" />
     <Compile Include="Models\ShopTypeModels\ShopTypeListViewModel.cs" />
+    <Compile Include="Models\TimesModel\AddEditTimesModel.cs" />
     <Compile Include="Models\UserModels\AddNewUserModel.cs" />
     <Compile Include="Models\UserModels\RegisterUserModel.cs" />
     <Compile Include="Models\UserModels\UserListViewModel.cs" />
@@ -6094,6 +6096,8 @@
     <Content Include="Views\Shared\EditorTemplates\ShopID.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\ProductID.cshtml" />
     <Content Include="Views\ProductInShop\Table.cshtml" />
+    <Content Include="Views\Shared\TimesPopup.cshtml" />
+    <Content Include="Views\Shared\TimesView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="assets\apps\img\" />
@@ -6101,6 +6105,7 @@
     <Folder Include="Views\Category\" />
     <Folder Include="Views\Manufacturer\" />
     <Folder Include="Views\ShopType\" />
+    <Folder Include="Views\ShopWorkTime\" />
     <Folder Include="Views\User\" />
   </ItemGroup>
   <ItemGroup>

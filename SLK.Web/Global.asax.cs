@@ -11,6 +11,7 @@ using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
 using SLK.Web.Localization;
+using System.Reflection;
 
 namespace SLK.Web
 {
